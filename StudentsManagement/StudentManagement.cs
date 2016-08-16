@@ -29,6 +29,7 @@ namespace StudentsManagement
         private ArrayList columnsNames = new ArrayList();
         private ArrayList locations = new ArrayList();
         private string defaultPath = Common.defaultPath;
+        private int selectedIndex;
         public StudentManagement()
         {
             InitializeComponent();
@@ -271,6 +272,48 @@ namespace StudentsManagement
             }
             DbHelperSQLite.ExecuteSqlTran(SQLiteStringList);
             updateButton.Visible = false;
+        }
+
+        private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void 删除ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            int i = selectedIndex;
+            DialogResult d = MessageBox.Show("是否删除？", "请确认", MessageBoxButtons.OKCancel);
+            if(d.ToString().Equals("OK"))
+            {                
+                string sql = "DELETE FROM Student_List WHERE 学号='" + dt.Rows[i]["学号"] +"'";
+                int j = DbHelperSQLite.ExecuteSql(sql);
+                if (j == 1)
+                {
+                    dt.Rows[i].Delete();
+                    MessageBox.Show("已成功删除");                    
+                }
+                else
+                {
+                    MessageBox.Show("删除失败");
+                }
+            }
+            
+        }
+
+        private void StudentListGridView_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right)
+            {
+                if (e.RowIndex == -1) return;
+                StudentListGridView.ClearSelection();
+                StudentListGridView.Rows[e.RowIndex].Selected = true;
+                selectedIndex = e.RowIndex;
+            }
         }
     }
 }

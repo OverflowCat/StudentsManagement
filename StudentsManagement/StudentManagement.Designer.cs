@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("学生");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("成绩");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("活动");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("综合评定");
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("学生");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("成绩");
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("活动");
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("综合评定");
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.studentPanel = new System.Windows.Forms.Panel();
+            this.updateButton = new System.Windows.Forms.Button();
             this.okGroupBox1 = new System.Windows.Forms.GroupBox();
             this.cancelButton1 = new System.Windows.Forms.Button();
             this.okButton1 = new System.Windows.Forms.Button();
@@ -64,30 +66,32 @@
             this.inputButton = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
             this.activityPanel = new System.Windows.Forms.Panel();
-            this.updateButton = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.studentPanel.SuspendLayout();
             this.okGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StudentListGridView)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // treeView1
             // 
             this.treeView1.Location = new System.Drawing.Point(12, 119);
             this.treeView1.Name = "treeView1";
-            treeNode9.Name = "student";
-            treeNode9.Text = "学生";
-            treeNode10.Name = "grade";
-            treeNode10.Text = "成绩";
-            treeNode11.Name = "activity";
-            treeNode11.Text = "活动";
-            treeNode12.Name = "evaluation";
-            treeNode12.Text = "综合评定";
+            treeNode17.Name = "student";
+            treeNode17.Text = "学生";
+            treeNode18.Name = "grade";
+            treeNode18.Text = "成绩";
+            treeNode19.Name = "activity";
+            treeNode19.Text = "活动";
+            treeNode20.Name = "evaluation";
+            treeNode20.Text = "综合评定";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode9,
-            treeNode10,
-            treeNode11,
-            treeNode12});
+            treeNode17,
+            treeNode18,
+            treeNode19,
+            treeNode20});
             this.treeView1.Size = new System.Drawing.Size(87, 635);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -106,6 +110,17 @@
             this.studentPanel.Size = new System.Drawing.Size(1131, 635);
             this.studentPanel.TabIndex = 18;
             this.studentPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // updateButton
+            // 
+            this.updateButton.Location = new System.Drawing.Point(68, 599);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(75, 23);
+            this.updateButton.TabIndex = 19;
+            this.updateButton.Text = "更新";
+            this.updateButton.UseVisualStyleBackColor = true;
+            this.updateButton.Visible = false;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // okGroupBox1
             // 
@@ -142,7 +157,6 @@
             // StudentListGridView
             // 
             this.StudentListGridView.AllowUserToAddRows = false;
-            this.StudentListGridView.AllowUserToDeleteRows = false;
             this.StudentListGridView.AllowUserToOrderColumns = true;
             this.StudentListGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.StudentListGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -155,9 +169,11 @@
             this.student_class});
             this.StudentListGridView.Location = new System.Drawing.Point(0, 96);
             this.StudentListGridView.Name = "StudentListGridView";
+            this.StudentListGridView.RowTemplate.ContextMenuStrip = this.contextMenuStrip1;
             this.StudentListGridView.RowTemplate.Height = 23;
             this.StudentListGridView.Size = new System.Drawing.Size(1131, 484);
             this.StudentListGridView.TabIndex = 15;
+            this.StudentListGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.StudentListGridView_CellMouseDown);
             this.StudentListGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.StudentListGridView_CellValidating);
             this.StudentListGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.StudentListGridView_CellValueChanged);
             // 
@@ -362,7 +378,7 @@
             // 
             this.politicalStatusText.Location = new System.Drawing.Point(203, 30);
             this.politicalStatusText.Name = "politicalStatusText";
-            this.politicalStatusText.Size = new System.Drawing.Size(100, 21);
+            this.politicalStatusText.Size = new System.Drawing.Size(76, 21);
             this.politicalStatusText.TabIndex = 16;
             this.politicalStatusText.TextChanged += new System.EventHandler(this.politicalStatusText_TextChanged);
             // 
@@ -393,16 +409,20 @@
             this.activityPanel.Size = new System.Drawing.Size(1131, 635);
             this.activityPanel.TabIndex = 2;
             // 
-            // updateButton
+            // contextMenuStrip1
             // 
-            this.updateButton.Location = new System.Drawing.Point(68, 599);
-            this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(75, 23);
-            this.updateButton.TabIndex = 19;
-            this.updateButton.Text = "更新";
-            this.updateButton.UseVisualStyleBackColor = true;
-            this.updateButton.Visible = false;
-            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.删除ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // 删除ToolStripMenuItem
+            // 
+            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.删除ToolStripMenuItem.Text = "删除";
+            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click_1);
             // 
             // StudentManagement
             // 
@@ -420,6 +440,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.StudentListGridView)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -459,6 +480,8 @@
         private System.Windows.Forms.Button cancelButton1;
         private System.Windows.Forms.Button okButton1;
         private System.Windows.Forms.Button updateButton;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem;
     }
 }
 
