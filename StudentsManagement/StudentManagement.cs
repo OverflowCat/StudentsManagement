@@ -315,5 +315,24 @@ namespace StudentsManagement
                 selectedIndex = e.RowIndex;
             }
         }
+
+        private void outputButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "excel97-2003|*.xls";
+            saveFileDialog.RestoreDirectory = true;
+            saveFileDialog.FileName = "学生名单";
+            saveFileDialog.DefaultExt = "xls";
+            saveFileDialog.AddExtension = true;
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string path = saveFileDialog.FileName.ToString();
+                string name = path.Substring(path.LastIndexOf("\\") + 1);
+                string local = path.Substring(0, path.LastIndexOf("\\"));
+                string[] oldColumnsNames = (string[])columnsNames.ToArray(typeof(string));
+                string[] newColumnsNames = (string[])columnsNames.ToArray(typeof(string));
+                ExcelHelper.Export(dt, name, path,"",oldColumnsNames,newColumnsNames);
+            }
+        }
     }
 }

@@ -29,7 +29,7 @@ namespace ExcelOperate
             }
             using (MemoryStream ms = Export(dtSource, strHeaderText, strSheetName, oldColumnNames, newColumnNames))
             {
-                using (FileStream fs = new FileStream(strFileName, FileMode.Create, FileAccess.Write))
+                using (FileStream fs = new FileStream(strFileName, FileMode.Create, FileAccess.ReadWrite))
                 {
                     byte[] data = ms.ToArray();
                     fs.Write(data, 0, data.Length);
@@ -56,7 +56,7 @@ namespace ExcelOperate
             ISheet sheet = workbook.CreateSheet(strSheetName);
 
             #region 右击文件 属性信息
-            {
+            /*{
                 DocumentSummaryInformation dsi = PropertySetFactory.CreateDocumentSummaryInformation();
                 dsi.Company = "http://....../";
                 workbook.DocumentSummaryInformation = dsi;
@@ -80,7 +80,7 @@ namespace ExcelOperate
                 si.Subject = strHeaderText;              //填加文件主题信息      
                 si.CreateDateTime = DateTime.Now;
                 workbook.SummaryInformation = si;
-            }
+            }*/
             #endregion
 
             ICellStyle dateStyle = workbook.CreateCellStyle();
@@ -134,7 +134,7 @@ namespace ExcelOperate
                     }
 
                     #region 表头及样式
-                    {
+                    /*{
                         IRow headerRow = sheet.CreateRow(0);
                         headerRow.HeightInPoints = 25;
                         headerRow.CreateCell(0).SetCellValue(strHeaderText);
@@ -149,14 +149,14 @@ namespace ExcelOperate
                         headerRow.GetCell(0).CellStyle = headStyle;
                         //sheet.AddMergedRegion(new Region(0, 0, 0, dtSource.Columns.Count - 1));   
                         sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(0, 0, 0, dtSource.Columns.Count - 1));
-                    }
+                    }*/
                     #endregion
 
 
                     #region 列头及样式
                     {
                         //HSSFRow headerRow = sheet.CreateRow(1);   
-                        IRow headerRow = sheet.CreateRow(1);
+                        IRow headerRow = sheet.CreateRow(0);
 
                         ICellStyle headStyle = workbook.CreateCellStyle();
                         headStyle.Alignment = HorizontalAlignment.Center;
@@ -185,7 +185,7 @@ namespace ExcelOperate
                     }
                     #endregion
 
-                    rowIndex = 2;
+                    rowIndex = 1;
                 }
                 #endregion
 
@@ -247,7 +247,7 @@ namespace ExcelOperate
 
             using (MemoryStream ms = new MemoryStream())
             {
-                workbook.Write(ms);
+                workbook.Write(ms);               
                 ms.Flush();
                 ms.Position = 0;
 

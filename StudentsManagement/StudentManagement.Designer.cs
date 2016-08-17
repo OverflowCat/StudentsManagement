@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("学生");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("成绩");
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("活动");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("综合评定");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("学生");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("成绩");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("活动");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("综合评定");
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.studentPanel = new System.Windows.Forms.Panel();
             this.updateButton = new System.Windows.Forms.Button();
@@ -47,6 +47,8 @@
             this.student_political = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.student_major = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.student_class = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.outputButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -66,32 +68,30 @@
             this.inputButton = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
             this.activityPanel = new System.Windows.Forms.Panel();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.studentPanel.SuspendLayout();
             this.okGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StudentListGridView)).BeginInit();
-            this.flowLayoutPanel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // treeView1
             // 
             this.treeView1.Location = new System.Drawing.Point(12, 119);
             this.treeView1.Name = "treeView1";
-            treeNode17.Name = "student";
-            treeNode17.Text = "学生";
-            treeNode18.Name = "grade";
-            treeNode18.Text = "成绩";
-            treeNode19.Name = "activity";
-            treeNode19.Text = "活动";
-            treeNode20.Name = "evaluation";
-            treeNode20.Text = "综合评定";
+            treeNode1.Name = "student";
+            treeNode1.Text = "学生";
+            treeNode2.Name = "grade";
+            treeNode2.Text = "成绩";
+            treeNode3.Name = "activity";
+            treeNode3.Text = "活动";
+            treeNode4.Name = "evaluation";
+            treeNode4.Text = "综合评定";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode17,
-            treeNode18,
-            treeNode19,
-            treeNode20});
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4});
             this.treeView1.Size = new System.Drawing.Size(87, 635);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -220,6 +220,21 @@
             this.student_class.HeaderText = "行政班";
             this.student_class.Name = "student_class";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.删除ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // 删除ToolStripMenuItem
+            // 
+            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.删除ToolStripMenuItem.Text = "删除";
+            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click_1);
+            // 
             // outputButton
             // 
             this.outputButton.Location = new System.Drawing.Point(944, 599);
@@ -228,6 +243,7 @@
             this.outputButton.TabIndex = 17;
             this.outputButton.Text = "导出";
             this.outputButton.UseVisualStyleBackColor = true;
+            this.outputButton.Click += new System.EventHandler(this.outputButton_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -394,7 +410,7 @@
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(852, 25);
+            this.searchButton.Location = new System.Drawing.Point(886, 25);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(124, 42);
             this.searchButton.TabIndex = 14;
@@ -409,38 +425,25 @@
             this.activityPanel.Size = new System.Drawing.Size(1131, 635);
             this.activityPanel.TabIndex = 2;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.删除ToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
-            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
-            // 
-            // 删除ToolStripMenuItem
-            // 
-            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.删除ToolStripMenuItem.Text = "删除";
-            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click_1);
-            // 
             // StudentManagement
             // 
+            this.AcceptButton = this.searchButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 766);
             this.Controls.Add(this.studentPanel);
             this.Controls.Add(this.activityPanel);
             this.Controls.Add(this.treeView1);
+            this.KeyPreview = true;
             this.Name = "StudentManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "StudentManagement";
             this.studentPanel.ResumeLayout(false);
             this.okGroupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.StudentListGridView)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
