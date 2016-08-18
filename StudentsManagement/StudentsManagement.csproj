@@ -74,6 +74,12 @@
     <Compile Include="Common.cs" />
     <Compile Include="DbHelperSQLite.cs" />
     <Compile Include="ExcelHelper.cs" />
+    <Compile Include="StudentInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudentInfoForm.Designer.cs">
+      <DependentUpon>StudentInfoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="StudentManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,6 +88,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="StudentInfoForm.resx">
+      <DependentUpon>StudentInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StudentManagement.resx">
       <DependentUpon>StudentManagement.cs</DependentUpon>
     </EmbeddedResource>

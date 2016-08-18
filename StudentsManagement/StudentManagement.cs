@@ -76,7 +76,7 @@ namespace StudentsManagement
             }
             else
             {
-                sql = "SELECT * FROM Student_List WHERE 学号 = '" + mStudentId + "'";
+                sql = "SELECT * FROM Student_List WHERE 学号 LIKE '" + mStudentId + "%'";
             }
             return sql;
         }
@@ -98,6 +98,7 @@ namespace StudentsManagement
                     columnsNames.Add(dt.Columns[i].ColumnName);
                 }
                 StudentListGridView.DataSource = dt;
+                StudentListGridView.ReadOnly = false;
             }
         }
 
@@ -183,6 +184,7 @@ namespace StudentsManagement
                     columnsNames.Add(inputDataTable.Columns[i].ColumnName);
                 }
                 okGroupBox1.Visible = true;
+                StudentListGridView.ReadOnly = true;
             }
                      
         }
@@ -333,6 +335,14 @@ namespace StudentsManagement
                 string[] newColumnsNames = (string[])columnsNames.ToArray(typeof(string));
                 ExcelHelper.Export(dt, name, path,"",oldColumnsNames,newColumnsNames);
             }
+        }
+
+        private void StudentListGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Common.dt = dt;
+            Common.index = e.ColumnIndex;
+            StudentInfoForm studentInfoForm = new StudentInfoForm();
+            studentInfoForm.Show();
         }
     }
 }

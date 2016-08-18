@@ -173,6 +173,7 @@
             this.StudentListGridView.RowTemplate.Height = 23;
             this.StudentListGridView.Size = new System.Drawing.Size(1131, 484);
             this.StudentListGridView.TabIndex = 15;
+            this.StudentListGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.StudentListGridView_CellDoubleClick);
             this.StudentListGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.StudentListGridView_CellMouseDown);
             this.StudentListGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.StudentListGridView_CellValidating);
             this.StudentListGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.StudentListGridView_CellValueChanged);
