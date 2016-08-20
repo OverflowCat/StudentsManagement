@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("学生");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("成绩");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("活动");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("综合评定");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("学生");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("成绩");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("活动");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("综合评定");
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.studentPanel = new System.Windows.Forms.Panel();
             this.updateButton = new System.Windows.Forms.Button();
@@ -67,12 +67,32 @@
             this.politicalStatusText = new System.Windows.Forms.TextBox();
             this.inputButton = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
-            this.activityPanel = new System.Windows.Forms.Panel();
+            this.gradePanel = new System.Windows.Forms.Panel();
+            this.gradeOutputButton = new System.Windows.Forms.Button();
+            this.gradeInputButton = new System.Windows.Forms.Button();
+            this.sessonComboBox4 = new System.Windows.Forms.ComboBox();
+            this.yearComboBox3 = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.classComboBox2 = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.majorComboBox1 = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.idTextBox1 = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.searchButton1 = new System.Windows.Forms.Button();
+            this.gradeDataGridView = new System.Windows.Forms.DataGridView();
+            this.okGroupBox2 = new System.Windows.Forms.GroupBox();
+            this.insertOKButton1 = new System.Windows.Forms.Button();
+            this.insertCancelButton1 = new System.Windows.Forms.Button();
             this.studentPanel.SuspendLayout();
             this.okGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StudentListGridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.gradePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gradeDataGridView)).BeginInit();
+            this.okGroupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // treeView1
@@ -82,19 +102,19 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeView1.Location = new System.Drawing.Point(12, 119);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "student";
-            treeNode1.Text = "学生";
-            treeNode2.Name = "grade";
-            treeNode2.Text = "成绩";
-            treeNode3.Name = "activity";
-            treeNode3.Text = "活动";
-            treeNode4.Name = "evaluation";
-            treeNode4.Text = "综合评定";
+            treeNode9.Name = "student";
+            treeNode9.Text = "学生";
+            treeNode10.Name = "grade";
+            treeNode10.Text = "成绩";
+            treeNode11.Name = "activity";
+            treeNode11.Text = "活动";
+            treeNode12.Name = "evaluation";
+            treeNode12.Text = "综合评定";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4});
+            treeNode9,
+            treeNode10,
+            treeNode11,
+            treeNode12});
             this.treeView1.Size = new System.Drawing.Size(87, 635);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -425,15 +445,202 @@
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
-            // activityPanel
+            // gradePanel
             // 
-            this.activityPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.gradePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.activityPanel.Location = new System.Drawing.Point(108, 119);
-            this.activityPanel.Name = "activityPanel";
-            this.activityPanel.Size = new System.Drawing.Size(1131, 635);
-            this.activityPanel.TabIndex = 2;
+            this.gradePanel.Controls.Add(this.okGroupBox2);
+            this.gradePanel.Controls.Add(this.gradeOutputButton);
+            this.gradePanel.Controls.Add(this.gradeInputButton);
+            this.gradePanel.Controls.Add(this.sessonComboBox4);
+            this.gradePanel.Controls.Add(this.yearComboBox3);
+            this.gradePanel.Controls.Add(this.label12);
+            this.gradePanel.Controls.Add(this.label11);
+            this.gradePanel.Controls.Add(this.classComboBox2);
+            this.gradePanel.Controls.Add(this.label10);
+            this.gradePanel.Controls.Add(this.majorComboBox1);
+            this.gradePanel.Controls.Add(this.label9);
+            this.gradePanel.Controls.Add(this.idTextBox1);
+            this.gradePanel.Controls.Add(this.label8);
+            this.gradePanel.Controls.Add(this.searchButton1);
+            this.gradePanel.Controls.Add(this.gradeDataGridView);
+            this.gradePanel.Location = new System.Drawing.Point(108, 119);
+            this.gradePanel.Name = "gradePanel";
+            this.gradePanel.Size = new System.Drawing.Size(1131, 635);
+            this.gradePanel.TabIndex = 2;
+            // 
+            // gradeOutputButton
+            // 
+            this.gradeOutputButton.Location = new System.Drawing.Point(879, 599);
+            this.gradeOutputButton.Name = "gradeOutputButton";
+            this.gradeOutputButton.Size = new System.Drawing.Size(75, 23);
+            this.gradeOutputButton.TabIndex = 13;
+            this.gradeOutputButton.Text = "导出";
+            this.gradeOutputButton.UseVisualStyleBackColor = true;
+            this.gradeOutputButton.Click += new System.EventHandler(this.gradeOutputButton_Click);
+            // 
+            // gradeInputButton
+            // 
+            this.gradeInputButton.Location = new System.Drawing.Point(771, 599);
+            this.gradeInputButton.Name = "gradeInputButton";
+            this.gradeInputButton.Size = new System.Drawing.Size(75, 23);
+            this.gradeInputButton.TabIndex = 12;
+            this.gradeInputButton.Text = "导入";
+            this.gradeInputButton.UseVisualStyleBackColor = true;
+            this.gradeInputButton.Click += new System.EventHandler(this.gradeInputButton_Click);
+            // 
+            // sessonComboBox4
+            // 
+            this.sessonComboBox4.FormattingEnabled = true;
+            this.sessonComboBox4.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3"});
+            this.sessonComboBox4.Location = new System.Drawing.Point(515, 52);
+            this.sessonComboBox4.Name = "sessonComboBox4";
+            this.sessonComboBox4.Size = new System.Drawing.Size(121, 20);
+            this.sessonComboBox4.TabIndex = 11;
+            this.sessonComboBox4.SelectedIndexChanged += new System.EventHandler(this.sessonComboBox4_SelectedIndexChanged);
+            // 
+            // yearComboBox3
+            // 
+            this.yearComboBox3.FormattingEnabled = true;
+            this.yearComboBox3.Items.AddRange(new object[] {
+            "2013-2014",
+            "2014-2015",
+            "2015-2016"});
+            this.yearComboBox3.Location = new System.Drawing.Point(313, 52);
+            this.yearComboBox3.Name = "yearComboBox3";
+            this.yearComboBox3.Size = new System.Drawing.Size(121, 20);
+            this.yearComboBox3.TabIndex = 10;
+            this.yearComboBox3.SelectedIndexChanged += new System.EventHandler(this.yearComboBox3_SelectedIndexChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(480, 55);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(29, 12);
+            this.label12.TabIndex = 9;
+            this.label12.Text = "学期";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(278, 55);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(29, 12);
+            this.label11.TabIndex = 8;
+            this.label11.Text = "学年";
+            // 
+            // classComboBox2
+            // 
+            this.classComboBox2.FormattingEnabled = true;
+            this.classComboBox2.Location = new System.Drawing.Point(590, 10);
+            this.classComboBox2.Name = "classComboBox2";
+            this.classComboBox2.Size = new System.Drawing.Size(121, 20);
+            this.classComboBox2.TabIndex = 7;
+            this.classComboBox2.SelectedIndexChanged += new System.EventHandler(this.classComboBox2_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(555, 13);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(29, 12);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "班级";
+            // 
+            // majorComboBox1
+            // 
+            this.majorComboBox1.FormattingEnabled = true;
+            this.majorComboBox1.Items.AddRange(new object[] {
+            "信息与计算科学",
+            "数学与应用数学",
+            "应用物理"});
+            this.majorComboBox1.Location = new System.Drawing.Point(412, 10);
+            this.majorComboBox1.Name = "majorComboBox1";
+            this.majorComboBox1.Size = new System.Drawing.Size(121, 20);
+            this.majorComboBox1.TabIndex = 5;
+            this.majorComboBox1.SelectedIndexChanged += new System.EventHandler(this.majorComboBox1_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(377, 13);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(29, 12);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "专业";
+            // 
+            // idTextBox1
+            // 
+            this.idTextBox1.Location = new System.Drawing.Point(255, 10);
+            this.idTextBox1.Name = "idTextBox1";
+            this.idTextBox1.Size = new System.Drawing.Size(100, 21);
+            this.idTextBox1.TabIndex = 3;
+            this.idTextBox1.TextChanged += new System.EventHandler(this.idTextBox1_TextChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(220, 13);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(29, 12);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "学号";
+            // 
+            // searchButton1
+            // 
+            this.searchButton1.Location = new System.Drawing.Point(852, 19);
+            this.searchButton1.Name = "searchButton1";
+            this.searchButton1.Size = new System.Drawing.Size(102, 33);
+            this.searchButton1.TabIndex = 1;
+            this.searchButton1.Text = "查询";
+            this.searchButton1.UseVisualStyleBackColor = true;
+            this.searchButton1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // gradeDataGridView
+            // 
+            this.gradeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gradeDataGridView.Location = new System.Drawing.Point(21, 80);
+            this.gradeDataGridView.Name = "gradeDataGridView";
+            this.gradeDataGridView.RowTemplate.Height = 23;
+            this.gradeDataGridView.Size = new System.Drawing.Size(1082, 500);
+            this.gradeDataGridView.TabIndex = 0;
+            // 
+            // okGroupBox2
+            // 
+            this.okGroupBox2.Controls.Add(this.insertCancelButton1);
+            this.okGroupBox2.Controls.Add(this.insertOKButton1);
+            this.okGroupBox2.Location = new System.Drawing.Point(106, 586);
+            this.okGroupBox2.Name = "okGroupBox2";
+            this.okGroupBox2.Size = new System.Drawing.Size(175, 46);
+            this.okGroupBox2.TabIndex = 14;
+            this.okGroupBox2.TabStop = false;
+            this.okGroupBox2.Text = "是否导入";
+            this.okGroupBox2.Visible = false;
+            // 
+            // insertOKButton1
+            // 
+            this.insertOKButton1.Location = new System.Drawing.Point(3, 17);
+            this.insertOKButton1.Name = "insertOKButton1";
+            this.insertOKButton1.Size = new System.Drawing.Size(63, 23);
+            this.insertOKButton1.TabIndex = 0;
+            this.insertOKButton1.Text = "确认";
+            this.insertOKButton1.UseVisualStyleBackColor = true;
+            this.insertOKButton1.Click += new System.EventHandler(this.insertOKButton1_Click);
+            // 
+            // insertCancelButton1
+            // 
+            this.insertCancelButton1.Location = new System.Drawing.Point(108, 17);
+            this.insertCancelButton1.Name = "insertCancelButton1";
+            this.insertCancelButton1.Size = new System.Drawing.Size(63, 23);
+            this.insertCancelButton1.TabIndex = 1;
+            this.insertCancelButton1.Text = "取消";
+            this.insertCancelButton1.UseVisualStyleBackColor = true;
+            this.insertCancelButton1.Click += new System.EventHandler(this.insertCancelButton1_Click);
             // 
             // StudentManagement
             // 
@@ -441,9 +648,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 766);
-            this.Controls.Add(this.studentPanel);
-            this.Controls.Add(this.activityPanel);
+            this.Controls.Add(this.gradePanel);
             this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.studentPanel);
             this.KeyPreview = true;
             this.Name = "StudentManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -454,6 +661,10 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            this.gradePanel.ResumeLayout(false);
+            this.gradePanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gradeDataGridView)).EndInit();
+            this.okGroupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -480,7 +691,7 @@
         private System.Windows.Forms.TextBox nationalityText;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox politicalStatusText;
-        private System.Windows.Forms.Panel activityPanel;
+        private System.Windows.Forms.Panel gradePanel;
         private System.Windows.Forms.Panel studentPanel;
         private System.Windows.Forms.DataGridViewTextBoxColumn student_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn student_name;
@@ -495,6 +706,23 @@
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem;
+        private System.Windows.Forms.DataGridView gradeDataGridView;
+        private System.Windows.Forms.Button searchButton1;
+        private System.Windows.Forms.ComboBox sessonComboBox4;
+        private System.Windows.Forms.ComboBox yearComboBox3;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox classComboBox2;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox majorComboBox1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox idTextBox1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button gradeOutputButton;
+        private System.Windows.Forms.Button gradeInputButton;
+        private System.Windows.Forms.GroupBox okGroupBox2;
+        private System.Windows.Forms.Button insertCancelButton1;
+        private System.Windows.Forms.Button insertOKButton1;
     }
 }
 
