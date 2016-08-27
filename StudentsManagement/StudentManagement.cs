@@ -30,6 +30,7 @@ namespace StudentsManagement
         private ArrayList locations = new ArrayList();
         private string defaultPath = Common.defaultPath;
         private int selectedIndex;
+        private int dtTag;
         public StudentManagement()
         {
             InitializeComponent();
@@ -46,6 +47,11 @@ namespace StudentsManagement
             {
                 gradePanel.BringToFront();
                 this.AcceptButton = searchButton1;
+            }
+            else if (treeView1.SelectedNode.Text == "活动")
+            {
+                activityPanel.BringToFront();
+                this.AcceptButton = searchButton2;
             }
         }
         private string getSql(string mStudentId, string mStudentName, string mStudentMajor, string mStudentClass, string mStudentSex, string mStudentNationality, string mStudentPoliticalStatus)
@@ -100,6 +106,8 @@ namespace StudentsManagement
                     columnsNames.Add(dt.Columns[i].ColumnName);
                 }
                 StudentListGridView.DataSource = dt;
+                outputButton.Enabled = true;
+                dtTag = 0;
                 StudentListGridView.ReadOnly = false;
             }
         }
@@ -181,6 +189,7 @@ namespace StudentsManagement
                 //inputDataTable.Clear();
                 inputDataTable = ExcelHelper.RenderDataTableFromExcel(fileName, 0, 0);
                 StudentListGridView.DataSource = inputDataTable;
+                dtTag = 1;
                 for (int i = 0; i < inputDataTable.Columns.Count; i++)
                 {
                     columnsNames.Add(inputDataTable.Columns[i].ColumnName);
@@ -196,18 +205,39 @@ namespace StudentsManagement
             ArrayList SQLStringList = new ArrayList();
             for (int i = 0; i < inputDataTable.Rows.Count; i++)
             {
-                string sql1 = "REPLACE INTO Student_List(" + columnsNames[0].ToString();              
-                string sql2 = ") Values('" + inputDataTable.Rows[i][columnsNames[0].ToString()];
-                for (int j = 1; j < inputDataTable.Columns.Count; j++)
+                string sqlCheck = "UPDATE Student_List SET 学号='" + inputDataTable.Rows[i]["学号"] + "' WHERE 学号='" + inputDataTable.Rows[i]["学号"] + "'";
+                int check = DbHelperSQLite.ExecuteSql(sqlCheck);
+                if (check == 1)
                 {
-                    sql1 = sql1 + "," + columnsNames[j].ToString();
-                    sql2 = sql2 + "','" + inputDataTable.Rows[i][columnsNames[j].ToString()];
+                    DialogResult d = MessageBox.Show("学号为" + inputDataTable.Rows[i]["学号"] + "的学生信息重复\n是否覆盖？", "信息重复", MessageBoxButtons.YesNoCancel);
+                    if (d.ToString().Equals("OK"))
+                    {
+                        string sql1 = "REPLACE INTO Student_List(" + columnsNames[0].ToString();
+                        string sql2 = ") Values('" + inputDataTable.Rows[i][columnsNames[0].ToString()];
+                        for (int j = 1; j < inputDataTable.Columns.Count; j++)
+                        {
+                            sql1 = sql1 + "," + columnsNames[j].ToString();
+                            sql2 = sql2 + "','" + inputDataTable.Rows[i][columnsNames[j].ToString()];
+                        }
+                        string sql = sql1 + sql2 + "')";
+                        SQLStringList.Add(sql);
+                    }
                 }
-                string sql = sql1 + sql2 + "')";
-                SQLStringList.Add(sql);
+                else
+                {
+                    string sql1 = "INSERT INTO Student_List(" + columnsNames[0].ToString();
+                    string sql2 = ") Values('" + inputDataTable.Rows[i][columnsNames[0].ToString()];
+                    for (int j = 1; j < inputDataTable.Columns.Count; j++)
+                    {
+                        sql1 = sql1 + "," + columnsNames[j].ToString();
+                        sql2 = sql2 + "','" + inputDataTable.Rows[i][columnsNames[j].ToString()];
+                    }
+                    string sql = sql1 + sql2 + "')";
+                    SQLStringList.Add(sql);
+                }
             }
             DbHelperSQLite.ExecuteSqlTran(SQLStringList);
-            MessageBox.Show("共导入" + inputDataTable.Rows.Count + "条学生信息");
+            MessageBox.Show("共导入" + SQLStringList.Count + "条学生信息");
             okGroupBox1.Visible = false;
         }
 
@@ -341,10 +371,13 @@ namespace StudentsManagement
 
         private void StudentListGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            Common.dt = dt;
-            Common.index = e.ColumnIndex;
-            StudentInfoForm studentInfoForm = new StudentInfoForm();
-            studentInfoForm.Show();
+            if (dtTag == 0)
+            {
+                Common.dt = dt;
+                Common.index = e.RowIndex;
+                StudentInfoForm studentInfoForm = new StudentInfoForm();
+                studentInfoForm.Show();
+            }           
         }
         /**************************************************************************************/
 
@@ -356,8 +389,11 @@ namespace StudentsManagement
         private string majorText;
         private string classText;
         private string yearText;
-        private string sessonText;        
+        private string sessonText;
+        private ArrayList regulerLessonGrade = new ArrayList();
+        private ArrayList PElessonGrade = new ArrayList();    
         private DataTable gradeDt = new DataTable();
+        private DataTable eGradeDt = new DataTable();
         private ArrayList gradeColumnNames = new ArrayList();
         string[] names = { "课程名称", "课程性质", "期末成绩", "成绩", "补考成绩" };
         private string getSql(string idText, string majorText, string classText, string yearText, string sessonText)
@@ -371,7 +407,8 @@ namespace StudentsManagement
             {
                 if (idText != "" && idText != null)
                 {
-                    sql = "学号='" + idText + "'";
+                    sql = "学号='" + idText + "'AND 学年 LIKE '"
+                        + yearText + "%' AND 学期 LIKE'" + sessonText + "%'";
                 }
                 else
                 {
@@ -406,6 +443,7 @@ namespace StudentsManagement
                 }                
             }            
             gradeDataGridView.DataSource = gradeDt;
+            gradeOutputButton.Enabled = true;
         }
         private ArrayList split(DataTable dt, string columnName)
         {
@@ -421,10 +459,55 @@ namespace StudentsManagement
         {
             int index = 0;
             string tag = dt.Rows[0]["学号"].ToString() + dt.Rows[0]["学年"].ToString() + dt.Rows[0]["学期"].ToString();
-            
+            int[] grade1 = { 0,0,0};
+            int grade2 = 0;
+            int[] count = {0,0,0,0 };
+            regulerLessonGrade.Clear();
+            PElessonGrade.Clear();
+            if (dt.Rows[0]["课程性质"].ToString() == "体育项目课")
+            {
+                grade2 = Convert.ToInt16(dt.Rows[0]["期末成绩"]);
+            }
+            else
+            {
+                int grade;
+                switch (dt.Rows[0]["期末成绩"].ToString())
+                {
+                    case "优":
+                        grade = 85;
+                        break;
+                    case "良":
+                        grade = 75;
+                        break;
+                    case "及格":
+                        grade = 60;
+                        break;
+                    case "不及格":
+                        grade = 45;
+                        break;
+                    default:
+                        grade = Convert.ToInt16(dt.Rows[0]["期末成绩"]);
+                        break;
+                }
+                switch(dt.Rows[0]["课程性质"].ToString())
+                {
+                    case "公共基础课": case "综合教育必修课": case "公共选修课":
+                        grade1[0] = grade;
+                        count[0] += 1;
+                        break;
+                    case "专业必修课": case "专业选修课":
+                        grade1[1] = grade;
+                        count[1] += 1;
+                        break;
+                    case "实践课":
+                        grade1[2] = grade;
+                        count[2] += 1;
+                        break;
+                }
+            }
             for (int i = 1; i < dt.Rows.Count; i++)
             {
-                int c = dt.Rows.Count;
+                int c = dt.Rows.Count;                
                 string tag1 = dt.Rows[i]["学号"].ToString() + dt.Rows[i]["学年"].ToString() + dt.Rows[i]["学期"].ToString();
                 if (tag1 == tag)
                 {
@@ -433,15 +516,125 @@ namespace StudentsManagement
                         string str = dt.Rows[index][columnNames[j]].ToString() + " " + dt.Rows[i][columnNames[j]].ToString();
                         dt.Rows[index][columnNames[j]] = str;                                              
                     }
-                    dt.Rows[i].Delete();
+                    if(dt.Rows[i]["课程性质"].ToString() == "体育项目课")
+                    {
+                        grade2 = Convert.ToInt16(dt.Rows[i]["期末成绩"]);
+                    }
+                    else
+                    {
+                        int grade = 0;
+                        switch (dt.Rows[i]["期末成绩"].ToString())
+                        {
+                            case "优":
+                            case "上":
+                                grade = 85;
+                                break;
+                            case "良":
+                            case "中":
+                                grade = 75;
+                                break;
+                            case "及格":
+                            case "下":
+                                grade = 60;
+                                break;
+                            case "不及格":
+                                grade = 45;
+                                break;
+                            default:
+                                grade = Convert.ToInt16(dt.Rows[i]["期末成绩"]);
+                                break;
+                        }
+                        switch (dt.Rows[i]["课程性质"].ToString())
+                        {
+                            case "公共基础课": case "综合教育必修课": case "公共选修课":
+                                grade1[0] += grade;
+                                count[0] += 1;
+                                break;
+                            case "专业必修课": case "专业选修课":
+                                grade1[1] += grade;
+                                count[1] += 1;
+                                break;
+                            case "实践课":
+                                grade1[2] += grade;
+                                count[2] += 1;
+                                break;
+                        }
+
+                    }
+                    dt.Rows.Remove(dt.Rows[i]);
                     i = i - 1;
                 }
                 else
                 {
                     tag = tag1;
                     index = i;
+                    double grade = (grade1[0] / count[0] + grade1[1] / count[1] + grade1[2] / count[2]) * 0.3 + grade2 * 0.1;
+                    regulerLessonGrade.Add(grade);
+                    grade1[0] = 0;
+                    grade1[1] = 0;
+                    grade1[2] = 0;
+                    grade2 = 0;
+                    count[0] = 0;
+                    count[1] = 0;
+                    count[2] = 0;
+                    count[3] += 1;
+                    if (dt.Rows[i]["课程性质"].ToString() == "体育项目课")
+                    {
+                        grade2 = Convert.ToInt16(dt.Rows[i]["期末成绩"]);
+                    }
+                    else
+                    {
+                        int grade0 = 0;
+                        switch (dt.Rows[i]["期末成绩"].ToString())
+                        {
+                            case "优":
+                                grade0 = 85;
+                                break;
+                            case "良":
+                                grade0 = 75;
+                                break;
+                            case "及格":
+                                grade0 = 60;
+                                break;
+                            case "不及格":
+                                grade0 = 45;
+                                break;
+                            default:
+                                grade0 = Convert.ToInt16(dt.Rows[i]["期末成绩"]);
+                                break;
+                        }
+                        switch (dt.Rows[i]["课程性质"].ToString())
+                        {
+                            case "公共基础课":
+                            case "综合教育必修课":
+                            case "公共选修课":
+                                grade1[0] += grade0;
+                                count[0] += 1;
+                                break;
+                            case "专业必修课":
+                            case "专业选修课":
+                                grade1[1] += grade0;
+                                count[1] += 1;
+                                break;
+                            case "实践课":
+                                grade1[2] += grade0;
+                                count[2] += 1;
+                                break;
+                        }
+
+                    }
                 }
             }
+            for(int i = 0; i < count.Count() ; i++)
+            {
+                if(count[i] == 0)
+                {
+                    count[i] = 1;
+                }
+            }
+            double grade3 = (grade1[0] / count[0] + grade1[1] / count[1] + grade1[2] / count[2]) * 0.3 + grade2 * 0.1;
+            regulerLessonGrade.Add(grade3);
+            //PElessonGrade.Add(grade2);
             //dt.AcceptChanges();
             return dt;
         }
@@ -462,7 +655,7 @@ namespace StudentsManagement
                 gradeColumnNames.Clear();
                 for (int i = 0; i < dt.Columns.Count; i++)
                 {
-                    gradeColumnNames.Add(dt.Columns[i].ColumnName);
+                     gradeColumnNames.Add(dt.Columns[i].ColumnName);             
                 }
             }
             return dataTable;
@@ -555,7 +748,40 @@ namespace StudentsManagement
         {
             gradeDt = input(0);
             gradeDataGridView.DataSource = gradeDt;
-            okGroupBox2.Visible = true;
+            string[] names = { "学号", "学年", "学期", "课程名称", "课程性质", "成绩", "期末成绩", "补考成绩" };
+            ArrayList tags = new ArrayList();
+            for(int i = 0; i < 8; i++)
+            {
+                int tag = 0;
+                for (int j = 0; j < gradeDt.Columns.Count; j++)
+                {
+                    if(gradeDt.Columns[j].ColumnName == names[i])
+                    {
+                        tag = 1;
+                    }
+                }
+                tags.Add(tag);
+            }
+            string str = "";
+            if (tags[0].ToString() == "0")
+            {
+                str = str + names[0];
+            }
+            for (int i = 1; i < 8; i++)
+            {
+                if(tags[i].ToString() == "0")
+                {
+                    str = str + " " + names[i];
+                }
+            }            
+            if (str != "")
+            {
+                MessageBox.Show("缺少：" + str + "等信息", "错误");
+            }
+            else
+            {
+                okGroupBox2.Show();
+            }           
         }
 
         private void gradeOutputButton_Click(object sender, EventArgs e)
@@ -565,8 +791,35 @@ namespace StudentsManagement
 
         private void insertOKButton1_Click(object sender, EventArgs e)
         {
-            DataTable dt = comban(gradeDt, names);
-            SQLiteInput(dt, "Grade_List");
+            DataTable gradeDt1 = gradeDt.Copy();
+            DataTable dt = comban(gradeDt1, names);
+            DataTable dt1 = dt;
+            string[] neededNames = { "学号", "学年", "学期", "课程名称", "课程性质", "成绩", "期末成绩", "补考成绩" };
+            for (int i = 0; i < dt1.Columns.Count; i++)
+            {
+                int tag = 0;
+                for (int j = 0; j < 8; j++)
+                {
+                    if (dt1.Columns[i].ColumnName == neededNames[j])
+                    {
+                        tag = 1;
+                    }
+                }
+                if(tag == 0)
+                {
+                    dt1.Columns.Remove(dt1.Columns[i]);
+                    i -= 1;
+                }
+            }
+            SQLiteInput(dt1, "Grade_List");
+            ArrayList sqlList = new ArrayList();
+            for(int i = 0; i < dt.Rows.Count; i++)
+            {
+                string sql = "REPLACE INTO Evaluation_Grade(学号,学年,学期,智育成绩) VALUES ('" + dt.Rows[i]["学号"]
+                    + "','" + dt.Rows[i]["学年"] + "','" + dt.Rows[i]["学期"] + "','" + regulerLessonGrade[i] + "')";
+                sqlList.Add(sql);
+            }
+            DbHelperSQLite.ExecuteSqlTran(sqlList);
             okGroupBox2.Visible = false;
         }
 
@@ -575,5 +828,122 @@ namespace StudentsManagement
             okGroupBox2.Visible = false;
             gradeDt.Clear();
         }
+
+        private void gradeDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (okGroupBox2.Visible != true)
+            {
+                gradeUpdateButton.Visible = true;
+            }
+        }
+        private void gradeUpdateButton_Click(object sender, EventArgs e)
+        {
+            DataTable gradeDt1 = gradeDt.Copy();
+            DataTable dt = comban(gradeDt1, names);
+            DataTable dt1 = dt;
+            string[] neededNames = { "学号", "学年", "学期", "课程名称", "课程性质", "成绩", "期末成绩", "补考成绩" };
+            for (int i = 0; i < dt1.Columns.Count; i++)
+            {
+                int tag = 0;
+                for (int j = 0; j < 8; j++)
+                {
+                    if (dt1.Columns[i].ColumnName == neededNames[j])
+                    {
+                        tag = 1;
+                    }
+                }
+                if (tag == 0)
+                {
+                    dt1.Columns.Remove(dt1.Columns[i]);
+                    i -= 1;
+                }
+            }
+            SQLiteInput(dt1, "Grade_List");
+            ArrayList sqlList = new ArrayList();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                string sql = "REPLACE INTO Evaluation_Grade(学号,学年,学期,智育成绩) VALUES ('" + dt.Rows[i]["学号"]
+                    + "','" + dt.Rows[i]["学年"] + "','" + dt.Rows[i]["学期"] + "','" + regulerLessonGrade[i] + "')";
+                sqlList.Add(sql);
+            }
+            DbHelperSQLite.ExecuteSqlTran(sqlList);
+            gradeUpdateButton.Visible = false;
+        }        
+        private void gradeDataGridView_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (e.RowIndex == -1) return;
+                gradeDataGridView.ClearSelection();
+                gradeDataGridView.Rows[e.RowIndex].Selected = true;
+                selectedIndex = e.RowIndex;
+            }
+        }        
+         private void 删除ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            int index = selectedIndex;
+            DialogResult d = MessageBox.Show("是否删除？", "请确认", MessageBoxButtons.OKCancel);
+            if (d.ToString().Equals("OK"))
+            {
+                gradeDt.Rows.Remove(gradeDt.Rows[index]);
+                DataTable gradeDt1 = gradeDt.Copy();
+                DataTable dt = comban(gradeDt1, names);
+                DataTable dt1 = dt;
+                string[] neededNames = { "学号", "学年", "学期", "课程名称", "课程性质", "成绩", "期末成绩", "补考成绩" };
+                for (int i = 0; i < dt1.Columns.Count; i++)
+                {
+                    int tag = 0;
+                    for (int j = 0; j < 8; j++)
+                    {
+                        if (dt1.Columns[i].ColumnName == neededNames[j])
+                        {
+                            tag = 1;
+                        }
+                    }
+                    if (tag == 0)
+                    {
+                        dt1.Columns.Remove(dt1.Columns[i]);
+                        i -= 1;
+                    }
+                }
+                SQLiteInput(dt1, "Grade_List");
+                ArrayList sqlList = new ArrayList();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    string sql = "REPLACE INTO Evaluation_Grade(学号,学年,学期,智育成绩) VALUES ('" + dt.Rows[i]["学号"]
+                        + "','" + dt.Rows[i]["学年"] + "','" + dt.Rows[i]["学期"] + "','" + regulerLessonGrade[i] + "')";
+                    sqlList.Add(sql);
+                }
+                DbHelperSQLite.ExecuteSqlTran(sqlList);
+            }
+        }       
+        /*********************************************************************/
+
+
+
+
+        /*********************************************************************/
+
+
+        private void searchButton2_Click(object sender, EventArgs e)
+        {
+            string date = "";
+            if(dateTimePicker1.Checked == true)
+            {
+                date = "AND 活动日期 = '" + dateTimePicker1.Text + "'";
+            }
+            string sql = "SELECT * FROM Activities_List WHERE 活动名称 LIKE '%" + activityNameText.Text + "%'" 
+                + date + " AND 学年 LIKE '%" + yearComboBox1.Text + "%' AND 学期 LIKE '%" + sessonComboBox1.Text + "%'";
+            DataTable dt = DbHelperSQLite.Query(sql).Tables[0];
+            activityDataGridView.DataSource = dt;
+        }
+
+        private void activityInputButton_Click(object sender, EventArgs e)
+        {
+            ActivityInputForm activityInputForm = new ActivityInputForm();
+            activityInputForm.Show();
+        }
+
+
     }
 }
