@@ -42,16 +42,24 @@ namespace StudentsManagement
             {
                 studentPanel.BringToFront();
                 this.AcceptButton = searchButton;
+                label17.Text = "学生基础信息管理界面";
             }
             else if (treeView1.SelectedNode.Text == "成绩")
             {
                 gradePanel.BringToFront();
                 this.AcceptButton = searchButton1;
+                label17.Text = "学生成绩信息管理界面";
             }
             else if (treeView1.SelectedNode.Text == "活动")
             {
                 activityPanel.BringToFront();
                 this.AcceptButton = searchButton2;
+                label17.Text = "院系活动信息管理界面";
+            }
+            else
+            {
+                evaluationPanel.BringToFront();
+                label17.Text = "学生综合评测信息管理界面";
             }
         }
         private string getSql(string mStudentId, string mStudentName, string mStudentMajor, string mStudentClass, string mStudentSex, string mStudentNationality, string mStudentPoliticalStatus)
@@ -101,9 +109,12 @@ namespace StudentsManagement
                 string sql = getSql(mStudentId, mStudentName, mStudentMajor, mStudentClass, mStudentSex, mStudentNationality, mStudentPoliticalStatus);
                 ds = DbHelperSQLite.Query(sql);
                 dt = ds.Tables[0];
-                for (int i = 0; i < dt.Columns.Count; i++)
+                if (columnsNames.Count == 0)
                 {
-                    columnsNames.Add(dt.Columns[i].ColumnName);
+                    for (int i = 0; i < dt.Columns.Count; i++)
+                    {
+                        columnsNames.Add(dt.Columns[i].ColumnName);
+                    }
                 }
                 StudentListGridView.DataSource = dt;
                 outputButton.Enabled = true;
@@ -258,6 +269,7 @@ namespace StudentsManagement
             {
                 int i = e.RowIndex;
                 int j = e.ColumnIndex;
+                int tag = 0;
                 ArrayList location = new ArrayList();
                 if (locations.Count == 0)
                 {
@@ -272,13 +284,15 @@ namespace StudentsManagement
                         if (i.Equals(((ArrayList)locations[k])[0]))
                         {
                             ((ArrayList)locations[k]).Add(j);
+                            tag = 1;
+                            break;
                         }
-                        else
-                        {
-                            location.Add(i);
-                            location.Add(j);
-                            locations.Add(location);
-                        }
+                    }
+                    if(tag == 0)
+                    {
+                        location.Add(i);
+                        location.Add(j);
+                        locations.Add(location);
                     }
                 }
                                                 
@@ -306,6 +320,7 @@ namespace StudentsManagement
             }
             DbHelperSQLite.ExecuteSqlTran(SQLiteStringList);
             updateButton.Visible = false;
+            locations.Clear();
         }
 
         private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -879,7 +894,7 @@ namespace StudentsManagement
                 selectedIndex = e.RowIndex;
             }
         }        
-         private void 删除ToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void 删除ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             int index = selectedIndex;
             DialogResult d = MessageBox.Show("是否删除？", "请确认", MessageBoxButtons.OKCancel);
@@ -916,7 +931,7 @@ namespace StudentsManagement
                 }
                 DbHelperSQLite.ExecuteSqlTran(sqlList);
             }
-        }       
+        }
         /*********************************************************************/
 
 
@@ -924,9 +939,13 @@ namespace StudentsManagement
 
         /*********************************************************************/
 
-
+        private DataTable activityDt = new DataTable();
+        private DataTable studentDt = new DataTable();
+        private ArrayList locations1 = new ArrayList();
+        private ArrayList activityColumnNames = new ArrayList();
         private void searchButton2_Click(object sender, EventArgs e)
         {
+            activityUpdateButton1.Visible = false;
             string date = "";
             if(dateTimePicker1.Checked == true)
             {
@@ -934,8 +953,19 @@ namespace StudentsManagement
             }
             string sql = "SELECT * FROM Activities_List WHERE 活动名称 LIKE '%" + activityNameText.Text + "%'" 
                 + date + " AND 学年 LIKE '%" + yearComboBox1.Text + "%' AND 学期 LIKE '%" + sessonComboBox1.Text + "%'";
-            DataTable dt = DbHelperSQLite.Query(sql).Tables[0];
-            activityDataGridView.DataSource = dt;
+            activityDt = DbHelperSQLite.Query(sql).Tables[0];
+            if(activityColumnNames.Count == 0)
+            {
+                for (int i = 0; i < activityDt.Columns.Count; i++)
+                {
+                    activityColumnNames.Add(activityDt.Columns[i].ColumnName);
+                }
+            }            
+            activityDataGridView.DataSource = activityDt;
+            if(returnActivityButton.Visible == true)
+            {
+                returnActivityButton.Visible = false;
+            }
         }
 
         private void activityInputButton_Click(object sender, EventArgs e)
@@ -944,6 +974,123 @@ namespace StudentsManagement
             activityInputForm.Show();
         }
 
+        private void activityDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = e.RowIndex;
+            string sql = "SELECT * FROM Student_Activity WHERE 活动序列 = '" + activityDt.Rows[index]["活动序列"] + "'";
+            studentDt = DbHelperSQLite.Query(sql).Tables[0];
+            activityDataGridView.DataSource = studentDt;
+            activityDataGridView.ContextMenuStrip = contextMenuStrip4;
+            activityDataGridView.ReadOnly = true;
+            returnActivityButton.Visible = true;
+        }
 
+        private void returnActivityButton_Click(object sender, EventArgs e)
+        {
+            activityDataGridView.DataSource = activityDt;
+            activityDataGridView.ContextMenuStrip = contextMenuStrip3;
+            activityDataGridView.ReadOnly = false;
+            returnActivityButton.Visible = false;
+        }
+
+        private void activityDataGridView_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (e.RowIndex == -1) return;
+                activityDataGridView.ClearSelection();
+                activityDataGridView.Rows[e.RowIndex].Selected = true;
+                selectedIndex = e.RowIndex;
+            }
+        }
+
+        private void 导入名单ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataTable inputActivityDt1 = input(0);
+            DataTable inputActivityDt2 = new DataTable();
+            inputActivityDt2.Columns.Add(inputActivityDt1.Columns["学号"]);
+            DataColumn activityIndex = new DataColumn("活动序列");
+            inputActivityDt2.Columns.Add(activityIndex);
+            for(int i = 0; i < inputActivityDt2.Rows.Count; i++)
+            {
+                inputActivityDt2.Rows[i]["活动序列"] = activityDt.Rows[selectedIndex]["活动序列"];
+            }
+            SQLiteInput(inputActivityDt2, "Activities_Student");
+        }
+
+        private void 删除活动ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string sql1 = "DELETE FROM Activites_List WHERE 活动序列 = " + activityDt.Rows[selectedIndex]["活动序列"];
+            string sql2 = "DELETE FROM Activites_Student WHERE 活动序列 = '" + activityDt.Rows[selectedIndex]["活动序列"] + "'";
+            DbHelperSQLite.ExecuteSql(sql1);
+            DbHelperSQLite.ExecuteSql(sql2);
+        }
+
+        private void 清空名单ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string sql = "DELETE FROM Activites_Student WHERE 活动序列 = '" + activityDt.Rows[selectedIndex]["活动序列"] + "'";
+            DbHelperSQLite.ExecuteSql(sql);
+        }
+
+        private void activityDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            int i = e.RowIndex;
+            int j = e.ColumnIndex;
+            int tag = 0;
+            ArrayList location = new ArrayList();
+            if (locations1.Count == 0)
+            {
+                location.Add(i);
+                location.Add(j);
+                locations1.Add(location);
+            }
+            else
+            {
+                for (int k = 0; k < locations1.Count; k++)
+                {
+                    if (i.Equals(((ArrayList)locations1[k])[0]))
+                    {
+                        ((ArrayList)locations1[k]).Add(j);
+                        tag = 1;
+                        break;
+                    }
+                }
+                if(tag == 0)
+                {
+                    location.Add(i);
+                    location.Add(j);
+                    locations1.Add(location);
+                }
+            }
+            activityUpdateButton1.Visible = true;
+        }
+
+        private void activityUpdateButton1_Click(object sender, EventArgs e)
+        {
+            ArrayList SQLiteStringList = new ArrayList();
+            for (int i = 0; i < locations1.Count; i++)
+            {
+                 string sql1 = "UPDATE Activities_List SET "
+                    + activityColumnNames[Convert.ToInt32(((ArrayList)locations1[i])[1])].ToString() + "='"
+                    + activityDt.Rows[Convert.ToInt32(((ArrayList)locations1[i])[0])][Convert.ToInt32(((ArrayList)locations1[i])[1])];
+                 for (int j = 2; j < ((ArrayList)locations1[i]).Count; j++)
+                 {
+                     sql1 = sql1 + "'," + activityColumnNames[Convert.ToInt32(((ArrayList)locations1[i])[j])].ToString() + "='"
+                        + activityDt.Rows[Convert.ToInt32(((ArrayList)locations1[i])[0])][Convert.ToInt32(((ArrayList)locations1[i])[j])];
+                 }
+                 sql1 = sql1 + "' WHERE 活动序列='" + activityDt.Rows[Convert.ToInt32(((ArrayList)locations1[i])[0])][0].ToString() + "'";
+                 SQLiteStringList.Add(sql1);
+            }
+            DbHelperSQLite.ExecuteSqlTran(SQLiteStringList);
+            activityUpdateButton1.Visible = false;
+            locations1.Clear();
+        }
+
+        private void 删除ToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            string sql = "DELETE FROM Activities_Student WHERE 活动序列 = '"
+                + studentDt.Rows[selectedIndex]["活动序列"]
+                + "' AND 学号 = '" + studentDt.Rows[selectedIndex]["学号"] + "'";
+        }
     }
 }

@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("学生");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("成绩");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("活动");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("综合评定");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("学生");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("成绩");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("活动");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("综合评定");
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.studentPanel = new System.Windows.Forms.Panel();
             this.updateButton = new System.Windows.Forms.Button();
@@ -86,7 +86,11 @@
             this.label8 = new System.Windows.Forms.Label();
             this.searchButton1 = new System.Windows.Forms.Button();
             this.gradeDataGridView = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.删除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.activityPanel = new System.Windows.Forms.Panel();
+            this.activityUpdateButton1 = new System.Windows.Forms.Button();
+            this.returnActivityButton = new System.Windows.Forms.Button();
             this.sessonComboBox1 = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.yearComboBox1 = new System.Windows.Forms.ComboBox();
@@ -94,20 +98,20 @@
             this.activityOutputButton = new System.Windows.Forms.Button();
             this.activityInputButton = new System.Windows.Forms.Button();
             this.activityDataGridView = new System.Windows.Forms.DataGridView();
-            this.活动序列 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.活动名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.学年 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.学期 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.活动日期 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.活动加分 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.备注 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.导入名单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除活动ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.清空名单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.activityNameText = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.searchButton2 = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.删除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip4 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.删除ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.evaluationPanel = new System.Windows.Forms.Panel();
+            this.label17 = new System.Windows.Forms.Label();
             this.studentPanel.SuspendLayout();
             this.okGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StudentListGridView)).BeginInit();
@@ -116,9 +120,11 @@
             this.gradePanel.SuspendLayout();
             this.okGroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gradeDataGridView)).BeginInit();
+            this.contextMenuStrip2.SuspendLayout();
             this.activityPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.activityDataGridView)).BeginInit();
-            this.contextMenuStrip2.SuspendLayout();
+            this.contextMenuStrip3.SuspendLayout();
+            this.contextMenuStrip4.SuspendLayout();
             this.SuspendLayout();
             // 
             // treeView1
@@ -126,22 +132,22 @@
             this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeView1.Location = new System.Drawing.Point(12, 119);
+            this.treeView1.Location = new System.Drawing.Point(12, 88);
             this.treeView1.Name = "treeView1";
-            treeNode13.Name = "student";
-            treeNode13.Text = "学生";
-            treeNode14.Name = "grade";
-            treeNode14.Text = "成绩";
-            treeNode15.Name = "activity";
-            treeNode15.Text = "活动";
-            treeNode16.Name = "evaluation";
-            treeNode16.Text = "综合评定";
+            treeNode1.Name = "student";
+            treeNode1.Text = "学生";
+            treeNode2.Name = "grade";
+            treeNode2.Text = "成绩";
+            treeNode3.Name = "activity";
+            treeNode3.Text = "活动";
+            treeNode4.Name = "evaluation";
+            treeNode4.Text = "综合评定";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode13,
-            treeNode14,
-            treeNode15,
-            treeNode16});
-            this.treeView1.Size = new System.Drawing.Size(87, 635);
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4});
+            this.treeView1.Size = new System.Drawing.Size(87, 666);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
@@ -157,7 +163,7 @@
             this.studentPanel.Controls.Add(this.flowLayoutPanel1);
             this.studentPanel.Controls.Add(this.inputButton);
             this.studentPanel.Controls.Add(this.searchButton);
-            this.studentPanel.Location = new System.Drawing.Point(108, 119);
+            this.studentPanel.Location = new System.Drawing.Point(105, 119);
             this.studentPanel.Name = "studentPanel";
             this.studentPanel.Size = new System.Drawing.Size(1131, 635);
             this.studentPanel.TabIndex = 18;
@@ -493,7 +499,7 @@
             this.gradePanel.Controls.Add(this.label8);
             this.gradePanel.Controls.Add(this.searchButton1);
             this.gradePanel.Controls.Add(this.gradeDataGridView);
-            this.gradePanel.Location = new System.Drawing.Point(108, 119);
+            this.gradePanel.Location = new System.Drawing.Point(105, 119);
             this.gradePanel.Name = "gradePanel";
             this.gradePanel.Size = new System.Drawing.Size(1131, 635);
             this.gradePanel.TabIndex = 2;
@@ -685,8 +691,24 @@
             this.gradeDataGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gradeDataGridView_CellMouseDown);
             this.gradeDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gradeDataGridView_CellValueChanged);
             // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.删除ToolStripMenuItem1});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 26);
+            // 
+            // 删除ToolStripMenuItem1
+            // 
+            this.删除ToolStripMenuItem1.Name = "删除ToolStripMenuItem1";
+            this.删除ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.删除ToolStripMenuItem1.Text = "删除";
+            this.删除ToolStripMenuItem1.Click += new System.EventHandler(this.删除ToolStripMenuItem1_Click);
+            // 
             // activityPanel
             // 
+            this.activityPanel.Controls.Add(this.activityUpdateButton1);
+            this.activityPanel.Controls.Add(this.returnActivityButton);
             this.activityPanel.Controls.Add(this.sessonComboBox1);
             this.activityPanel.Controls.Add(this.label16);
             this.activityPanel.Controls.Add(this.yearComboBox1);
@@ -699,10 +721,31 @@
             this.activityPanel.Controls.Add(this.label13);
             this.activityPanel.Controls.Add(this.searchButton2);
             this.activityPanel.Controls.Add(this.dateTimePicker1);
-            this.activityPanel.Location = new System.Drawing.Point(108, 119);
+            this.activityPanel.Location = new System.Drawing.Point(105, 119);
             this.activityPanel.Name = "activityPanel";
             this.activityPanel.Size = new System.Drawing.Size(1131, 635);
             this.activityPanel.TabIndex = 15;
+            // 
+            // activityUpdateButton1
+            // 
+            this.activityUpdateButton1.Location = new System.Drawing.Point(106, 575);
+            this.activityUpdateButton1.Name = "activityUpdateButton1";
+            this.activityUpdateButton1.Size = new System.Drawing.Size(75, 23);
+            this.activityUpdateButton1.TabIndex = 13;
+            this.activityUpdateButton1.Text = "更新";
+            this.activityUpdateButton1.UseVisualStyleBackColor = true;
+            this.activityUpdateButton1.Click += new System.EventHandler(this.activityUpdateButton1_Click);
+            // 
+            // returnActivityButton
+            // 
+            this.returnActivityButton.Location = new System.Drawing.Point(106, 575);
+            this.returnActivityButton.Name = "returnActivityButton";
+            this.returnActivityButton.Size = new System.Drawing.Size(75, 23);
+            this.returnActivityButton.TabIndex = 12;
+            this.returnActivityButton.Text = "返回";
+            this.returnActivityButton.UseVisualStyleBackColor = true;
+            this.returnActivityButton.Visible = false;
+            this.returnActivityButton.Click += new System.EventHandler(this.returnActivityButton_Click);
             // 
             // sessonComboBox1
             // 
@@ -771,73 +814,45 @@
             this.activityDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.activityDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.activityDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.activityDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.活动序列,
-            this.活动名称,
-            this.学年,
-            this.学期,
-            this.活动日期,
-            this.活动加分,
-            this.备注});
+            this.activityDataGridView.ContextMenuStrip = this.contextMenuStrip3;
             this.activityDataGridView.Location = new System.Drawing.Point(68, 106);
             this.activityDataGridView.Name = "activityDataGridView";
             this.activityDataGridView.RowTemplate.Height = 23;
             this.activityDataGridView.Size = new System.Drawing.Size(1020, 426);
             this.activityDataGridView.TabIndex = 5;
+            this.activityDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.activityDataGridView_CellDoubleClick);
+            this.activityDataGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.activityDataGridView_CellMouseDown);
+            this.activityDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.activityDataGridView_CellValueChanged);
             // 
-            // 活动序列
+            // contextMenuStrip3
             // 
-            this.活动序列.DataPropertyName = "活动序列";
-            this.活动序列.HeaderText = "活动序列";
-            this.活动序列.Name = "活动序列";
-            this.活动序列.ReadOnly = true;
-            this.活动序列.Width = 78;
+            this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.导入名单ToolStripMenuItem,
+            this.删除活动ToolStripMenuItem,
+            this.清空名单ToolStripMenuItem});
+            this.contextMenuStrip3.Name = "contextMenuStrip3";
+            this.contextMenuStrip3.Size = new System.Drawing.Size(125, 70);
             // 
-            // 活动名称
+            // 导入名单ToolStripMenuItem
             // 
-            this.活动名称.DataPropertyName = "活动名称";
-            this.活动名称.HeaderText = "活动名称";
-            this.活动名称.Name = "活动名称";
-            this.活动名称.Width = 78;
+            this.导入名单ToolStripMenuItem.Name = "导入名单ToolStripMenuItem";
+            this.导入名单ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.导入名单ToolStripMenuItem.Text = "导入名单";
+            this.导入名单ToolStripMenuItem.Click += new System.EventHandler(this.导入名单ToolStripMenuItem_Click);
             // 
-            // 学年
+            // 删除活动ToolStripMenuItem
             // 
-            this.学年.DataPropertyName = "学年";
-            this.学年.HeaderText = "学年";
-            this.学年.Name = "学年";
-            this.学年.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.学年.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.学年.Width = 35;
+            this.删除活动ToolStripMenuItem.Name = "删除活动ToolStripMenuItem";
+            this.删除活动ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.删除活动ToolStripMenuItem.Text = "删除活动";
+            this.删除活动ToolStripMenuItem.Click += new System.EventHandler(this.删除活动ToolStripMenuItem_Click);
             // 
-            // 学期
+            // 清空名单ToolStripMenuItem
             // 
-            this.学期.DataPropertyName = "学期";
-            this.学期.HeaderText = "学期";
-            this.学期.Name = "学期";
-            this.学期.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.学期.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.学期.Width = 35;
-            // 
-            // 活动日期
-            // 
-            this.活动日期.DataPropertyName = "活动日期";
-            this.活动日期.HeaderText = "活动日期";
-            this.活动日期.Name = "活动日期";
-            this.活动日期.Width = 78;
-            // 
-            // 活动加分
-            // 
-            this.活动加分.DataPropertyName = "活动加分";
-            this.活动加分.HeaderText = "活动加分";
-            this.活动加分.Name = "活动加分";
-            this.活动加分.Width = 78;
-            // 
-            // 备注
-            // 
-            this.备注.DataPropertyName = "备注";
-            this.备注.HeaderText = "备注";
-            this.备注.Name = "备注";
-            this.备注.Width = 54;
+            this.清空名单ToolStripMenuItem.Name = "清空名单ToolStripMenuItem";
+            this.清空名单ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.清空名单ToolStripMenuItem.Text = "清空名单";
+            this.清空名单ToolStripMenuItem.Click += new System.EventHandler(this.清空名单ToolStripMenuItem_Click);
             // 
             // activityNameText
             // 
@@ -884,19 +899,42 @@
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 21);
             this.dateTimePicker1.TabIndex = 0;
             // 
-            // contextMenuStrip2
+            // contextMenuStrip4
             // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.删除ToolStripMenuItem1});
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 26);
+            this.contextMenuStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator1,
+            this.删除ToolStripMenuItem2});
+            this.contextMenuStrip4.Name = "contextMenuStrip4";
+            this.contextMenuStrip4.Size = new System.Drawing.Size(101, 32);
             // 
-            // 删除ToolStripMenuItem1
+            // toolStripSeparator1
             // 
-            this.删除ToolStripMenuItem1.Name = "删除ToolStripMenuItem1";
-            this.删除ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.删除ToolStripMenuItem1.Text = "删除";
-            this.删除ToolStripMenuItem1.Click += new System.EventHandler(this.删除ToolStripMenuItem1_Click);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(97, 6);
+            // 
+            // 删除ToolStripMenuItem2
+            // 
+            this.删除ToolStripMenuItem2.Name = "删除ToolStripMenuItem2";
+            this.删除ToolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
+            this.删除ToolStripMenuItem2.Text = "删除";
+            this.删除ToolStripMenuItem2.Click += new System.EventHandler(this.删除ToolStripMenuItem2_Click);
+            // 
+            // evaluationPanel
+            // 
+            this.evaluationPanel.Location = new System.Drawing.Point(105, 119);
+            this.evaluationPanel.Name = "evaluationPanel";
+            this.evaluationPanel.Size = new System.Drawing.Size(1131, 635);
+            this.evaluationPanel.TabIndex = 19;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label17.Location = new System.Drawing.Point(105, 95);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(87, 21);
+            this.label17.TabIndex = 20;
+            this.label17.Text = "label17";
             // 
             // StudentManagement
             // 
@@ -904,6 +942,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 766);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.evaluationPanel);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.activityPanel);
             this.Controls.Add(this.gradePanel);
@@ -911,7 +951,6 @@
             this.KeyPreview = true;
             this.Name = "StudentManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "StudentManagement";
             this.studentPanel.ResumeLayout(false);
             this.okGroupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.StudentListGridView)).EndInit();
@@ -922,11 +961,14 @@
             this.gradePanel.PerformLayout();
             this.okGroupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gradeDataGridView)).EndInit();
+            this.contextMenuStrip2.ResumeLayout(false);
             this.activityPanel.ResumeLayout(false);
             this.activityPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.activityDataGridView)).EndInit();
-            this.contextMenuStrip2.ResumeLayout(false);
+            this.contextMenuStrip3.ResumeLayout(false);
+            this.contextMenuStrip4.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -997,16 +1039,20 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ComboBox yearComboBox1;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 活动序列;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 活动名称;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 学年;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 学期;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 活动日期;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 活动加分;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 备注;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem1;
         private System.Windows.Forms.Button gradeUpdateButton;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
+        private System.Windows.Forms.ToolStripMenuItem 导入名单ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 删除活动ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 清空名单ToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip4;
+        private System.Windows.Forms.Button returnActivityButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem2;
+        private System.Windows.Forms.Button activityUpdateButton1;
+        private System.Windows.Forms.Panel evaluationPanel;
+        private System.Windows.Forms.Label label17;
     }
 }
 
