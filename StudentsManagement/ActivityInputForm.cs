@@ -18,11 +18,15 @@ namespace StudentsManagement
             InitializeComponent();
         }
         private DataTable dt = new DataTable();
-        private string[] names = { "活动名称", "学年", "学期", "活动日期", "活动加分", "备注"};
-        private string[] text = { "", "", "", "", "", "" };
+        private string[] names = { "活动名称", "学年", "学期", "活动日期","评测项目", "活动加分", "备注"};
+        private string[] text = { "", "", "", "", "", "" ,""};
         private void button1_Click(object sender, EventArgs e)
         {
             dt = Common.input(0);
+            if(dt.Rows.Count == 0)
+            {
+                MessageBox.Show("文件内没有数据", "错误");
+            }
             activityInputTextBox1.Text = Common.fileName;
         }
 
@@ -35,7 +39,7 @@ namespace StudentsManagement
             else
             {
                 int tag = 0;                
-                for (int i = 1; i < 5; i++)
+                for (int i = 1; i < 6; i++)
                 {
                     if (text[i-1] == "")
                     {
@@ -47,7 +51,7 @@ namespace StudentsManagement
                 {
                     string sql1 = "REPLACE INTO Activities_List(" + names[0];
                     string sql2 = "VALUES ('" + text[0];
-                    for (int i = 0; i<6; i++)
+                    for (int i = 0; i<7; i++)
                     {
                         if (i != 0)
                         {
@@ -107,19 +111,25 @@ namespace StudentsManagement
             text[3] = activityDateTimePicker1.Text;
         }
 
+        private void eComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            text[4] = eComboBox1.Text;
+        }
         private void activityValuesTextBox3_TextChanged(object sender, EventArgs e)
         {
-            text[4] = activityValuesTextBox3.Text;
+            text[5] = activityValuesTextBox3.Text;
         }
 
         private void activityPsTextBox1_TextChanged(object sender, EventArgs e)
         {
-            text[5] = activityPsTextBox1.Text;
+            text[6] = activityPsTextBox1.Text;
         }
 
         private void activityCancelButton2_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        
     }
 }

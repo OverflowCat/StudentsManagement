@@ -77,6 +77,12 @@
     <Compile Include="ActivityInputForm.Designer.cs">
       <DependentUpon>ActivityInputForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CalculateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CalculateForm.Designer.cs">
+      <DependentUpon>CalculateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common.cs" />
     <Compile Include="DbHelperSQLite.cs" />
     <Compile Include="ExcelHelper.cs" />
@@ -96,6 +102,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ActivityInputForm.resx">
       <DependentUpon>ActivityInputForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CalculateForm.resx">
+      <DependentUpon>CalculateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StudentInfoForm.resx">
       <DependentUpon>StudentInfoForm.cs</DependentUpon>

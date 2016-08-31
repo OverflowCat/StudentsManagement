@@ -59,6 +59,7 @@ namespace StudentsManagement
             else
             {
                 evaluationPanel.BringToFront();
+                this.AcceptButton = eSearchButton1;
                 label17.Text = "学生综合评测信息管理界面";
             }
         }
@@ -137,7 +138,7 @@ namespace StudentsManagement
         {
             //mStudentMajor = majors[majorBox.SelectedIndex];
             mStudentMajor = majorBox.SelectedItem.ToString();
-            string sql = "SELECT class_num FROM Class_List WHERE class_major = '" + mStudentMajor + "'";
+            string sql = "SELECT DISTINCT 行政班 FROM Student_List WHERE 专业 = '" + mStudentMajor + "'";
             DataSet ds = DbHelperSQLite.Query(sql);           
             int n = ds.Tables[0].Rows.Count;
             classBox.Items.Clear();
@@ -724,7 +725,7 @@ namespace StudentsManagement
         {
             majorText = majorComboBox1.Text;
             string mGradeMajor = majorComboBox1.SelectedItem.ToString();
-            string sql = "SELECT class_num FROM Class_List WHERE class_major = '" + mGradeMajor + "'";
+            string sql = "SELECT DISTINCT 行政班 FROM Student_List WHERE 专业 = '" + mGradeMajor + "'";
             DataSet ds = DbHelperSQLite.Query(sql);
             int n = ds.Tables[0].Rows.Count;
             classComboBox2.Items.Clear();
@@ -830,9 +831,15 @@ namespace StudentsManagement
             ArrayList sqlList = new ArrayList();
             for(int i = 0; i < dt.Rows.Count; i++)
             {
-                string sql = "REPLACE INTO Evaluation_Grade(学号,学年,学期,智育成绩) VALUES ('" + dt.Rows[i]["学号"]
+                string sql = "UPDATE Evaluation_Grade SET 智育成绩 = '" + regulerLessonGrade[i] + "' WHERE 学号='" + dt.Rows[i]["学号"]
+                    + "' AND 学年 = '" + dt.Rows[i]["学年"] + "' AND 学期='" + dt.Rows[i]["学期"] + "'";
+                int n = DbHelperSQLite.ExecuteSql(sql);
+                if (n == 0)
+                {
+                    sql = "REPLACE INTO Evaluation_Grade(学号,学年,学期,智育成绩) VALUES ('" + dt.Rows[i]["学号"]
                     + "','" + dt.Rows[i]["学年"] + "','" + dt.Rows[i]["学期"] + "','" + regulerLessonGrade[i] + "')";
-                sqlList.Add(sql);
+                    sqlList.Add(sql);
+                }
             }
             DbHelperSQLite.ExecuteSqlTran(sqlList);
             okGroupBox2.Visible = false;
@@ -877,9 +884,16 @@ namespace StudentsManagement
             ArrayList sqlList = new ArrayList();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                string sql = "REPLACE INTO Evaluation_Grade(学号,学年,学期,智育成绩) VALUES ('" + dt.Rows[i]["学号"]
+                string sql = "UPDATE Evaluation_Grade SET 智育成绩 = '" + regulerLessonGrade[i] + "' WHERE 学号='" + dt.Rows[i]["学号"]
+                    + "' AND 学年 = '" + dt.Rows[i]["学年"] + "' AND 学期='" + dt.Rows[i]["学期"] + "'";
+                int n = DbHelperSQLite.ExecuteSql(sql);
+                if( n == 0)
+                {
+                    sql = "REPLACE INTO Evaluation_Grade(学号,学年,学期,智育成绩) VALUES ('" + dt.Rows[i]["学号"]
                     + "','" + dt.Rows[i]["学年"] + "','" + dt.Rows[i]["学期"] + "','" + regulerLessonGrade[i] + "')";
-                sqlList.Add(sql);
+                    sqlList.Add(sql);
+                }
+                
             }
             DbHelperSQLite.ExecuteSqlTran(sqlList);
             gradeUpdateButton.Visible = false;
@@ -925,9 +939,15 @@ namespace StudentsManagement
                 ArrayList sqlList = new ArrayList();
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    string sql = "REPLACE INTO Evaluation_Grade(学号,学年,学期,智育成绩) VALUES ('" + dt.Rows[i]["学号"]
+                    string sql = "UPDATE Evaluation_Grade SET 智育成绩 = '" + regulerLessonGrade[i] + "' WHERE 学号='" + dt.Rows[i]["学号"]
+                    + "' AND 学年 = '" + dt.Rows[i]["学年"] + "' AND 学期='" + dt.Rows[i]["学期"] + "'";
+                    int n = DbHelperSQLite.ExecuteSql(sql);
+                    if (n == 0)
+                    {
+                        sql = "REPLACE INTO Evaluation_Grade(学号,学年,学期,智育成绩) VALUES ('" + dt.Rows[i]["学号"]
                         + "','" + dt.Rows[i]["学年"] + "','" + dt.Rows[i]["学期"] + "','" + regulerLessonGrade[i] + "')";
-                    sqlList.Add(sql);
+                        sqlList.Add(sql);
+                    }
                 }
                 DbHelperSQLite.ExecuteSqlTran(sqlList);
             }
@@ -941,8 +961,22 @@ namespace StudentsManagement
 
         private DataTable activityDt = new DataTable();
         private DataTable studentDt = new DataTable();
-        private ArrayList locations1 = new ArrayList();
+        //private DataTable evaluationDt = new DataTable();
+        private ArrayList locations1 = new ArrayList();       
         private ArrayList activityColumnNames = new ArrayList();
+        private DataTable newEvaluationDt(DataTable dt)
+        {
+            DataTable evaluationDt = new DataTable();
+            evaluationDt.Columns.Add(dt.Columns["学号"]);
+            //evaluationDt.Columns.Add(dt.Columns["评测项目"]);
+            //evaluationDt.Columns.Add("学号", typeof(string));
+            evaluationDt.Columns.Add("学年", typeof(string));
+            evaluationDt.Columns.Add("学期", typeof(int));
+            evaluationDt.Columns.Add("评测项目", typeof(string));
+            evaluationDt.Columns.Add("内容", typeof(string));
+            evaluationDt.Columns.Add("分值", typeof(double));
+            return evaluationDt;
+        }
         private void searchButton2_Click(object sender, EventArgs e)
         {
             activityUpdateButton1.Visible = false;
@@ -1008,14 +1042,21 @@ namespace StudentsManagement
         {
             DataTable inputActivityDt1 = input(0);
             DataTable inputActivityDt2 = new DataTable();
-            inputActivityDt2.Columns.Add(inputActivityDt1.Columns["学号"]);
-            DataColumn activityIndex = new DataColumn("活动序列");
-            inputActivityDt2.Columns.Add(activityIndex);
+            //inputActivityDt2.Columns.Add(inputActivityDt1.Columns["学号"]);
+            //DataColumn activityIndex = new DataColumn("活动序列");
+            DataTable evaluationDt = newEvaluationDt(inputActivityDt2);
+            //inputActivityDt2.Columns.Add(activityIndex);
             for(int i = 0; i < inputActivityDt2.Rows.Count; i++)
             {
                 inputActivityDt2.Rows[i]["活动序列"] = activityDt.Rows[selectedIndex]["活动序列"];
+                evaluationDt.Rows[i]["学年"] = activityDt.Rows[selectedIndex]["学年"];
+                evaluationDt.Rows[i]["学期"] = activityDt.Rows[selectedIndex]["学期"];
+                evaluationDt.Rows[i]["评测项目"] = activityDt.Rows[selectedIndex]["评测项目"];
+                evaluationDt.Rows[i]["内容"] = "参加：" + activityDt.Rows[selectedIndex]["活动名称"];
+                evaluationDt.Rows[i]["分值"] = activityDt.Rows[selectedIndex]["活动加分"];
             }
             SQLiteInput(inputActivityDt2, "Activities_Student");
+            SQLiteInput(evaluationDt, "Evaluation_Item");
         }
 
         private void 删除活动ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1091,6 +1132,253 @@ namespace StudentsManagement
             string sql = "DELETE FROM Activities_Student WHERE 活动序列 = '"
                 + studentDt.Rows[selectedIndex]["活动序列"]
                 + "' AND 学号 = '" + studentDt.Rows[selectedIndex]["学号"] + "'";
+        }
+
+        /********************************************************************/
+
+
+
+
+        /********************************************************************/
+        private DataTable evaluationGradeDt = new DataTable();
+        private DataTable evaluationListDt = new DataTable();
+        private DataTable evaluationOutDt = new DataTable();
+        private ArrayList locations2 = new ArrayList();
+        private ArrayList evaluationColumnNames = new ArrayList();
+        private void eSearchButton1_Click(object sender, EventArgs e)
+        {
+            string sql = "SELECT * FROM Evaluation_Grade WHERE ";
+            string sql1 = "";
+            if(eIdTextBox1.Text != null && eIdTextBox1.Text != "")
+            {
+                sql = sql + "学号 = '" + eIdTextBox1.Text
+                    + "' AND 学年 LIKE '%" + eYearComboBox1.Text + "%' AND 学期 LIKE '%"
+                    + eSessionComboBox2.Text + "%'";
+            }
+            else
+            {
+                sql = sql + "学年 LIKE '%" + eYearComboBox1.Text + "%' AND 学期 LIKE '%"
+                + eSessionComboBox2.Text + "%'";
+                if (eMajorComboBox3.Text != "" && eMajorComboBox3.Text != null)
+                {
+                    sql1 = "(SELECT 学号 FROM Student_List WHERE 专业 LIKE '%" + eMajorComboBox3.Text
+                    + "%' ANd 行政班 LIKE '%" + eClassComboBox4.Text + "%')";
+                    sql = sql + "AND 学号 IN " + sql1;
+                }                
+            }           
+            evaluationGradeDt = DbHelperSQLite.Query(sql).Tables[0];
+            evaluationDataGridView.DataSource = evaluationGradeDt;
+            evaluationDataGridView.ReadOnly = true;
+            evaluationOutDt = evaluationGradeDt;
+            evaluationDataGridView.ContextMenuStrip = contextMenuStrip5;
+        }
+
+        private void eSearchButton2_Click(object sender, EventArgs e)
+        {
+            string sql = "SELECT * FROM Evaluation_Item WHERE ";
+            string sql1 = "";
+            if (eIdTextBox1.Text != null && eIdTextBox1.Text != "")
+            {
+                sql = sql + "学号 = '" + eIdTextBox1.Text
+                    + "' AND 学年 LIKE '%" + eYearComboBox1.Text + "%' AND 学期 LIKE '%"
+                    + eSessionComboBox2.Text + "%'";
+            }
+            else
+            {
+                sql = sql + "学年 LIKE '%" + eYearComboBox1.Text + "%' AND 学期 LIKE '%"
+                + eSessionComboBox2.Text + "%'";
+                if (eMajorComboBox3.Text != "" && eMajorComboBox3.Text != null)
+                {
+                    sql1 = "(SELECT 学号 FROM Student_List WHERE 专业 LIKE '%" + eMajorComboBox3.Text
+                    + "%' ANd 行政班 LIKE '%" + eClassComboBox4.Text + "%')";
+                    sql = sql + "AND 学号 IN " + sql1;
+                }
+            }
+            evaluationListDt = DbHelperSQLite.Query(sql).Tables[0];
+            for(int i = 0; i < evaluationListDt.Columns.Count; i++)
+            {
+                evaluationColumnNames.Add(evaluationListDt.Columns[i].ColumnName);
+            }
+            evaluationDataGridView.DataSource = evaluationListDt;
+            evaluationDataGridView.ReadOnly = false;
+            evaluationOutDt = evaluationListDt;
+            evaluationDataGridView.ContextMenuStrip = contextMenuStrip6;
+        }
+
+        private void eInputButton_Click(object sender, EventArgs e)
+        {
+            evaluationListDt = input(0);
+            evaluationDataGridView.DataSource = evaluationListDt;
+            eGroupBox1.Visible = true;
+            evaluationDataGridView.ContextMenuStrip = null;
+        }
+
+        private void eInputOkbutton_Click(object sender, EventArgs e)
+        {
+            SQLiteInput(evaluationListDt, "Evaluation_Item");
+            eGroupBox1.Visible = false;
+        }
+
+        private void cancelInputButton_Click(object sender, EventArgs e)
+        {
+            evaluationDataGridView.DataSource = null;
+        }
+
+        private void eOutputButton_Click(object sender, EventArgs e)
+        {
+            output(evaluationOutDt, "综评信息");
+        }
+
+        private void evaluationDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            int i = e.RowIndex;
+            int j = e.ColumnIndex;
+            int tag = 0;
+            ArrayList location = new ArrayList();
+            if (locations1.Count == 0)
+            {
+                location.Add(i);
+                location.Add(j);
+                locations2.Add(location);
+            }
+            else
+            {
+                for (int k = 0; k < locations2.Count; k++)
+                {
+                    if (i.Equals(((ArrayList)locations2[k])[0]))
+                    {
+                        ((ArrayList)locations2[k]).Add(j);
+                        tag = 1;
+                        break;
+                    }
+                }
+                if (tag == 0)
+                {
+                    location.Add(i);
+                    location.Add(j);
+                    locations2.Add(location);
+                }
+            }
+            eUpdateButton.Visible = true;
+        }
+
+        private void eUpdateButton_Click(object sender, EventArgs e)
+        {
+            ArrayList SQLiteStringList = new ArrayList();
+            for (int i = 0; i < locations2.Count; i++)
+            {
+                string sql1 = "UPDATE Evaluation_Item SET "
+                   + evaluationColumnNames[Convert.ToInt32(((ArrayList)locations2[i])[1])].ToString() + "='"
+                   + evaluationListDt.Rows[Convert.ToInt32(((ArrayList)locations2[i])[0])][Convert.ToInt32(((ArrayList)locations2[i])[1])];
+                for (int j = 2; j < ((ArrayList)locations2[i]).Count; j++)
+                {
+                    sql1 = sql1 + "'," + evaluationColumnNames[Convert.ToInt32(((ArrayList)locations2[i])[j])].ToString() + "='"
+                       + evaluationListDt.Rows[Convert.ToInt32(((ArrayList)locations2[i])[0])][Convert.ToInt32(((ArrayList)locations2[i])[j])];
+                }
+                sql1 = sql1 + "' WHERE 记录序列='" + evaluationListDt.Rows[Convert.ToInt32(((ArrayList)locations2[i])[0])][0].ToString() + "'";
+                SQLiteStringList.Add(sql1);
+            }
+            DbHelperSQLite.ExecuteSqlTran(SQLiteStringList);
+            eUpdateButton.Visible = false;
+            locations2.Clear();
+        }
+
+        private void eMajorComboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string eStudentMajor = eMajorComboBox3.SelectedItem.ToString();
+            string sql = "SELECT DISTINCT 行政班 FROM Student_List WHERE 专业 = '" + eStudentMajor + "'";
+            DataSet ds = DbHelperSQLite.Query(sql);
+            int n = ds.Tables[0].Rows.Count;
+            classBox.Items.Clear();
+            if (n != 0)
+            {
+                mClassNums = new string[n];
+                for (int i = 0; i < n; i++)
+                {
+                    mClassNums[i] = ds.Tables[0].Rows[i][0].ToString().Trim();
+                }
+                eClassComboBox4.Items.AddRange(mClassNums);
+            }
+        }
+
+        private void evaluationCalculate(string studentId, string year, string sesson)
+        {
+            double grade1 = 20;
+            double grade2 = 0;
+            double grade3 = 10;
+            double grade4 = 0;
+            double grade = 0;           
+            string sql = "SELECT 评测项目,分值 FROM Evaluation_Item WHERE 学号 = '" + studentId
+                + "' AND 学年 = '" + year
+                + "' AND 学期 = '" + sesson + "'";
+            DataTable dt = DbHelperSQLite.Query(sql).Tables[0];
+            string sql1 = "SELECT 智育成绩 FROM Evaluation_Grade WHERE 学号 = '" + studentId
+                + "' AND 学年 = '" + year
+                + "' AND 学期 = '" + sesson + "'";
+            grade2 = Convert.ToDouble(DbHelperSQLite.Query(sql1).Tables[0].Rows[0][0]);
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                switch (dt.Rows[i]["评测项目"].ToString())
+                {
+                    case "德育评测":
+                    case "德育测评":
+                        grade1 += Convert.ToDouble(dt.Rows[i]["分值"]);
+                        if(grade1 > 100)
+                        {
+                            grade1 = 100;
+                        }
+                        else if(grade1 < 0)
+                        {
+                            grade1 = 0;
+                        }
+                        break;
+                    case "能力评测":
+                    case "能力测评":
+                        grade3 += Convert.ToDouble(dt.Rows[i]["分值"]);
+                        break;
+                    case "个性发展评测":
+                    case "个性发展测评":
+                        grade4 += Convert.ToDouble(dt.Rows[i]["分值"]);
+                        if (grade1 > 40)
+                        {
+                            grade1 = 40;
+                        }
+                        break;
+                }
+            }
+            grade = grade1 * 0.4 + grade2 * 0.4 + grade3 * 0.2 + grade4;
+            string sql2 = "REPLACE INTO Evaluation_Grade(学号,学年,学期,德育成绩,智育成绩,能力成绩,个性发展成绩,总成绩) VALUES('" + studentId
+                + "','" + year + "','" + sesson + "', " + grade1.ToString() + "," + grade2.ToString()
+                + "," + grade3.ToString() + "," + grade4.ToString() + "," + grade.ToString() + ")";
+            DbHelperSQLite.ExecuteSql(sql2);
+        }
+
+        private void evaluationDataGridView_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (e.RowIndex == -1) return;
+                evaluationDataGridView.ClearSelection();
+                evaluationDataGridView.Rows[e.RowIndex].Selected = true;
+                selectedIndex = e.RowIndex;
+            }
+        }
+
+        private void 计算成绩ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string eStudentId = evaluationGradeDt.Rows[selectedIndex]["学号"].ToString();
+            string year = evaluationGradeDt.Rows[selectedIndex]["学年"].ToString();
+            string sesson = evaluationGradeDt.Rows[selectedIndex]["学期"].ToString();
+            evaluationCalculate(eStudentId, year, sesson);
+        }
+
+        private void 删除ToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            string sql = "DELETE FROM Evaluation_Item WHERE 记录序列 = '" + evaluationListDt.Rows[selectedIndex]["记录序列"] + "'";
+            string eStudentId = evaluationGradeDt.Rows[selectedIndex]["学号"].ToString();
+            string year = evaluationGradeDt.Rows[selectedIndex]["学年"].ToString();
+            string sesson = evaluationGradeDt.Rows[selectedIndex]["学期"].ToString();
+            evaluationCalculate(eStudentId, year, sesson);
         }
     }
 }

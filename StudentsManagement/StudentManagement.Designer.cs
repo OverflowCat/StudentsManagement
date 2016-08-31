@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("学生");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("成绩");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("活动");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("综合评定");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("学生");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("成绩");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("活动");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("综合评定");
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.studentPanel = new System.Windows.Forms.Panel();
             this.updateButton = new System.Windows.Forms.Button();
@@ -111,7 +111,31 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.删除ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.evaluationPanel = new System.Windows.Forms.Panel();
+            this.eGroupBox1 = new System.Windows.Forms.GroupBox();
+            this.cancelInputButton = new System.Windows.Forms.Button();
+            this.eInputOkbutton = new System.Windows.Forms.Button();
+            this.eUpdateButton = new System.Windows.Forms.Button();
+            this.eOutputButton = new System.Windows.Forms.Button();
+            this.eInputButton = new System.Windows.Forms.Button();
+            this.eClassComboBox4 = new System.Windows.Forms.ComboBox();
+            this.eMajorComboBox3 = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.eSearchButton2 = new System.Windows.Forms.Button();
+            this.eSearchButton1 = new System.Windows.Forms.Button();
+            this.eSessionComboBox2 = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.eYearComboBox1 = new System.Windows.Forms.ComboBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.eIdTextBox1 = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.evaluationDataGridView = new System.Windows.Forms.DataGridView();
             this.label17 = new System.Windows.Forms.Label();
+            this.contextMenuStrip5 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStrip6 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.计算成绩ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.calculateButton = new System.Windows.Forms.Button();
             this.studentPanel.SuspendLayout();
             this.okGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StudentListGridView)).BeginInit();
@@ -125,6 +149,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.activityDataGridView)).BeginInit();
             this.contextMenuStrip3.SuspendLayout();
             this.contextMenuStrip4.SuspendLayout();
+            this.evaluationPanel.SuspendLayout();
+            this.eGroupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.evaluationDataGridView)).BeginInit();
+            this.contextMenuStrip5.SuspendLayout();
+            this.contextMenuStrip6.SuspendLayout();
             this.SuspendLayout();
             // 
             // treeView1
@@ -134,19 +163,19 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeView1.Location = new System.Drawing.Point(12, 88);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "student";
-            treeNode1.Text = "学生";
-            treeNode2.Name = "grade";
-            treeNode2.Text = "成绩";
-            treeNode3.Name = "activity";
-            treeNode3.Text = "活动";
-            treeNode4.Name = "evaluation";
-            treeNode4.Text = "综合评定";
+            treeNode5.Name = "student";
+            treeNode5.Text = "学生";
+            treeNode6.Name = "grade";
+            treeNode6.Text = "成绩";
+            treeNode7.Name = "activity";
+            treeNode7.Text = "活动";
+            treeNode8.Name = "evaluation";
+            treeNode8.Text = "综合评定";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4});
+            treeNode5,
+            treeNode6,
+            treeNode7,
+            treeNode8});
             this.treeView1.Size = new System.Drawing.Size(87, 666);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -921,20 +950,270 @@
             // 
             // evaluationPanel
             // 
+            this.evaluationPanel.Controls.Add(this.calculateButton);
+            this.evaluationPanel.Controls.Add(this.eGroupBox1);
+            this.evaluationPanel.Controls.Add(this.eUpdateButton);
+            this.evaluationPanel.Controls.Add(this.eOutputButton);
+            this.evaluationPanel.Controls.Add(this.eInputButton);
+            this.evaluationPanel.Controls.Add(this.eClassComboBox4);
+            this.evaluationPanel.Controls.Add(this.eMajorComboBox3);
+            this.evaluationPanel.Controls.Add(this.label22);
+            this.evaluationPanel.Controls.Add(this.label21);
+            this.evaluationPanel.Controls.Add(this.eSearchButton2);
+            this.evaluationPanel.Controls.Add(this.eSearchButton1);
+            this.evaluationPanel.Controls.Add(this.eSessionComboBox2);
+            this.evaluationPanel.Controls.Add(this.label20);
+            this.evaluationPanel.Controls.Add(this.eYearComboBox1);
+            this.evaluationPanel.Controls.Add(this.label19);
+            this.evaluationPanel.Controls.Add(this.eIdTextBox1);
+            this.evaluationPanel.Controls.Add(this.label18);
+            this.evaluationPanel.Controls.Add(this.evaluationDataGridView);
             this.evaluationPanel.Location = new System.Drawing.Point(105, 119);
             this.evaluationPanel.Name = "evaluationPanel";
             this.evaluationPanel.Size = new System.Drawing.Size(1131, 635);
             this.evaluationPanel.TabIndex = 19;
             // 
+            // eGroupBox1
+            // 
+            this.eGroupBox1.Controls.Add(this.cancelInputButton);
+            this.eGroupBox1.Controls.Add(this.eInputOkbutton);
+            this.eGroupBox1.Location = new System.Drawing.Point(130, 572);
+            this.eGroupBox1.Name = "eGroupBox1";
+            this.eGroupBox1.Size = new System.Drawing.Size(160, 60);
+            this.eGroupBox1.TabIndex = 16;
+            this.eGroupBox1.TabStop = false;
+            this.eGroupBox1.Text = "是否导入";
+            this.eGroupBox1.Visible = false;
+            // 
+            // cancelInputButton
+            // 
+            this.cancelInputButton.Location = new System.Drawing.Point(87, 20);
+            this.cancelInputButton.Name = "cancelInputButton";
+            this.cancelInputButton.Size = new System.Drawing.Size(67, 23);
+            this.cancelInputButton.TabIndex = 1;
+            this.cancelInputButton.Text = "取消";
+            this.cancelInputButton.UseVisualStyleBackColor = true;
+            this.cancelInputButton.Click += new System.EventHandler(this.cancelInputButton_Click);
+            // 
+            // eInputOkbutton
+            // 
+            this.eInputOkbutton.Location = new System.Drawing.Point(6, 20);
+            this.eInputOkbutton.Name = "eInputOkbutton";
+            this.eInputOkbutton.Size = new System.Drawing.Size(70, 23);
+            this.eInputOkbutton.TabIndex = 0;
+            this.eInputOkbutton.Text = "确定";
+            this.eInputOkbutton.UseVisualStyleBackColor = true;
+            this.eInputOkbutton.Click += new System.EventHandler(this.eInputOkbutton_Click);
+            // 
+            // eUpdateButton
+            // 
+            this.eUpdateButton.Location = new System.Drawing.Point(47, 592);
+            this.eUpdateButton.Name = "eUpdateButton";
+            this.eUpdateButton.Size = new System.Drawing.Size(75, 23);
+            this.eUpdateButton.TabIndex = 15;
+            this.eUpdateButton.Text = "更新";
+            this.eUpdateButton.UseVisualStyleBackColor = true;
+            this.eUpdateButton.Visible = false;
+            this.eUpdateButton.Click += new System.EventHandler(this.eUpdateButton_Click);
+            // 
+            // eOutputButton
+            // 
+            this.eOutputButton.Location = new System.Drawing.Point(865, 592);
+            this.eOutputButton.Name = "eOutputButton";
+            this.eOutputButton.Size = new System.Drawing.Size(75, 23);
+            this.eOutputButton.TabIndex = 14;
+            this.eOutputButton.Text = "导出";
+            this.eOutputButton.UseVisualStyleBackColor = true;
+            this.eOutputButton.Click += new System.EventHandler(this.eOutputButton_Click);
+            // 
+            // eInputButton
+            // 
+            this.eInputButton.Location = new System.Drawing.Point(771, 592);
+            this.eInputButton.Name = "eInputButton";
+            this.eInputButton.Size = new System.Drawing.Size(75, 23);
+            this.eInputButton.TabIndex = 13;
+            this.eInputButton.Text = "导入记录";
+            this.eInputButton.UseVisualStyleBackColor = true;
+            this.eInputButton.Click += new System.EventHandler(this.eInputButton_Click);
+            // 
+            // eClassComboBox4
+            // 
+            this.eClassComboBox4.FormattingEnabled = true;
+            this.eClassComboBox4.Location = new System.Drawing.Point(474, 73);
+            this.eClassComboBox4.Name = "eClassComboBox4";
+            this.eClassComboBox4.Size = new System.Drawing.Size(121, 20);
+            this.eClassComboBox4.TabIndex = 12;
+            // 
+            // eMajorComboBox3
+            // 
+            this.eMajorComboBox3.FormattingEnabled = true;
+            this.eMajorComboBox3.Items.AddRange(new object[] {
+            "信息与计算科学",
+            "数学与应用数学",
+            "应用物理"});
+            this.eMajorComboBox3.Location = new System.Drawing.Point(280, 73);
+            this.eMajorComboBox3.Name = "eMajorComboBox3";
+            this.eMajorComboBox3.Size = new System.Drawing.Size(121, 20);
+            this.eMajorComboBox3.TabIndex = 11;
+            this.eMajorComboBox3.SelectedIndexChanged += new System.EventHandler(this.eMajorComboBox3_SelectedIndexChanged);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(439, 76);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(29, 12);
+            this.label22.TabIndex = 10;
+            this.label22.Text = "班级";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(245, 76);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(29, 12);
+            this.label21.TabIndex = 9;
+            this.label21.Text = "专业";
+            // 
+            // eSearchButton2
+            // 
+            this.eSearchButton2.Location = new System.Drawing.Point(852, 25);
+            this.eSearchButton2.Name = "eSearchButton2";
+            this.eSearchButton2.Size = new System.Drawing.Size(88, 48);
+            this.eSearchButton2.TabIndex = 8;
+            this.eSearchButton2.Text = "查询综评记录";
+            this.eSearchButton2.UseVisualStyleBackColor = true;
+            this.eSearchButton2.Click += new System.EventHandler(this.eSearchButton2_Click);
+            // 
+            // eSearchButton1
+            // 
+            this.eSearchButton1.Location = new System.Drawing.Point(737, 25);
+            this.eSearchButton1.Name = "eSearchButton1";
+            this.eSearchButton1.Size = new System.Drawing.Size(92, 48);
+            this.eSearchButton1.TabIndex = 7;
+            this.eSearchButton1.Text = "查询综评分数";
+            this.eSearchButton1.UseVisualStyleBackColor = true;
+            this.eSearchButton1.Click += new System.EventHandler(this.eSearchButton1_Click);
+            // 
+            // eSessionComboBox2
+            // 
+            this.eSessionComboBox2.FormattingEnabled = true;
+            this.eSessionComboBox2.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3"});
+            this.eSessionComboBox2.Location = new System.Drawing.Point(553, 19);
+            this.eSessionComboBox2.Name = "eSessionComboBox2";
+            this.eSessionComboBox2.Size = new System.Drawing.Size(121, 20);
+            this.eSessionComboBox2.TabIndex = 6;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(515, 22);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(29, 12);
+            this.label20.TabIndex = 5;
+            this.label20.Text = "学期";
+            // 
+            // eYearComboBox1
+            // 
+            this.eYearComboBox1.FormattingEnabled = true;
+            this.eYearComboBox1.Items.AddRange(new object[] {
+            "2013-2014",
+            "2014-2015",
+            "2015-2016",
+            "2016-2017",
+            "2017-2018",
+            "2018-2019",
+            "2019-2020"});
+            this.eYearComboBox1.Location = new System.Drawing.Point(358, 19);
+            this.eYearComboBox1.Name = "eYearComboBox1";
+            this.eYearComboBox1.Size = new System.Drawing.Size(121, 20);
+            this.eYearComboBox1.TabIndex = 4;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(323, 22);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(29, 12);
+            this.label19.TabIndex = 3;
+            this.label19.Text = "学年";
+            // 
+            // eIdTextBox1
+            // 
+            this.eIdTextBox1.Location = new System.Drawing.Point(190, 19);
+            this.eIdTextBox1.Name = "eIdTextBox1";
+            this.eIdTextBox1.Size = new System.Drawing.Size(100, 21);
+            this.eIdTextBox1.TabIndex = 2;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(155, 22);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(29, 12);
+            this.label18.TabIndex = 1;
+            this.label18.Text = "学号";
+            // 
+            // evaluationDataGridView
+            // 
+            this.evaluationDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.evaluationDataGridView.Location = new System.Drawing.Point(47, 106);
+            this.evaluationDataGridView.Name = "evaluationDataGridView";
+            this.evaluationDataGridView.RowTemplate.Height = 23;
+            this.evaluationDataGridView.Size = new System.Drawing.Size(1041, 463);
+            this.evaluationDataGridView.TabIndex = 0;
+            this.evaluationDataGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.evaluationDataGridView_CellMouseDown);
+            this.evaluationDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.evaluationDataGridView_CellValueChanged);
+            // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label17.Font = new System.Drawing.Font("SimSun", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label17.Location = new System.Drawing.Point(105, 95);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(87, 21);
             this.label17.TabIndex = 20;
             this.label17.Text = "label17";
+            // 
+            // contextMenuStrip5
+            // 
+            this.contextMenuStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.计算成绩ToolStripMenuItem});
+            this.contextMenuStrip5.Name = "contextMenuStrip5";
+            this.contextMenuStrip5.Size = new System.Drawing.Size(125, 26);
+            // 
+            // contextMenuStrip6
+            // 
+            this.contextMenuStrip6.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.删除ToolStripMenuItem3});
+            this.contextMenuStrip6.Name = "contextMenuStrip6";
+            this.contextMenuStrip6.Size = new System.Drawing.Size(101, 26);
+            // 
+            // 计算成绩ToolStripMenuItem
+            // 
+            this.计算成绩ToolStripMenuItem.Name = "计算成绩ToolStripMenuItem";
+            this.计算成绩ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.计算成绩ToolStripMenuItem.Text = "计算成绩";
+            this.计算成绩ToolStripMenuItem.Click += new System.EventHandler(this.计算成绩ToolStripMenuItem_Click);
+            // 
+            // 删除ToolStripMenuItem3
+            // 
+            this.删除ToolStripMenuItem3.Name = "删除ToolStripMenuItem3";
+            this.删除ToolStripMenuItem3.Size = new System.Drawing.Size(100, 22);
+            this.删除ToolStripMenuItem3.Text = "删除";
+            this.删除ToolStripMenuItem3.Click += new System.EventHandler(this.删除ToolStripMenuItem3_Click);
+            // 
+            // calculateButton
+            // 
+            this.calculateButton.Location = new System.Drawing.Point(474, 582);
+            this.calculateButton.Name = "calculateButton";
+            this.calculateButton.Size = new System.Drawing.Size(117, 40);
+            this.calculateButton.TabIndex = 17;
+            this.calculateButton.Text = "综评成绩计算";
+            this.calculateButton.UseVisualStyleBackColor = true;
             // 
             // StudentManagement
             // 
@@ -967,6 +1246,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.activityDataGridView)).EndInit();
             this.contextMenuStrip3.ResumeLayout(false);
             this.contextMenuStrip4.ResumeLayout(false);
+            this.evaluationPanel.ResumeLayout(false);
+            this.evaluationPanel.PerformLayout();
+            this.eGroupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.evaluationDataGridView)).EndInit();
+            this.contextMenuStrip5.ResumeLayout(false);
+            this.contextMenuStrip6.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1053,6 +1338,30 @@
         private System.Windows.Forms.Button activityUpdateButton1;
         private System.Windows.Forms.Panel evaluationPanel;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.DataGridView evaluationDataGridView;
+        private System.Windows.Forms.Button eSearchButton2;
+        private System.Windows.Forms.Button eSearchButton1;
+        private System.Windows.Forms.ComboBox eSessionComboBox2;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ComboBox eYearComboBox1;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox eIdTextBox1;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ComboBox eClassComboBox4;
+        private System.Windows.Forms.ComboBox eMajorComboBox3;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip5;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip6;
+        private System.Windows.Forms.GroupBox eGroupBox1;
+        private System.Windows.Forms.Button cancelInputButton;
+        private System.Windows.Forms.Button eInputOkbutton;
+        private System.Windows.Forms.Button eUpdateButton;
+        private System.Windows.Forms.Button eOutputButton;
+        private System.Windows.Forms.Button eInputButton;
+        private System.Windows.Forms.ToolStripMenuItem 计算成绩ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem3;
+        private System.Windows.Forms.Button calculateButton;
     }
 }
 

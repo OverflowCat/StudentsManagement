@@ -47,6 +47,8 @@
             this.activityOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.label8 = new System.Windows.Forms.Label();
             this.activityPsTextBox1 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.eComboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -97,7 +99,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(117, 113);
+            this.label4.Location = new System.Drawing.Point(117, 105);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 5;
@@ -106,7 +108,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(117, 153);
+            this.label5.Location = new System.Drawing.Point(117, 137);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 6;
@@ -115,7 +117,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(93, 193);
+            this.label6.Location = new System.Drawing.Point(93, 169);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 12);
             this.label6.TabIndex = 7;
@@ -148,7 +150,7 @@
             "2016-2017",
             "2017-2018",
             "2018-2019"});
-            this.activityYearComboBox1.Location = new System.Drawing.Point(152, 110);
+            this.activityYearComboBox1.Location = new System.Drawing.Point(152, 102);
             this.activityYearComboBox1.Name = "activityYearComboBox1";
             this.activityYearComboBox1.Size = new System.Drawing.Size(121, 20);
             this.activityYearComboBox1.TabIndex = 10;
@@ -161,7 +163,7 @@
             "1",
             "2",
             "3"});
-            this.activitySessionComboBox2.Location = new System.Drawing.Point(152, 145);
+            this.activitySessionComboBox2.Location = new System.Drawing.Point(152, 133);
             this.activitySessionComboBox2.Name = "activitySessionComboBox2";
             this.activitySessionComboBox2.Size = new System.Drawing.Size(121, 20);
             this.activitySessionComboBox2.TabIndex = 11;
@@ -171,7 +173,7 @@
             // 
             this.activityDateTimePicker1.CustomFormat = "yyyy-MM-dd";
             this.activityDateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.activityDateTimePicker1.Location = new System.Drawing.Point(152, 193);
+            this.activityDateTimePicker1.Location = new System.Drawing.Point(152, 164);
             this.activityDateTimePicker1.Name = "activityDateTimePicker1";
             this.activityDateTimePicker1.Size = new System.Drawing.Size(155, 21);
             this.activityDateTimePicker1.TabIndex = 12;
@@ -179,7 +181,7 @@
             // 
             // activityValuesTextBox3
             // 
-            this.activityValuesTextBox3.Location = new System.Drawing.Point(152, 230);
+            this.activityValuesTextBox3.Location = new System.Drawing.Point(152, 227);
             this.activityValuesTextBox3.Name = "activityValuesTextBox3";
             this.activityValuesTextBox3.Size = new System.Drawing.Size(100, 21);
             this.activityValuesTextBox3.TabIndex = 13;
@@ -229,11 +231,35 @@
             this.activityPsTextBox1.TabIndex = 17;
             this.activityPsTextBox1.TextChanged += new System.EventHandler(this.activityPsTextBox1_TextChanged);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(93, 199);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 12);
+            this.label9.TabIndex = 18;
+            this.label9.Text = "评测项目";
+            // 
+            // eComboBox1
+            // 
+            this.eComboBox1.FormattingEnabled = true;
+            this.eComboBox1.Items.AddRange(new object[] {
+            "德育测评",
+            "能力测评",
+            "个性发展测评"});
+            this.eComboBox1.Location = new System.Drawing.Point(152, 196);
+            this.eComboBox1.Name = "eComboBox1";
+            this.eComboBox1.Size = new System.Drawing.Size(121, 20);
+            this.eComboBox1.TabIndex = 19;
+            this.eComboBox1.SelectedIndexChanged += new System.EventHandler(this.eComboBox1_SelectedIndexChanged);
+            // 
             // ActivityInputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(347, 371);
+            this.Controls.Add(this.eComboBox1);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.activityPsTextBox1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.activityCancelButton2);
@@ -281,5 +307,7 @@
         private System.Windows.Forms.OpenFileDialog activityOpenFileDialog;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox activityPsTextBox1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox eComboBox1;
     }
 }
