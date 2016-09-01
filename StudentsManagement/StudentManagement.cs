@@ -1222,6 +1222,7 @@ namespace StudentsManagement
         private void cancelInputButton_Click(object sender, EventArgs e)
         {
             evaluationDataGridView.DataSource = null;
+            eGroupBox1.Visible = false;
         }
 
         private void eOutputButton_Click(object sender, EventArgs e)
@@ -1379,6 +1380,12 @@ namespace StudentsManagement
             string year = evaluationGradeDt.Rows[selectedIndex]["学年"].ToString();
             string sesson = evaluationGradeDt.Rows[selectedIndex]["学期"].ToString();
             evaluationCalculate(eStudentId, year, sesson);
+        }
+
+        private void calculateButton_Click(object sender, EventArgs e)
+        {
+            CalculateForm calculateFrom = new CalculateForm();
+            calculateFrom.Show();
         }
     }
 }

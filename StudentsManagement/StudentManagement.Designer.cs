@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("学生");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("成绩");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("活动");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("综合评定");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("学生");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("成绩");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("活动");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("综合评定");
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.studentPanel = new System.Windows.Forms.Panel();
             this.updateButton = new System.Windows.Forms.Button();
@@ -111,6 +111,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.删除ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.evaluationPanel = new System.Windows.Forms.Panel();
+            this.calculateButton = new System.Windows.Forms.Button();
             this.eGroupBox1 = new System.Windows.Forms.GroupBox();
             this.cancelInputButton = new System.Windows.Forms.Button();
             this.eInputOkbutton = new System.Windows.Forms.Button();
@@ -132,10 +133,9 @@
             this.evaluationDataGridView = new System.Windows.Forms.DataGridView();
             this.label17 = new System.Windows.Forms.Label();
             this.contextMenuStrip5 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.contextMenuStrip6 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.计算成绩ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip6 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.calculateButton = new System.Windows.Forms.Button();
             this.studentPanel.SuspendLayout();
             this.okGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StudentListGridView)).BeginInit();
@@ -163,19 +163,19 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeView1.Location = new System.Drawing.Point(12, 88);
             this.treeView1.Name = "treeView1";
-            treeNode5.Name = "student";
-            treeNode5.Text = "学生";
-            treeNode6.Name = "grade";
-            treeNode6.Text = "成绩";
-            treeNode7.Name = "activity";
-            treeNode7.Text = "活动";
-            treeNode8.Name = "evaluation";
-            treeNode8.Text = "综合评定";
+            treeNode1.Name = "student";
+            treeNode1.Text = "学生";
+            treeNode2.Name = "grade";
+            treeNode2.Text = "成绩";
+            treeNode3.Name = "activity";
+            treeNode3.Text = "活动";
+            treeNode4.Name = "evaluation";
+            treeNode4.Text = "综合评定";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6,
-            treeNode7,
-            treeNode8});
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4});
             this.treeView1.Size = new System.Drawing.Size(87, 666);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -973,6 +973,16 @@
             this.evaluationPanel.Size = new System.Drawing.Size(1131, 635);
             this.evaluationPanel.TabIndex = 19;
             // 
+            // calculateButton
+            // 
+            this.calculateButton.Location = new System.Drawing.Point(474, 582);
+            this.calculateButton.Name = "calculateButton";
+            this.calculateButton.Size = new System.Drawing.Size(117, 40);
+            this.calculateButton.TabIndex = 17;
+            this.calculateButton.Text = "综评成绩计算";
+            this.calculateButton.UseVisualStyleBackColor = true;
+            this.calculateButton.Click += new System.EventHandler(this.calculateButton_Click);
+            // 
             // eGroupBox1
             // 
             this.eGroupBox1.Controls.Add(this.cancelInputButton);
@@ -1185,19 +1195,19 @@
             this.contextMenuStrip5.Name = "contextMenuStrip5";
             this.contextMenuStrip5.Size = new System.Drawing.Size(125, 26);
             // 
-            // contextMenuStrip6
-            // 
-            this.contextMenuStrip6.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.删除ToolStripMenuItem3});
-            this.contextMenuStrip6.Name = "contextMenuStrip6";
-            this.contextMenuStrip6.Size = new System.Drawing.Size(101, 26);
-            // 
             // 计算成绩ToolStripMenuItem
             // 
             this.计算成绩ToolStripMenuItem.Name = "计算成绩ToolStripMenuItem";
             this.计算成绩ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.计算成绩ToolStripMenuItem.Text = "计算成绩";
             this.计算成绩ToolStripMenuItem.Click += new System.EventHandler(this.计算成绩ToolStripMenuItem_Click);
+            // 
+            // contextMenuStrip6
+            // 
+            this.contextMenuStrip6.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.删除ToolStripMenuItem3});
+            this.contextMenuStrip6.Name = "contextMenuStrip6";
+            this.contextMenuStrip6.Size = new System.Drawing.Size(101, 26);
             // 
             // 删除ToolStripMenuItem3
             // 
@@ -1206,15 +1216,6 @@
             this.删除ToolStripMenuItem3.Text = "删除";
             this.删除ToolStripMenuItem3.Click += new System.EventHandler(this.删除ToolStripMenuItem3_Click);
             // 
-            // calculateButton
-            // 
-            this.calculateButton.Location = new System.Drawing.Point(474, 582);
-            this.calculateButton.Name = "calculateButton";
-            this.calculateButton.Size = new System.Drawing.Size(117, 40);
-            this.calculateButton.TabIndex = 17;
-            this.calculateButton.Text = "综评成绩计算";
-            this.calculateButton.UseVisualStyleBackColor = true;
-            // 
             // StudentManagement
             // 
             this.AcceptButton = this.searchButton;
@@ -1222,11 +1223,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 766);
             this.Controls.Add(this.label17);
-            this.Controls.Add(this.evaluationPanel);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.activityPanel);
             this.Controls.Add(this.gradePanel);
             this.Controls.Add(this.studentPanel);
+            this.Controls.Add(this.evaluationPanel);
             this.KeyPreview = true;
             this.Name = "StudentManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
