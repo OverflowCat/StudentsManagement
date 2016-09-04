@@ -61,7 +61,7 @@ namespace StudentsManagement
                     }
                     else
                     {
-                        sql = sql + " 专业= '" + mMajor + "'";
+                        sql = sql + " 专业= '" + mMajor + "' AND 当前所在级='" + mGrade + "'";
                         tag = 2;
                     }
                 }
@@ -82,13 +82,15 @@ namespace StudentsManagement
                     }
                     else
                     {
-                        sql = sql + " 专业= '" + mMajor + "'";
-                        tag = 2;
+                        MessageBox.Show("请选择年级或者班级","提示");
+                        sql = "";
                     }
                 }
                 else
                 {
-                    DialogResult d = MessageBox.Show("是否进行全系学生成绩计算？", "提示", MessageBoxButtons.YesNo);
+                    MessageBox.Show("请选择相应的年级、专业与班级","提示");
+                    sql = "";
+                    /*DialogResult d = MessageBox.Show("是否进行全系学生成绩计算？", "提示", MessageBoxButtons.YesNo);
                     if(d.ToString() == "Yes")
                     {
                         sql = "SELECT 学号,专业,行政班 FROM Student_List ";
@@ -97,7 +99,7 @@ namespace StudentsManagement
                     else
                     {
                         sql = "";
-                    }
+                    }*/
                 }
             }
             return sql;

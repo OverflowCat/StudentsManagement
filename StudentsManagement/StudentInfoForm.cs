@@ -35,12 +35,12 @@ namespace StudentsManagement
             majorTextBox.Text = dt.Rows[index]["专业"].ToString();
             hometownTextBox.Text = dt.Rows[index]["籍贯"].ToString();
             policTextBox.Text = dt.Rows[index]["政治面貌"].ToString();
-            birthTextBox.Text = dt.Rows[index]["出生日期"].ToString().Substring(0, 10);
+            birthTextBox.Text = dt.Rows[index]["出生日期"].ToString();
             idcardTextBox.Text = dt.Rows[index]["身份证号"].ToString();
             classTextBox.Text = dt.Rows[index]["行政班"].ToString();
             studyYearTextBox.Text = dt.Rows[index]["学制"].ToString();
             gradeTextBox.Text = dt.Rows[index]["当前所在级"].ToString();
-            inDateTextBox.Text = dt.Rows[index]["入学日期"].ToString().Substring(0, 10);
+            inDateTextBox.Text = dt.Rows[index]["入学日期"].ToString();
             roomTextBox.Text = dt.Rows[index]["宿舍号"].ToString();
             levelTextBox.Text = dt.Rows[index]["学历层次"].ToString();
             eLevelTextBox.Text = dt.Rows[index]["英语等级"].ToString();
@@ -57,6 +57,7 @@ namespace StudentsManagement
             mWorkTextBox.Text = dt.Rows[index]["母亲单位"].ToString();
             fWorktextBox.Text = dt.Rows[index]["父亲单位"].ToString();
             psTextBox.Text = dt.Rows[index]["备注"].ToString();
+            updateButton1.Visible = false;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -659,6 +660,41 @@ namespace StudentsManagement
             SQLiteInput(evaluationDt, "Evaluation_Item");
             updateButton.Visible = false;
         }
+
+        private void 删除ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            string sql = "";
+            if(tag == 0)
+            {
+                sql = "DELETE FROM Activities_Student WHERE 学号='" + studentId
+                    + "' AND 活动序列 = '" + activityDt.Rows[selectedIndex]["活动序列"] + "'";
+            }
+            else
+            {
+                sql = "DELETE FROM Evaluation_Item WHERE 记录序列 = '" + evaluationDt.Rows[selectedIndex]["记录序列"] + "'";
+            }
+            int n = DbHelperSQLite.ExecuteSql(sql);
+            if(n == 1)
+            {
+                MessageBox.Show("删除成功");
+            }
+            else
+            {
+                MessageBox.Show("删除失败");
+            }
+        }        
+
+        private void aeDataGridView_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (e.RowIndex == -1) return;
+                aeDataGridView.ClearSelection();
+                aeDataGridView.Rows[e.RowIndex].Selected = true;
+                selectedIndex = e.RowIndex;
+            }
+        }        
+
         /*******************************************************************/
 
 
@@ -696,5 +732,198 @@ namespace StudentsManagement
                 MessageBox.Show("请输入学年与学期", "提示");
             }
         }
+
+        /*****************************************************************/
+
+
+
+
+        /*****************************************************************/
+        private DataTable dtCopy = Common.dt.Copy(); 
+        private void updateButton1_Click(object sender, EventArgs e)
+        {
+            dt = dtCopy.Copy();
+            dtCopy.Clear();
+            DataRow dr = dt.Rows[index];
+            dtCopy.ImportRow(dr);
+            SQLiteInput(dtCopy, "Student_List");
+            studentName = dtCopy.Rows[0]["姓名"].ToString();
+            updateButton1.Visible = false;
+        }
+        private void NameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["姓名"] = NameTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void oldNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["曾用名"] = oldNameTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void sexTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["性别"] = sexTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void nationTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["民族"] = nationTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void policTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["政治面貌"] = policTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void majorTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["专业"] = majorTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void classTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["行政班"] = classTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void birthTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["出生日期"] = birthTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void hometownTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["籍贯"] = hometownTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void idcardTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["身份证号"] = idcardTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void studyYearTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["学制"] = studyYearTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void gradeTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["当前所在级"] = gradeTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void inDateTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["入学日期"] = inDateTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void roomTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["宿舍号"] = roomTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void levelTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["学历层次"] = levelTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void eLevelTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["英语等级"] = eLevelTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void eGradeTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["英语成绩"] = eGradeTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void phoneTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["手机号"] = phoneTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void qqTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["QQ号"] = qqTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void emailTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["电子邮箱"] = emailTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void addressTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["家庭地址"] = addressTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void codeTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["邮政编码"] = codeTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void mNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["母亲姓名"] = mNameTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void fNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["父亲姓名"] = fNameTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void mPhoneTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["母亲电话"] = mPhoneTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void fPhoneTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["父亲电话"] = fPhoneTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void mWorkTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["母亲单位"] = mWorkTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void fWorktextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["父亲单位"] = fWorktextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+        private void psTextBox_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["备注"] = psTextBox.Text;
+            updateButton1.Visible = true;
+        }
+
+
     }
 }

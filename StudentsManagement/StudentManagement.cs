@@ -221,17 +221,16 @@ namespace StudentsManagement
                 int check = DbHelperSQLite.ExecuteSql(sqlCheck);
                 if (check == 1)
                 {
-                    DialogResult d = MessageBox.Show("学号为" + inputDataTable.Rows[i]["学号"] + "的学生信息重复\n是否覆盖？", "信息重复", MessageBoxButtons.YesNoCancel);
-                    if (d.ToString().Equals("OK"))
+                    DialogResult d = MessageBox.Show("学号为" + inputDataTable.Rows[i]["学号"] + "的学生信息重复\n是否更新？", "信息重复", MessageBoxButtons.YesNoCancel);
+                    if (d.ToString() == "Yes")
                     {
-                        string sql1 = "REPLACE INTO Student_List(" + columnsNames[0].ToString();
-                        string sql2 = ") Values('" + inputDataTable.Rows[i][columnsNames[0].ToString()];
-                        for (int j = 1; j < inputDataTable.Columns.Count; j++)
+                        string sql1 = "UPDATE Student_List SET ";
+                        string sql2 = inputDataTable.Columns[1].ColumnName + "='" + inputDataTable.Rows[i][inputDataTable.Columns[1].ColumnName] + "'";
+                        for (int j = 2; j < inputDataTable.Columns.Count; j++)
                         {
-                            sql1 = sql1 + "," + columnsNames[j].ToString();
-                            sql2 = sql2 + "','" + inputDataTable.Rows[i][columnsNames[j].ToString()];
+                            sql2 = sql2 + ", " + inputDataTable.Columns[j].ColumnName + "='" + inputDataTable.Rows[i][inputDataTable.Columns[j].ColumnName] + "'";
                         }
-                        string sql = sql1 + sql2 + "')";
+                        string sql = sql1 + sql2 + " WHERE 学号 = '" + inputDataTable.Rows[i]["学号"] + "'";
                         SQLStringList.Add(sql);
                     }
                 }

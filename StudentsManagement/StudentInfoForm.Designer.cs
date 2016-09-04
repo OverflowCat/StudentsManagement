@@ -100,22 +100,24 @@
             this.fWorktextBox = new System.Windows.Forms.TextBox();
             this.fPhoneTextBox = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.yearComboBox1 = new System.Windows.Forms.ComboBox();
-            this.sessonComboBox1 = new System.Windows.Forms.ComboBox();
-            this.gradeSearchButton = new System.Windows.Forms.Button();
-            this.gradeDataGridView = new System.Windows.Forms.DataGridView();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.gradeInputButton = new System.Windows.Forms.Button();
-            this.gradeOutputButton = new System.Windows.Forms.Button();
-            this.gradeInputGroupBox = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.gradeUpdateButton = new System.Windows.Forms.Button();
+            this.gradeInputGroupBox = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.gradeOutputButton = new System.Windows.Forms.Button();
+            this.gradeInputButton = new System.Windows.Forms.Button();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.gradeDataGridView = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gradeSearchButton = new System.Windows.Forms.Button();
+            this.sessonComboBox1 = new System.Windows.Forms.ComboBox();
+            this.yearComboBox1 = new System.Windows.Forms.ComboBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label35 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.evaluationSearchButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
             this.eGroupBox = new System.Windows.Forms.GroupBox();
             this.inputCancelButton = new System.Windows.Forms.Button();
@@ -125,34 +127,33 @@
             this.label33 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
             this.aeDataGridView = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.删除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.activitySearchButton = new System.Windows.Forms.Button();
             this.sessonComboBox2 = new System.Windows.Forms.ComboBox();
             this.yearComboBox2 = new System.Windows.Forms.ComboBox();
-            this.evaluationSearchButton = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.label35 = new System.Windows.Forms.Label();
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.删除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.calculateButton = new System.Windows.Forms.Button();
+            this.evaluationOutputButton = new System.Windows.Forms.Button();
             this.label36 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.evaluationDataGridView = new System.Windows.Forms.DataGridView();
             this.evaluatingSearchButton = new System.Windows.Forms.Button();
             this.sessonComboBox3 = new System.Windows.Forms.ComboBox();
             this.yearComboBox3 = new System.Windows.Forms.ComboBox();
-            this.evaluationOutputButton = new System.Windows.Forms.Button();
-            this.calculateButton = new System.Windows.Forms.Button();
+            this.updateButton1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gradeDataGridView)).BeginInit();
             this.gradeInputGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gradeDataGridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.eGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.aeDataGridView)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.evaluationDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -171,6 +172,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.updateButton1);
             this.tabPage1.Controls.Add(this.tableLayoutPanel1);
             this.tabPage1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
@@ -251,7 +253,7 @@
             this.tableLayoutPanel1.Controls.Add(this.textBox24, 2, 15);
             this.tableLayoutPanel1.Controls.Add(this.fWorktextBox, 3, 14);
             this.tableLayoutPanel1.Controls.Add(this.fPhoneTextBox, 3, 13);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(281, 36);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(283, 17);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 16;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.985537F));
@@ -281,6 +283,7 @@
             this.psTextBox.Name = "psTextBox";
             this.psTextBox.Size = new System.Drawing.Size(198, 114);
             this.psTextBox.TabIndex = 63;
+            this.psTextBox.TextChanged += new System.EventHandler(this.psTextBox_TextChanged);
             // 
             // mWorkTextBox
             // 
@@ -289,6 +292,7 @@
             this.mWorkTextBox.Name = "mWorkTextBox";
             this.mWorkTextBox.Size = new System.Drawing.Size(198, 14);
             this.mWorkTextBox.TabIndex = 61;
+            this.mWorkTextBox.TextChanged += new System.EventHandler(this.mWorkTextBox_TextChanged);
             // 
             // mPhoneTextBox
             // 
@@ -297,6 +301,7 @@
             this.mPhoneTextBox.Name = "mPhoneTextBox";
             this.mPhoneTextBox.Size = new System.Drawing.Size(100, 14);
             this.mPhoneTextBox.TabIndex = 59;
+            this.mPhoneTextBox.TextChanged += new System.EventHandler(this.mPhoneTextBox_TextChanged);
             // 
             // mNameTextBox
             // 
@@ -305,6 +310,7 @@
             this.mNameTextBox.Name = "mNameTextBox";
             this.mNameTextBox.Size = new System.Drawing.Size(100, 14);
             this.mNameTextBox.TabIndex = 55;
+            this.mNameTextBox.TextChanged += new System.EventHandler(this.mNameTextBox_TextChanged);
             // 
             // codeTextBox
             // 
@@ -313,6 +319,7 @@
             this.codeTextBox.Name = "codeTextBox";
             this.codeTextBox.Size = new System.Drawing.Size(100, 14);
             this.codeTextBox.TabIndex = 52;
+            this.codeTextBox.TextChanged += new System.EventHandler(this.codeTextBox_TextChanged);
             // 
             // addressTextBox
             // 
@@ -322,6 +329,7 @@
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.Size = new System.Drawing.Size(201, 49);
             this.addressTextBox.TabIndex = 51;
+            this.addressTextBox.TextChanged += new System.EventHandler(this.addressTextBox_TextChanged);
             // 
             // emailTextBox
             // 
@@ -330,6 +338,7 @@
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.Size = new System.Drawing.Size(182, 14);
             this.emailTextBox.TabIndex = 50;
+            this.emailTextBox.TextChanged += new System.EventHandler(this.emailTextBox_TextChanged);
             // 
             // qqTextBox
             // 
@@ -338,6 +347,7 @@
             this.qqTextBox.Name = "qqTextBox";
             this.qqTextBox.Size = new System.Drawing.Size(100, 14);
             this.qqTextBox.TabIndex = 49;
+            this.qqTextBox.TextChanged += new System.EventHandler(this.qqTextBox_TextChanged);
             // 
             // phoneTextBox
             // 
@@ -346,6 +356,7 @@
             this.phoneTextBox.Name = "phoneTextBox";
             this.phoneTextBox.Size = new System.Drawing.Size(100, 14);
             this.phoneTextBox.TabIndex = 48;
+            this.phoneTextBox.TextChanged += new System.EventHandler(this.phoneTextBox_TextChanged);
             // 
             // eGradeTextBox
             // 
@@ -354,6 +365,7 @@
             this.eGradeTextBox.Name = "eGradeTextBox";
             this.eGradeTextBox.Size = new System.Drawing.Size(100, 14);
             this.eGradeTextBox.TabIndex = 47;
+            this.eGradeTextBox.TextChanged += new System.EventHandler(this.eGradeTextBox_TextChanged);
             // 
             // eLevelTextBox
             // 
@@ -362,6 +374,7 @@
             this.eLevelTextBox.Name = "eLevelTextBox";
             this.eLevelTextBox.Size = new System.Drawing.Size(100, 14);
             this.eLevelTextBox.TabIndex = 46;
+            this.eLevelTextBox.TextChanged += new System.EventHandler(this.eLevelTextBox_TextChanged);
             // 
             // levelTextBox
             // 
@@ -370,6 +383,7 @@
             this.levelTextBox.Name = "levelTextBox";
             this.levelTextBox.Size = new System.Drawing.Size(100, 14);
             this.levelTextBox.TabIndex = 45;
+            this.levelTextBox.TextChanged += new System.EventHandler(this.levelTextBox_TextChanged);
             // 
             // roomTextBox
             // 
@@ -378,6 +392,7 @@
             this.roomTextBox.Name = "roomTextBox";
             this.roomTextBox.Size = new System.Drawing.Size(100, 14);
             this.roomTextBox.TabIndex = 44;
+            this.roomTextBox.TextChanged += new System.EventHandler(this.roomTextBox_TextChanged);
             // 
             // inDateTextBox
             // 
@@ -386,6 +401,7 @@
             this.inDateTextBox.Name = "inDateTextBox";
             this.inDateTextBox.Size = new System.Drawing.Size(100, 14);
             this.inDateTextBox.TabIndex = 43;
+            this.inDateTextBox.TextChanged += new System.EventHandler(this.inDateTextBox_TextChanged);
             // 
             // gradeTextBox
             // 
@@ -394,6 +410,7 @@
             this.gradeTextBox.Name = "gradeTextBox";
             this.gradeTextBox.Size = new System.Drawing.Size(100, 14);
             this.gradeTextBox.TabIndex = 42;
+            this.gradeTextBox.TextChanged += new System.EventHandler(this.gradeTextBox_TextChanged);
             // 
             // studyYearTextBox
             // 
@@ -402,6 +419,7 @@
             this.studyYearTextBox.Name = "studyYearTextBox";
             this.studyYearTextBox.Size = new System.Drawing.Size(100, 14);
             this.studyYearTextBox.TabIndex = 41;
+            this.studyYearTextBox.TextChanged += new System.EventHandler(this.studyYearTextBox_TextChanged);
             // 
             // hometownTextBox
             // 
@@ -410,6 +428,7 @@
             this.hometownTextBox.Name = "hometownTextBox";
             this.hometownTextBox.Size = new System.Drawing.Size(100, 14);
             this.hometownTextBox.TabIndex = 40;
+            this.hometownTextBox.TextChanged += new System.EventHandler(this.hometownTextBox_TextChanged);
             // 
             // classTextBox
             // 
@@ -418,6 +437,7 @@
             this.classTextBox.Name = "classTextBox";
             this.classTextBox.Size = new System.Drawing.Size(100, 14);
             this.classTextBox.TabIndex = 39;
+            this.classTextBox.TextChanged += new System.EventHandler(this.classTextBox_TextChanged);
             // 
             // policTextBox
             // 
@@ -426,6 +446,7 @@
             this.policTextBox.Name = "policTextBox";
             this.policTextBox.Size = new System.Drawing.Size(100, 14);
             this.policTextBox.TabIndex = 38;
+            this.policTextBox.TextChanged += new System.EventHandler(this.policTextBox_TextChanged);
             // 
             // sexTextBox
             // 
@@ -434,6 +455,7 @@
             this.sexTextBox.Name = "sexTextBox";
             this.sexTextBox.Size = new System.Drawing.Size(100, 14);
             this.sexTextBox.TabIndex = 37;
+            this.sexTextBox.TextChanged += new System.EventHandler(this.sexTextBox_TextChanged);
             // 
             // NameTextBox
             // 
@@ -442,12 +464,15 @@
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.Size = new System.Drawing.Size(100, 14);
             this.NameTextBox.TabIndex = 36;
+            this.NameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
             // 
             // idTextBox
             // 
+            this.idTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.idTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.idTextBox.Location = new System.Drawing.Point(127, 4);
             this.idTextBox.Name = "idTextBox";
+            this.idTextBox.ReadOnly = true;
             this.idTextBox.Size = new System.Drawing.Size(100, 14);
             this.idTextBox.TabIndex = 3;
             // 
@@ -458,6 +483,7 @@
             this.oldNameTextBox.Name = "oldNameTextBox";
             this.oldNameTextBox.Size = new System.Drawing.Size(100, 14);
             this.oldNameTextBox.TabIndex = 4;
+            this.oldNameTextBox.TextChanged += new System.EventHandler(this.oldNameTextBox_TextChanged);
             // 
             // nationTextBox
             // 
@@ -466,6 +492,7 @@
             this.nationTextBox.Name = "nationTextBox";
             this.nationTextBox.Size = new System.Drawing.Size(100, 14);
             this.nationTextBox.TabIndex = 5;
+            this.nationTextBox.TextChanged += new System.EventHandler(this.nationTextBox_TextChanged);
             // 
             // label1
             // 
@@ -488,6 +515,7 @@
             this.majorTextBox.Name = "majorTextBox";
             this.majorTextBox.Size = new System.Drawing.Size(100, 14);
             this.majorTextBox.TabIndex = 9;
+            this.majorTextBox.TextChanged += new System.EventHandler(this.majorTextBox_TextChanged);
             // 
             // birthTextBox
             // 
@@ -496,6 +524,7 @@
             this.birthTextBox.Name = "birthTextBox";
             this.birthTextBox.Size = new System.Drawing.Size(100, 14);
             this.birthTextBox.TabIndex = 10;
+            this.birthTextBox.TextChanged += new System.EventHandler(this.birthTextBox_TextChanged);
             // 
             // idcardTextBox
             // 
@@ -504,6 +533,7 @@
             this.idcardTextBox.Name = "idcardTextBox";
             this.idcardTextBox.Size = new System.Drawing.Size(100, 14);
             this.idcardTextBox.TabIndex = 11;
+            this.idcardTextBox.TextChanged += new System.EventHandler(this.idcardTextBox_TextChanged);
             // 
             // label2
             // 
@@ -773,6 +803,7 @@
             this.fNameTextBox.Name = "fNameTextBox";
             this.fNameTextBox.Size = new System.Drawing.Size(100, 14);
             this.fNameTextBox.TabIndex = 65;
+            this.fNameTextBox.TextChanged += new System.EventHandler(this.fNameTextBox_TextChanged);
             // 
             // textBox24
             // 
@@ -789,6 +820,7 @@
             this.fWorktextBox.Name = "fWorktextBox";
             this.fWorktextBox.Size = new System.Drawing.Size(201, 14);
             this.fWorktextBox.TabIndex = 67;
+            this.fWorktextBox.TextChanged += new System.EventHandler(this.fWorktextBox_TextChanged);
             // 
             // fPhoneTextBox
             // 
@@ -797,6 +829,7 @@
             this.fPhoneTextBox.Name = "fPhoneTextBox";
             this.fPhoneTextBox.Size = new System.Drawing.Size(100, 14);
             this.fPhoneTextBox.TabIndex = 66;
+            this.fPhoneTextBox.TextChanged += new System.EventHandler(this.fPhoneTextBox_TextChanged);
             // 
             // tabPage2
             // 
@@ -819,84 +852,87 @@
             this.tabPage2.Text = "成绩";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
+            // gradeUpdateButton
             // 
-            this.tabPage3.Controls.Add(this.label35);
-            this.tabPage3.Controls.Add(this.dateTimePicker1);
-            this.tabPage3.Controls.Add(this.evaluationSearchButton);
-            this.tabPage3.Controls.Add(this.updateButton);
-            this.tabPage3.Controls.Add(this.eGroupBox);
-            this.tabPage3.Controls.Add(this.button6);
-            this.tabPage3.Controls.Add(this.evaluationInputButton);
-            this.tabPage3.Controls.Add(this.label33);
-            this.tabPage3.Controls.Add(this.label34);
-            this.tabPage3.Controls.Add(this.aeDataGridView);
-            this.tabPage3.Controls.Add(this.activitySearchButton);
-            this.tabPage3.Controls.Add(this.sessonComboBox2);
-            this.tabPage3.Controls.Add(this.yearComboBox2);
-            this.tabPage3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tabPage3.Location = new System.Drawing.Point(4, 29);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1213, 662);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "活动奖惩";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.gradeUpdateButton.Location = new System.Drawing.Point(124, 604);
+            this.gradeUpdateButton.Name = "gradeUpdateButton";
+            this.gradeUpdateButton.Size = new System.Drawing.Size(75, 23);
+            this.gradeUpdateButton.TabIndex = 9;
+            this.gradeUpdateButton.Text = "更新";
+            this.gradeUpdateButton.UseVisualStyleBackColor = true;
+            this.gradeUpdateButton.Visible = false;
+            this.gradeUpdateButton.Click += new System.EventHandler(this.gradeUpdateButton_Click);
             // 
-            // tabPage4
+            // gradeInputGroupBox
             // 
-            this.tabPage4.Controls.Add(this.calculateButton);
-            this.tabPage4.Controls.Add(this.evaluationOutputButton);
-            this.tabPage4.Controls.Add(this.label36);
-            this.tabPage4.Controls.Add(this.label37);
-            this.tabPage4.Controls.Add(this.evaluationDataGridView);
-            this.tabPage4.Controls.Add(this.evaluatingSearchButton);
-            this.tabPage4.Controls.Add(this.sessonComboBox3);
-            this.tabPage4.Controls.Add(this.yearComboBox3);
-            this.tabPage4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tabPage4.Location = new System.Drawing.Point(4, 29);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1213, 662);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "综合评定";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.gradeInputGroupBox.Controls.Add(this.button5);
+            this.gradeInputGroupBox.Controls.Add(this.button4);
+            this.gradeInputGroupBox.Location = new System.Drawing.Point(161, 594);
+            this.gradeInputGroupBox.Name = "gradeInputGroupBox";
+            this.gradeInputGroupBox.Size = new System.Drawing.Size(160, 45);
+            this.gradeInputGroupBox.TabIndex = 8;
+            this.gradeInputGroupBox.TabStop = false;
+            this.gradeInputGroupBox.Text = "是否导入";
+            this.gradeInputGroupBox.Visible = false;
             // 
-            // yearComboBox1
+            // button5
             // 
-            this.yearComboBox1.FormattingEnabled = true;
-            this.yearComboBox1.Items.AddRange(new object[] {
-            "2013-2014",
-            "2014-2015",
-            "2015-2016",
-            "2016-2017",
-            "2017-2018",
-            "2018-2019",
-            "2019-2020"});
-            this.yearComboBox1.Location = new System.Drawing.Point(305, 62);
-            this.yearComboBox1.Name = "yearComboBox1";
-            this.yearComboBox1.Size = new System.Drawing.Size(121, 20);
-            this.yearComboBox1.TabIndex = 0;
+            this.button5.Location = new System.Drawing.Point(88, 16);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(66, 23);
+            this.button5.TabIndex = 1;
+            this.button5.Text = "取消";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // sessonComboBox1
+            // button4
             // 
-            this.sessonComboBox1.FormattingEnabled = true;
-            this.sessonComboBox1.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3"});
-            this.sessonComboBox1.Location = new System.Drawing.Point(521, 62);
-            this.sessonComboBox1.Name = "sessonComboBox1";
-            this.sessonComboBox1.Size = new System.Drawing.Size(121, 20);
-            this.sessonComboBox1.TabIndex = 1;
+            this.button4.Location = new System.Drawing.Point(6, 16);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(66, 23);
+            this.button4.TabIndex = 0;
+            this.button4.Text = "确定";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // gradeSearchButton
+            // gradeOutputButton
             // 
-            this.gradeSearchButton.Location = new System.Drawing.Point(749, 54);
-            this.gradeSearchButton.Name = "gradeSearchButton";
-            this.gradeSearchButton.Size = new System.Drawing.Size(92, 35);
-            this.gradeSearchButton.TabIndex = 2;
-            this.gradeSearchButton.Text = "查询";
-            this.gradeSearchButton.UseVisualStyleBackColor = true;
-            this.gradeSearchButton.Click += new System.EventHandler(this.button1_Click);
+            this.gradeOutputButton.Enabled = false;
+            this.gradeOutputButton.Location = new System.Drawing.Point(928, 604);
+            this.gradeOutputButton.Name = "gradeOutputButton";
+            this.gradeOutputButton.Size = new System.Drawing.Size(75, 23);
+            this.gradeOutputButton.TabIndex = 7;
+            this.gradeOutputButton.Text = "导出";
+            this.gradeOutputButton.UseVisualStyleBackColor = true;
+            this.gradeOutputButton.Click += new System.EventHandler(this.gradeOutputButton_Click);
+            // 
+            // gradeInputButton
+            // 
+            this.gradeInputButton.Location = new System.Drawing.Point(825, 604);
+            this.gradeInputButton.Name = "gradeInputButton";
+            this.gradeInputButton.Size = new System.Drawing.Size(75, 23);
+            this.gradeInputButton.TabIndex = 6;
+            this.gradeInputButton.Text = "导入";
+            this.gradeInputButton.UseVisualStyleBackColor = true;
+            this.gradeInputButton.Click += new System.EventHandler(this.gradeInputButton_Click);
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(486, 65);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(29, 12);
+            this.label32.TabIndex = 5;
+            this.label32.Text = "学期";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(270, 65);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(29, 12);
+            this.label31.TabIndex = 4;
+            this.label31.Text = "学年";
             // 
             // gradeDataGridView
             // 
@@ -934,88 +970,6 @@
             this.gradeDataGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gradeDataGridView_CellMouseDown);
             this.gradeDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gradeDataGridView_CellValueChanged);
             // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(270, 65);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(29, 12);
-            this.label31.TabIndex = 4;
-            this.label31.Text = "学年";
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(486, 65);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(29, 12);
-            this.label32.TabIndex = 5;
-            this.label32.Text = "学期";
-            // 
-            // gradeInputButton
-            // 
-            this.gradeInputButton.Location = new System.Drawing.Point(825, 604);
-            this.gradeInputButton.Name = "gradeInputButton";
-            this.gradeInputButton.Size = new System.Drawing.Size(75, 23);
-            this.gradeInputButton.TabIndex = 6;
-            this.gradeInputButton.Text = "导入";
-            this.gradeInputButton.UseVisualStyleBackColor = true;
-            this.gradeInputButton.Click += new System.EventHandler(this.gradeInputButton_Click);
-            // 
-            // gradeOutputButton
-            // 
-            this.gradeOutputButton.Enabled = false;
-            this.gradeOutputButton.Location = new System.Drawing.Point(928, 604);
-            this.gradeOutputButton.Name = "gradeOutputButton";
-            this.gradeOutputButton.Size = new System.Drawing.Size(75, 23);
-            this.gradeOutputButton.TabIndex = 7;
-            this.gradeOutputButton.Text = "导出";
-            this.gradeOutputButton.UseVisualStyleBackColor = true;
-            this.gradeOutputButton.Click += new System.EventHandler(this.gradeOutputButton_Click);
-            // 
-            // gradeInputGroupBox
-            // 
-            this.gradeInputGroupBox.Controls.Add(this.button5);
-            this.gradeInputGroupBox.Controls.Add(this.button4);
-            this.gradeInputGroupBox.Location = new System.Drawing.Point(161, 594);
-            this.gradeInputGroupBox.Name = "gradeInputGroupBox";
-            this.gradeInputGroupBox.Size = new System.Drawing.Size(160, 45);
-            this.gradeInputGroupBox.TabIndex = 8;
-            this.gradeInputGroupBox.TabStop = false;
-            this.gradeInputGroupBox.Text = "是否导入";
-            this.gradeInputGroupBox.Visible = false;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(6, 16);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(66, 23);
-            this.button4.TabIndex = 0;
-            this.button4.Text = "确定";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(88, 16);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(66, 23);
-            this.button5.TabIndex = 1;
-            this.button5.Text = "取消";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // gradeUpdateButton
-            // 
-            this.gradeUpdateButton.Location = new System.Drawing.Point(124, 604);
-            this.gradeUpdateButton.Name = "gradeUpdateButton";
-            this.gradeUpdateButton.Size = new System.Drawing.Size(75, 23);
-            this.gradeUpdateButton.TabIndex = 9;
-            this.gradeUpdateButton.Text = "更新";
-            this.gradeUpdateButton.UseVisualStyleBackColor = true;
-            this.gradeUpdateButton.Visible = false;
-            this.gradeUpdateButton.Click += new System.EventHandler(this.gradeUpdateButton_Click);
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1029,6 +983,96 @@
             this.删除ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.删除ToolStripMenuItem.Text = "删除";
             this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
+            // 
+            // gradeSearchButton
+            // 
+            this.gradeSearchButton.Location = new System.Drawing.Point(749, 54);
+            this.gradeSearchButton.Name = "gradeSearchButton";
+            this.gradeSearchButton.Size = new System.Drawing.Size(92, 35);
+            this.gradeSearchButton.TabIndex = 2;
+            this.gradeSearchButton.Text = "查询";
+            this.gradeSearchButton.UseVisualStyleBackColor = true;
+            this.gradeSearchButton.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // sessonComboBox1
+            // 
+            this.sessonComboBox1.FormattingEnabled = true;
+            this.sessonComboBox1.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3"});
+            this.sessonComboBox1.Location = new System.Drawing.Point(521, 62);
+            this.sessonComboBox1.Name = "sessonComboBox1";
+            this.sessonComboBox1.Size = new System.Drawing.Size(121, 20);
+            this.sessonComboBox1.TabIndex = 1;
+            // 
+            // yearComboBox1
+            // 
+            this.yearComboBox1.FormattingEnabled = true;
+            this.yearComboBox1.Items.AddRange(new object[] {
+            "2013-2014",
+            "2014-2015",
+            "2015-2016",
+            "2016-2017",
+            "2017-2018",
+            "2018-2019",
+            "2019-2020"});
+            this.yearComboBox1.Location = new System.Drawing.Point(305, 62);
+            this.yearComboBox1.Name = "yearComboBox1";
+            this.yearComboBox1.Size = new System.Drawing.Size(121, 20);
+            this.yearComboBox1.TabIndex = 0;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.label35);
+            this.tabPage3.Controls.Add(this.dateTimePicker1);
+            this.tabPage3.Controls.Add(this.evaluationSearchButton);
+            this.tabPage3.Controls.Add(this.updateButton);
+            this.tabPage3.Controls.Add(this.eGroupBox);
+            this.tabPage3.Controls.Add(this.button6);
+            this.tabPage3.Controls.Add(this.evaluationInputButton);
+            this.tabPage3.Controls.Add(this.label33);
+            this.tabPage3.Controls.Add(this.label34);
+            this.tabPage3.Controls.Add(this.aeDataGridView);
+            this.tabPage3.Controls.Add(this.activitySearchButton);
+            this.tabPage3.Controls.Add(this.sessonComboBox2);
+            this.tabPage3.Controls.Add(this.yearComboBox2);
+            this.tabPage3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(1213, 662);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "活动奖惩";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(540, 50);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(53, 12);
+            this.label35.TabIndex = 22;
+            this.label35.Text = "活动日期";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(593, 47);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.ShowCheckBox = true;
+            this.dateTimePicker1.Size = new System.Drawing.Size(153, 21);
+            this.dateTimePicker1.TabIndex = 21;
+            // 
+            // evaluationSearchButton
+            // 
+            this.evaluationSearchButton.Location = new System.Drawing.Point(880, 39);
+            this.evaluationSearchButton.Name = "evaluationSearchButton";
+            this.evaluationSearchButton.Size = new System.Drawing.Size(92, 35);
+            this.evaluationSearchButton.TabIndex = 20;
+            this.evaluationSearchButton.Text = "查询评测记录";
+            this.evaluationSearchButton.UseVisualStyleBackColor = true;
+            this.evaluationSearchButton.Click += new System.EventHandler(this.evaluationSearchButton_Click);
             // 
             // updateButton
             // 
@@ -1123,7 +1167,22 @@
             this.aeDataGridView.RowTemplate.Height = 23;
             this.aeDataGridView.Size = new System.Drawing.Size(1085, 477);
             this.aeDataGridView.TabIndex = 13;
+            this.aeDataGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.aeDataGridView_CellMouseDown);
             this.aeDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.aeDataGridView_CellValueChanged);
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.删除ToolStripMenuItem1});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 26);
+            // 
+            // 删除ToolStripMenuItem1
+            // 
+            this.删除ToolStripMenuItem1.Name = "删除ToolStripMenuItem1";
+            this.删除ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.删除ToolStripMenuItem1.Text = "删除";
+            this.删除ToolStripMenuItem1.Click += new System.EventHandler(this.删除ToolStripMenuItem1_Click);
             // 
             // activitySearchButton
             // 
@@ -1163,47 +1222,43 @@
             this.yearComboBox2.Size = new System.Drawing.Size(121, 20);
             this.yearComboBox2.TabIndex = 10;
             // 
-            // evaluationSearchButton
+            // tabPage4
             // 
-            this.evaluationSearchButton.Location = new System.Drawing.Point(880, 39);
-            this.evaluationSearchButton.Name = "evaluationSearchButton";
-            this.evaluationSearchButton.Size = new System.Drawing.Size(92, 35);
-            this.evaluationSearchButton.TabIndex = 20;
-            this.evaluationSearchButton.Text = "查询评测记录";
-            this.evaluationSearchButton.UseVisualStyleBackColor = true;
-            this.evaluationSearchButton.Click += new System.EventHandler(this.evaluationSearchButton_Click);
+            this.tabPage4.Controls.Add(this.calculateButton);
+            this.tabPage4.Controls.Add(this.evaluationOutputButton);
+            this.tabPage4.Controls.Add(this.label36);
+            this.tabPage4.Controls.Add(this.label37);
+            this.tabPage4.Controls.Add(this.evaluationDataGridView);
+            this.tabPage4.Controls.Add(this.evaluatingSearchButton);
+            this.tabPage4.Controls.Add(this.sessonComboBox3);
+            this.tabPage4.Controls.Add(this.yearComboBox3);
+            this.tabPage4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tabPage4.Location = new System.Drawing.Point(4, 29);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(1213, 662);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "综合评定";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // dateTimePicker1
+            // calculateButton
             // 
-            this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(593, 47);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.ShowCheckBox = true;
-            this.dateTimePicker1.Size = new System.Drawing.Size(153, 21);
-            this.dateTimePicker1.TabIndex = 21;
+            this.calculateButton.Location = new System.Drawing.Point(896, 43);
+            this.calculateButton.Name = "calculateButton";
+            this.calculateButton.Size = new System.Drawing.Size(90, 35);
+            this.calculateButton.TabIndex = 13;
+            this.calculateButton.Text = "计算综评成绩";
+            this.calculateButton.UseVisualStyleBackColor = true;
+            this.calculateButton.Click += new System.EventHandler(this.calculateButton_Click);
             // 
-            // label35
+            // evaluationOutputButton
             // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(540, 50);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(53, 12);
-            this.label35.TabIndex = 22;
-            this.label35.Text = "活动日期";
-            // 
-            // contextMenuStrip2
-            // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.删除ToolStripMenuItem1});
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 26);
-            // 
-            // 删除ToolStripMenuItem1
-            // 
-            this.删除ToolStripMenuItem1.Name = "删除ToolStripMenuItem1";
-            this.删除ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
-            this.删除ToolStripMenuItem1.Text = "删除";
+            this.evaluationOutputButton.Location = new System.Drawing.Point(939, 614);
+            this.evaluationOutputButton.Name = "evaluationOutputButton";
+            this.evaluationOutputButton.Size = new System.Drawing.Size(75, 23);
+            this.evaluationOutputButton.TabIndex = 12;
+            this.evaluationOutputButton.Text = "导出";
+            this.evaluationOutputButton.UseVisualStyleBackColor = true;
+            this.evaluationOutputButton.Click += new System.EventHandler(this.evaluationOutputButton_Click);
             // 
             // label36
             // 
@@ -1296,25 +1351,16 @@
             this.yearComboBox3.Size = new System.Drawing.Size(121, 20);
             this.yearComboBox3.TabIndex = 6;
             // 
-            // evaluationOutputButton
+            // updateButton1
             // 
-            this.evaluationOutputButton.Location = new System.Drawing.Point(939, 614);
-            this.evaluationOutputButton.Name = "evaluationOutputButton";
-            this.evaluationOutputButton.Size = new System.Drawing.Size(75, 23);
-            this.evaluationOutputButton.TabIndex = 12;
-            this.evaluationOutputButton.Text = "导出";
-            this.evaluationOutputButton.UseVisualStyleBackColor = true;
-            this.evaluationOutputButton.Click += new System.EventHandler(this.evaluationOutputButton_Click);
-            // 
-            // calculateButton
-            // 
-            this.calculateButton.Location = new System.Drawing.Point(896, 43);
-            this.calculateButton.Name = "calculateButton";
-            this.calculateButton.Size = new System.Drawing.Size(90, 35);
-            this.calculateButton.TabIndex = 13;
-            this.calculateButton.Text = "计算综评成绩";
-            this.calculateButton.UseVisualStyleBackColor = true;
-            this.calculateButton.Click += new System.EventHandler(this.calculateButton_Click);
+            this.updateButton1.Location = new System.Drawing.Point(568, 610);
+            this.updateButton1.Name = "updateButton1";
+            this.updateButton1.Size = new System.Drawing.Size(88, 46);
+            this.updateButton1.TabIndex = 1;
+            this.updateButton1.Text = "更新";
+            this.updateButton1.UseVisualStyleBackColor = true;
+            this.updateButton1.Visible = false;
+            this.updateButton1.Click += new System.EventHandler(this.updateButton1_Click);
             // 
             // StudentInfoForm
             // 
@@ -1331,16 +1377,16 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.gradeInputGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gradeDataGridView)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gradeDataGridView)).EndInit();
-            this.gradeInputGroupBox.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
             this.eGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.aeDataGridView)).EndInit();
             this.contextMenuStrip2.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.evaluationDataGridView)).EndInit();
             this.ResumeLayout(false);
 
@@ -1454,5 +1500,6 @@
         private System.Windows.Forms.ComboBox sessonComboBox3;
         private System.Windows.Forms.ComboBox yearComboBox3;
         private System.Windows.Forms.Button calculateButton;
+        private System.Windows.Forms.Button updateButton1;
     }
 }
