@@ -762,40 +762,43 @@ namespace StudentsManagement
         private void gradeInputButton_Click(object sender, EventArgs e)
         {
             gradeDt = input(0);
-            gradeDataGridView.DataSource = gradeDt;
-            string[] names = { "学号", "学年", "学期", "课程名称", "课程性质", "成绩", "期末成绩", "补考成绩" };
-            ArrayList tags = new ArrayList();
-            for(int i = 0; i < 8; i++)
+            if(gradeDt.Columns.Count != 0)
             {
-                int tag = 0;
-                for (int j = 0; j < gradeDt.Columns.Count; j++)
+                gradeDataGridView.DataSource = gradeDt;
+                string[] names = { "学号", "学年", "学期", "课程名称", "课程性质", "成绩", "期末成绩", "补考成绩" };
+                ArrayList tags = new ArrayList();
+                for (int i = 0; i < 8; i++)
                 {
-                    if(gradeDt.Columns[j].ColumnName == names[i])
+                    int tag = 0;
+                    for (int j = 0; j < gradeDt.Columns.Count; j++)
                     {
-                        tag = 1;
+                        if (gradeDt.Columns[j].ColumnName == names[i])
+                        {
+                            tag = 1;
+                        }
+                    }
+                    tags.Add(tag);
+                }
+                string str = "";
+                if (tags[0].ToString() == "0")
+                {
+                    str = str + names[0];
+                }
+                for (int i = 1; i < 8; i++)
+                {
+                    if (tags[i].ToString() == "0")
+                    {
+                        str = str + " " + names[i];
                     }
                 }
-                tags.Add(tag);
-            }
-            string str = "";
-            if (tags[0].ToString() == "0")
-            {
-                str = str + names[0];
-            }
-            for (int i = 1; i < 8; i++)
-            {
-                if(tags[i].ToString() == "0")
+                if (str != "")
                 {
-                    str = str + " " + names[i];
+                    MessageBox.Show("缺少：" + str + "等信息", "错误");
                 }
-            }            
-            if (str != "")
-            {
-                MessageBox.Show("缺少：" + str + "等信息", "错误");
-            }
-            else
-            {
-                okGroupBox2.Show();
+                else
+                {
+                    okGroupBox2.Show();
+                }
             }           
         }
 

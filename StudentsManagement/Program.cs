@@ -16,7 +16,11 @@ namespace StudentsManagement
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new StudentManagement());
+            Application.Run(new LoginForm());
+            if(LoginForm.tag == false)
+            {
+                Application.Run(new StudentManagement());
+            }
         }
     }
 }

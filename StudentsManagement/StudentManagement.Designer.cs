@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("学生");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("成绩");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("活动");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("综合评定");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("学生");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("成绩");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("活动");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("综合评定");
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.studentPanel = new System.Windows.Forms.Panel();
             this.updateButton = new System.Windows.Forms.Button();
@@ -163,19 +163,19 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeView1.Location = new System.Drawing.Point(12, 88);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "student";
-            treeNode1.Text = "学生";
-            treeNode2.Name = "grade";
-            treeNode2.Text = "成绩";
-            treeNode3.Name = "activity";
-            treeNode3.Text = "活动";
-            treeNode4.Name = "evaluation";
-            treeNode4.Text = "综合评定";
+            treeNode5.Name = "student";
+            treeNode5.Text = "学生";
+            treeNode6.Name = "grade";
+            treeNode6.Text = "成绩";
+            treeNode7.Name = "activity";
+            treeNode7.Text = "活动";
+            treeNode8.Name = "evaluation";
+            treeNode8.Text = "综合评定";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4});
+            treeNode5,
+            treeNode6,
+            treeNode7,
+            treeNode8});
             this.treeView1.Size = new System.Drawing.Size(87, 666);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -763,6 +763,7 @@
             this.activityUpdateButton1.TabIndex = 13;
             this.activityUpdateButton1.Text = "更新";
             this.activityUpdateButton1.UseVisualStyleBackColor = true;
+            this.activityUpdateButton1.Visible = false;
             this.activityUpdateButton1.Click += new System.EventHandler(this.activityUpdateButton1_Click);
             // 
             // returnActivityButton
@@ -1224,10 +1225,10 @@
             this.ClientSize = new System.Drawing.Size(1251, 766);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.treeView1);
-            this.Controls.Add(this.activityPanel);
             this.Controls.Add(this.gradePanel);
             this.Controls.Add(this.studentPanel);
             this.Controls.Add(this.evaluationPanel);
+            this.Controls.Add(this.activityPanel);
             this.KeyPreview = true;
             this.Name = "StudentManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
