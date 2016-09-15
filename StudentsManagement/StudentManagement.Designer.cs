@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("学生");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("成绩");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("活动");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("综合评定");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("学生");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("成绩");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("活动");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("综合评定");
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.studentPanel = new System.Windows.Forms.Panel();
             this.updateButton = new System.Windows.Forms.Button();
@@ -136,6 +136,8 @@
             this.计算成绩ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip6 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.setupLabel = new System.Windows.Forms.LinkLabel();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.studentPanel.SuspendLayout();
             this.okGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StudentListGridView)).BeginInit();
@@ -163,19 +165,19 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeView1.Location = new System.Drawing.Point(12, 88);
             this.treeView1.Name = "treeView1";
-            treeNode5.Name = "student";
-            treeNode5.Text = "学生";
-            treeNode6.Name = "grade";
-            treeNode6.Text = "成绩";
-            treeNode7.Name = "activity";
-            treeNode7.Text = "活动";
-            treeNode8.Name = "evaluation";
-            treeNode8.Text = "综合评定";
+            treeNode1.Name = "student";
+            treeNode1.Text = "学生";
+            treeNode2.Name = "grade";
+            treeNode2.Text = "成绩";
+            treeNode3.Name = "activity";
+            treeNode3.Text = "活动";
+            treeNode4.Name = "evaluation";
+            treeNode4.Text = "综合评定";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6,
-            treeNode7,
-            treeNode8});
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4});
             this.treeView1.Size = new System.Drawing.Size(87, 666);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -1217,18 +1219,42 @@
             this.删除ToolStripMenuItem3.Text = "删除";
             this.删除ToolStripMenuItem3.Click += new System.EventHandler(this.删除ToolStripMenuItem3_Click);
             // 
+            // setupLabel
+            // 
+            this.setupLabel.AutoSize = true;
+            this.setupLabel.Location = new System.Drawing.Point(1164, 9);
+            this.setupLabel.Name = "setupLabel";
+            this.setupLabel.Size = new System.Drawing.Size(29, 12);
+            this.setupLabel.TabIndex = 21;
+            this.setupLabel.TabStop = true;
+            this.setupLabel.Text = "设置";
+            this.setupLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.setupLabel_LinkClicked);
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(1207, 9);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(29, 12);
+            this.linkLabel1.TabIndex = 22;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "注册";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // StudentManagement
             // 
             this.AcceptButton = this.searchButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 766);
+            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.setupLabel);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.treeView1);
-            this.Controls.Add(this.gradePanel);
-            this.Controls.Add(this.studentPanel);
             this.Controls.Add(this.evaluationPanel);
             this.Controls.Add(this.activityPanel);
+            this.Controls.Add(this.gradePanel);
+            this.Controls.Add(this.studentPanel);
             this.KeyPreview = true;
             this.Name = "StudentManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -1364,6 +1390,8 @@
         private System.Windows.Forms.ToolStripMenuItem 计算成绩ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem3;
         private System.Windows.Forms.Button calculateButton;
+        private System.Windows.Forms.LinkLabel setupLabel;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
 

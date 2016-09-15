@@ -33,11 +33,28 @@ namespace StudentsManagement
 
         private void signUpButton_Click(object sender, EventArgs e)
         {
-            string sql = "INSERT INTO Account_List(账号,密码,权限) VALUES('" + accountTextBox.Text + "','" 
-                + passwordTextBox.Text + "'," + 0 + ")";
+            if(tag == 0)
+            {
+                string sql = "INSERT INTO Account_List(账号,密码,权限) VALUES('" + accountTextBox.Text + "','"
+                                + passwordTextBox.Text + "'," + 0 + ")";
+                int i = DbHelperSQLite.ExecuteSql(sql);
+                if(i == 1)
+                {
+                    MessageBox.Show("注册成功");
+                }
+                else
+                {
+                    MessageBox.Show("注册失败");
+                }
+            }
+            else
+            {
+                MessageBox.Show("账号已存在", "提示");
+            }
+            
             
         }
-
+        private int tag = 0;
         private void accountTextBox_TextChanged(object sender, EventArgs e)
         {
             string sql1 = "SELECT * FROM Account_List WHERE 账号='" + accountTextBox.Text + "'";
@@ -46,7 +63,18 @@ namespace StudentsManagement
             {
                 messageLabel.Text = "该账号已存在";
                 signUpButton.Enabled = false;
+                tag = 1;
             }
+            else
+            {
+                messageLabel.Text = "";
+                tag = 0;
+            }
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

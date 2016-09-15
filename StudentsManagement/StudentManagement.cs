@@ -987,17 +987,28 @@ namespace StudentsManagement
             {
                 date = "AND 活动日期 = '" + dateTimePicker1.Text + "'";
             }
+            else
+            {
+                date = "";
+            }
             string sql = "SELECT * FROM Activities_List WHERE 活动名称 LIKE '%" + activityNameText.Text + "%'" 
                 + date + " AND 学年 LIKE '%" + yearComboBox1.Text + "%' AND 学期 LIKE '%" + sessonComboBox1.Text + "%'";
             activityDt = DbHelperSQLite.Query(sql).Tables[0];
-            if(activityColumnNames.Count == 0)
+            if (activityDt.Rows.Count != 0)
             {
-                for (int i = 0; i < activityDt.Columns.Count; i++)
+                if (activityColumnNames.Count == 0)
                 {
-                    activityColumnNames.Add(activityDt.Columns[i].ColumnName);
+                    for (int i = 0; i < activityDt.Columns.Count; i++)
+                    {
+                        activityColumnNames.Add(activityDt.Columns[i].ColumnName);
+                    }
                 }
-            }            
-            activityDataGridView.DataSource = activityDt;
+                activityDataGridView.DataSource = activityDt;
+            }
+            else
+            {
+                MessageBox.Show("未找到相关信息", "提示");
+            }
             if(returnActivityButton.Visible == true)
             {
                 returnActivityButton.Visible = false;
@@ -1149,7 +1160,7 @@ namespace StudentsManagement
         private ArrayList evaluationColumnNames = new ArrayList();
         private void eSearchButton1_Click(object sender, EventArgs e)
         {
-            string sql = "SELECT * FROM Evaluation_Grade WHERE ";
+            string sql = "SELECT * FROM Student_EGrade WHERE ";
             string sql1 = "";
             if(eIdTextBox1.Text != null && eIdTextBox1.Text != "")
             {
@@ -1177,7 +1188,7 @@ namespace StudentsManagement
 
         private void eSearchButton2_Click(object sender, EventArgs e)
         {
-            string sql = "SELECT * FROM Evaluation_Item WHERE ";
+            string sql = "SELECT * FROM Student_EItem WHERE ";
             string sql1 = "";
             if (eIdTextBox1.Text != null && eIdTextBox1.Text != "")
             {
@@ -1304,7 +1315,7 @@ namespace StudentsManagement
             }
         }
 
-        private void evaluationCalculate(string studentId, string year, string sesson)
+        /*private void evaluationCalculate(string studentId, string year, string sesson)
         {
             double grade1 = 20;
             double grade2 = 0;
@@ -1354,7 +1365,7 @@ namespace StudentsManagement
                 + "','" + year + "','" + sesson + "', " + grade1.ToString() + "," + grade2.ToString()
                 + "," + grade3.ToString() + "," + grade4.ToString() + "," + grade.ToString() + ")";
             DbHelperSQLite.ExecuteSql(sql2);
-        }
+        }*/
 
         private void evaluationDataGridView_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -1372,7 +1383,7 @@ namespace StudentsManagement
             string eStudentId = evaluationGradeDt.Rows[selectedIndex]["学号"].ToString();
             string year = evaluationGradeDt.Rows[selectedIndex]["学年"].ToString();
             string sesson = evaluationGradeDt.Rows[selectedIndex]["学期"].ToString();
-            evaluationCalculate(eStudentId, year, sesson);
+            Common.evaluationCalculate(eStudentId, year, sesson);
         }
 
         private void 删除ToolStripMenuItem3_Click(object sender, EventArgs e)
@@ -1381,13 +1392,25 @@ namespace StudentsManagement
             string eStudentId = evaluationGradeDt.Rows[selectedIndex]["学号"].ToString();
             string year = evaluationGradeDt.Rows[selectedIndex]["学年"].ToString();
             string sesson = evaluationGradeDt.Rows[selectedIndex]["学期"].ToString();
-            evaluationCalculate(eStudentId, year, sesson);
+            Common.evaluationCalculate(eStudentId, year, sesson);
         }
 
         private void calculateButton_Click(object sender, EventArgs e)
         {
             CalculateForm calculateFrom = new CalculateForm();
             calculateFrom.Show();
+        }
+
+        private void setupLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            SetupForm setupForm = new SetupForm();
+            setupForm.Show();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            SignUpForm signUpForm = new SignUpForm();
+            signUpForm.Show();
         }
     }
 }

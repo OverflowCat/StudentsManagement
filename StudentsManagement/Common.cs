@@ -16,6 +16,19 @@ namespace StudentsManagement
         public static DataTable dt = new DataTable();
         public static int index;
         public static string fileName;
+        public static Double[] percent = GetPercent();
+        private static  Double[] GetPercent()
+        {
+            string sql = "SELECT * FROM Evaluation_Percent";
+            DataTable percent = DbHelperSQLite.Query(sql).Tables[0];
+            Double[] percents = { Convert.ToDouble(percent.Rows[0]["德育比例"]),
+                Convert.ToDouble(percent.Rows[0]["智育比例"]),
+                Convert.ToDouble(percent.Rows[0]["个人能力比例"]),
+                Convert.ToDouble(percent.Rows[0]["个性发展比例"]),
+                Convert.ToDouble(percent.Rows[0]["个性发展标志"]),
+            Convert.ToDouble(percent.Rows[0]["个性发展分值"])};
+            return percents;
+        }
         public static ArrayList columnNames = new ArrayList();
         public static void SQLiteInput(DataTable dt, string table)
         {
@@ -107,17 +120,38 @@ namespace StudentsManagement
                         case "个性发展评测":
                         case "个性发展测评":
                             grade4 += Convert.ToDouble(dt.Rows[i]["分值"]);
-                            if (grade1 > 40)
+                            if (grade1 > percent[5])
                             {
-                                grade1 = 40;
+                                grade1 = percent[5];
                             }
                             break;
                     }
                 }
-                grade = grade1 * 0.4 + grade2 * 0.4 + grade3 * 0.2 + grade4;
-                string sql2 = "REPLACE INTO Evaluation_Grade(学号,学年,学期,德育成绩,智育成绩,能力成绩,个性发展成绩,总成绩) VALUES('" + studentId
+                if(percent[4] == 0)
+                {
+                    grade = grade1 * percent[0] * 0.01 + grade2 * percent[1] * 0.01 + grade3 * percent[2] * 0.01 + grade4;
+                }
+                else
+                {
+                    grade = grade1 * percent[0] * 0.01 + grade2 * percent[1] * 0.01 + grade3 * percent[2] * 0.01 + grade4 * percent[3] * 0.01;
+                }
+
+                string sqlCheck = "SELECT 学号 FROM Evaluation_Grade WHERE 学号='" + studentId
+                    + "' AND 学年 = '" + year + "' AND 学期 = '" + sesson + "'";
+                DataTable checkDt = DbHelperSQLite.Query(sqlCheck).Tables[0];
+                string sql2 = "";
+                if(checkDt.Rows.Count == 0)
+                {
+                    sql2 = "REPLACE INTO Evaluation_Grade(学号,学年,学期,德育成绩,智育成绩,能力成绩,个性发展成绩,总成绩) VALUES('" + studentId
                     + "','" + year + "','" + sesson + "', " + grade1.ToString() + "," + grade2.ToString()
-                    + "," + grade3.ToString() + "," + grade4.ToString() + "," + grade.ToString() + ")";
+                    + "," + grade3.ToString() + "," + grade4.ToString() + "," + grade.ToString() + ")"; 
+                }
+                else
+                {
+                    sql2 = "UPDATE Evaluation_Grade SET 德育成绩='" + grade1.ToString() + "',智育成绩='" + grade2.ToString()
+                        + "',能力成绩='" + grade3.ToString() + "',个性发展成绩='" + grade4.ToString() + "',总成绩='" + grade.ToString()
+                        + "' WHERE 学号='" + studentId + "' AND 学年 = '" + year + "' AND 学期 = '" + sesson + "'";
+                }
                 DbHelperSQLite.ExecuteSql(sql2);
                 tag = 1;
             }
