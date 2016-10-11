@@ -45,6 +45,8 @@ namespace StudentsManagement
             levelTextBox.Text = dt.Rows[index]["学历层次"].ToString();
             eLevelTextBox.Text = dt.Rows[index]["英语等级"].ToString();
             eGradeTextBox.Text = dt.Rows[index]["英语成绩"].ToString();
+            pclevelText.Text = dt.Rows[index]["计算机等级"].ToString();
+            pcgradeText.Text = dt.Rows[index]["计算机成绩"].ToString();
             phoneTextBox.Text = dt.Rows[index]["手机号"].ToString();
             qqTextBox.Text = dt.Rows[index]["QQ号"].ToString();
             emailTextBox.Text = dt.Rows[index]["电子邮箱"].ToString();
@@ -69,7 +71,7 @@ namespace StudentsManagement
         {
 
         }
-        private DataTable comban(DataTable dt, string[] columnNames)
+        /*private DataTable comban(DataTable dt, string[] columnNames)
         {
             int index = 0;
             string tag = dt.Rows[0]["学号"].ToString() + dt.Rows[0]["学年"].ToString() + dt.Rows[0]["学期"].ToString();
@@ -257,6 +259,215 @@ namespace StudentsManagement
             //PElessonGrade.Add(grade2);
             //dt.AcceptChanges();
             return dt;
+        }*/
+        private DataTable comban(DataTable dt, string[] columNames)
+        {
+            int index = 0;
+            regulerLessonGrade.Clear();
+            DataTable dt1 = dt.Clone();
+            dt1.Rows.Clear();
+            string tag = dt.Rows[index]["学号"].ToString() + dt.Rows[index]["学年"].ToString() + dt.Rows[index]["学期"].ToString();
+            DataRow dr = dt.Rows[index];
+            dt1.ImportRow(dr);
+            for (int i = 1; i < dt.Rows.Count; i++)
+            {
+                string tag1 = dt.Rows[i]["学号"].ToString() + dt.Rows[i]["学年"].ToString() + dt.Rows[i]["学期"].ToString();
+                if (tag1 == tag)
+                {
+                    for (int j = 0; j < columNames.Count(); j++)
+                    {
+                        dt.Rows[index][columNames[j]] = dt.Rows[index][columNames[j]] + " " + dt.Rows[i][columNames[j]];
+                    }
+                    DataRow dr1 = dt.Rows[i];
+                    dt1.ImportRow(dr1);
+                    dt.Rows[i].Delete();
+                }
+                else
+                {
+                    countGrade(dt1);
+                    dt1.Rows.Clear();
+                    DataRow dr2 = dt.Rows[i];
+                    dt1.ImportRow(dr2);
+                    tag = tag1;
+                    index = i;
+                }
+            }
+            countGrade(dt1);
+            dt.AcceptChanges();
+            return dt;
+        }
+
+        private void countGrade(DataTable dt)
+        {
+            int[] percents = Common.percent1;
+            double totalGrade = 0;
+            if (percents[0] == 0)
+            {
+                double gradePoint = 0;
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    switch (dt.Rows[i]["课程性质"].ToString())
+                    {
+                        case "公共基础课":
+                            if (percents[1] != -1)
+                            {
+                                totalGrade = totalGrade + getScore(dt.Rows[i]["期末成绩"].ToString()) * Convert.ToDouble(dt.Rows[i]["学分"]);
+                                gradePoint += Convert.ToDouble(dt.Rows[i]["学分"]);
+                            }
+                            break;
+                        case "公共选修课":
+                            if (percents[2] != -1)
+                            {
+                                totalGrade = totalGrade + getScore(dt.Rows[i]["期末成绩"].ToString()) * Convert.ToDouble(dt.Rows[i]["学分"]);
+                                gradePoint += Convert.ToDouble(dt.Rows[i]["学分"]);
+                            }
+                            break;
+                        case "专业必修课":
+                            if (percents[3] != -1)
+                            {
+                                totalGrade = totalGrade + getScore(dt.Rows[i]["期末成绩"].ToString()) * Convert.ToDouble(dt.Rows[i]["学分"]);
+                                gradePoint += Convert.ToDouble(dt.Rows[i]["学分"]);
+                            }
+                            break;
+                        case "专业选修课":
+                            if (percents[4] != -1)
+                            {
+                                totalGrade = totalGrade + getScore(dt.Rows[i]["期末成绩"].ToString()) * Convert.ToDouble(dt.Rows[i]["学分"]);
+                                gradePoint += Convert.ToDouble(dt.Rows[i]["学分"]);
+                            }
+                            break;
+                        case "综合教育必修课":
+                            if (percents[5] != -1)
+                            {
+                                totalGrade = totalGrade + getScore(dt.Rows[i]["期末成绩"].ToString()) * Convert.ToDouble(dt.Rows[i]["学分"]);
+                                gradePoint += Convert.ToDouble(dt.Rows[i]["学分"]);
+                            }
+                            break;
+                        case "实践课":
+                            if (percents[6] != -1)
+                            {
+                                totalGrade = totalGrade + getScore(dt.Rows[i]["期末成绩"].ToString()) * Convert.ToDouble(dt.Rows[i]["学分"]);
+                                gradePoint += Convert.ToDouble(dt.Rows[i]["学分"]);
+                            }
+                            break;
+                        case "体育项目课":
+                            if (percents[7] != -1)
+                            {
+                                totalGrade = totalGrade + getScore(dt.Rows[i]["期末成绩"].ToString()) * Convert.ToDouble(dt.Rows[i]["学分"]);
+                                gradePoint += Convert.ToDouble(dt.Rows[i]["学分"]);
+                            }
+                            break;
+                    }
+                }
+                totalGrade = totalGrade / gradePoint;
+                regulerLessonGrade.Add(totalGrade);
+            }
+            else
+            {
+                double k = 100;
+                double[] grades = { 0, 0, 0, 0, 0, 0, 0 };
+                int[] count = { 0, 0, 0, 0, 0, 0, 0 };
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    switch (dt.Rows[i]["课程性质"].ToString())
+                    {
+                        case "公共基础课":
+                            if (percents[1] != -1)
+                            {
+                                grades[0] = grades[0] + getScore(dt.Rows[i]["期末成绩"].ToString());
+                                count[0] += 1;
+                            }
+                            break;
+                        case "公共选修课":
+                            if (percents[2] != -1)
+                            {
+                                grades[1] = grades[1] + getScore(dt.Rows[i]["期末成绩"].ToString());
+                                count[1] += 1;
+                            }
+                            break;
+                        case "专业必修课":
+                            if (percents[3] != -1)
+                            {
+                                grades[2] = grades[2] + getScore(dt.Rows[i]["期末成绩"].ToString());
+                                count[2] += 1;
+                            }
+                            break;
+                        case "专业选修课":
+                            if (percents[4] != -1)
+                            {
+                                grades[3] = grades[3] + getScore(dt.Rows[i]["期末成绩"].ToString());
+                                count[3] += 1;
+                            }
+                            break;
+                        case "综合教育必修课":
+                            if (percents[5] != -1)
+                            {
+                                grades[4] = grades[4] + getScore(dt.Rows[i]["期末成绩"].ToString());
+                                count[4] += 1;
+                            }
+                            break;
+                        case "实践课":
+                            if (percents[6] != -1)
+                            {
+                                grades[5] = grades[5] + getScore(dt.Rows[i]["期末成绩"].ToString());
+                                count[5] += 1;
+                            }
+                            break;
+                        case "体育项目课":
+                            if (percents[7] != -1)
+                            {
+                                grades[6] = grades[6] + getScore(dt.Rows[i]["期末成绩"].ToString());
+                                count[6] += 1;
+                            }
+                            break;
+                    }
+                }
+                if (percents[8] == 1)
+                {
+                    for (int i = 0; i < 7; i++)
+                    {
+                        if (count[i] == 0 && percents[i + 1] != -1)
+                        {
+                            k -= percents[i + 1];
+                        }
+                    }
+                }
+                for (int i = 0; i < 7; i++)
+                {
+                    if (count[i] != 0)
+                    {
+                        totalGrade = totalGrade + (grades[i] / count[i]) * (percents[i + 1] / k);
+                    }
+                }
+                regulerLessonGrade.Add(totalGrade);
+            }
+        }
+        private double getScore(string grade)
+        {
+            double score = 0;
+            switch (grade)
+            {
+                case "上":
+                case "优":
+                    score = 90;
+                    break;
+                case "良":
+                    score = 80;
+                    break;
+                case "中":
+                    score = 70;
+                    break;
+                case "及格":
+                    score = 60;
+                    break;
+                case "不及格":
+                    score = 50;
+                    break;
+                default:
+                    score = Convert.ToInt16(grade);
+                    break;
+            }
+            return score;
         }
         private DataTable input(int tag)
         {
@@ -338,7 +549,7 @@ namespace StudentsManagement
         private DataTable gradeDt = new DataTable();
         private DataTable eGradeDt = new DataTable();
         private ArrayList gradeColumnNames = new ArrayList();
-        string[] names = { "课程名称", "课程性质", "期末成绩", "成绩", "补考成绩" };
+        string[] names = { "课程名称", "课程性质", "期末成绩", "成绩", "补考成绩", "学分" };
         private int selectedIndex;
         private void button1_Click(object sender, EventArgs e)
         {
@@ -354,6 +565,7 @@ namespace StudentsManagement
             ArrayList finalGrades = split(dt, "期末成绩");
             ArrayList grades = split(dt, "成绩");
             ArrayList secondGrades = split(dt, "补考成绩");
+            ArrayList lessonScore = split(dt, "学分");
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 for (int j = 0; j < ((string[])lessonNames[i]).Count(); j++)
@@ -363,12 +575,14 @@ namespace StudentsManagement
                     dt.Rows[i]["期末成绩"] = ((string[])finalGrades[i])[j];
                     dt.Rows[i]["成绩"] = ((string[])grades[i])[j];
                     dt.Rows[i]["补考成绩"] = ((string[])secondGrades[i])[j];
+                    dt.Rows[i]["学分"] = ((string[])lessonScore[i])[j];
                     gradeDt.ImportRow(dt.Rows[i]);
                 }
             }
             gradeDataGridView.DataSource = gradeDt;
             gradeOutputButton.Enabled = true;
             gradeDataGridView.ContextMenuStrip = contextMenuStrip1;
+            gradeRecountButton.Visible = true;
         }
         private ArrayList split(DataTable dt, string columnName)
         {
@@ -387,9 +601,9 @@ namespace StudentsManagement
             gradeDataGridView.DataSource = gradeDt;
             gradeOutputButton.Enabled = false;
             gradeDataGridView.ContextMenuStrip = null;
-            string[] names = { "学号", "学年", "学期", "课程名称", "课程性质", "成绩", "期末成绩", "补考成绩" };
+            string[] names = { "学号", "学年", "学期", "课程名称", "课程性质", "成绩", "期末成绩", "补考成绩", "学分" };
             ArrayList tags = new ArrayList();
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 9; i++)
             {
                 int tag = 0;
                 for (int j = 0; j < gradeDt.Columns.Count; j++)
@@ -433,11 +647,11 @@ namespace StudentsManagement
             DataTable gradeDt1 = gradeDt.Copy();
             DataTable dt = comban(gradeDt1, names);
             DataTable dt1 = dt;
-            string[] neededNames = { "学号", "学年", "学期", "课程名称", "课程性质", "成绩", "期末成绩", "补考成绩" };
+            string[] neededNames = { "学号", "学年", "学期", "课程名称", "课程性质", "成绩", "期末成绩", "补考成绩","学分" };
             for (int i = 0; i < dt1.Columns.Count; i++)
             {
                 int tag = 0;
-                for (int j = 0; j < 8; j++)
+                for (int j = 0; j < 9; j++)
                 {
                     if (dt1.Columns[i].ColumnName == neededNames[j])
                     {
@@ -487,11 +701,11 @@ namespace StudentsManagement
             DataTable gradeDt1 = gradeDt.Copy();
             DataTable dt = comban(gradeDt1, names);
             DataTable dt1 = dt;
-            string[] neededNames = { "学号", "学年", "学期", "课程名称", "课程性质", "成绩", "期末成绩", "补考成绩" };
+            string[] neededNames = { "学号", "学年", "学期", "课程名称", "课程性质", "成绩", "期末成绩", "补考成绩","学分" };
             for (int i = 0; i < dt1.Columns.Count; i++)
             {
                 int tag = 0;
-                for (int j = 0; j < 8; j++)
+                for (int j = 0; j < 9; j++)
                 {
                     if (dt1.Columns[i].ColumnName == neededNames[j])
                     {
@@ -708,6 +922,7 @@ namespace StudentsManagement
                 + "%' AND 学期 LIKE '%" + sessonComboBox3.Text + "%'";
             evaluationGradeDt = DbHelperSQLite.Query(sql).Tables[0];
             evaluationDataGridView.DataSource = evaluationGradeDt;
+            evaluationOutputButton.Enabled = true;
         }
 
         private void evaluationOutputButton_Click(object sender, EventArgs e)
@@ -743,6 +958,7 @@ namespace StudentsManagement
         private void updateButton1_Click(object sender, EventArgs e)
         {
             dt = dtCopy.Copy();
+            Common.dt = dtCopy.Copy();
             dtCopy.Clear();
             DataRow dr = dt.Rows[index];
             dtCopy.ImportRow(dr);
@@ -924,6 +1140,102 @@ namespace StudentsManagement
             updateButton1.Visible = true;
         }
 
+        private void pclevelText_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["计算机等级"] = pclevelText.Text;
+            updateButton1.Visible = true;
+        }
 
+        private void pcgradeText_TextChanged(object sender, EventArgs e)
+        {
+            dtCopy.Rows[index]["计算机成绩"] = pcgradeText.Text;
+            updateButton1.Visible = true;
+        }
+        private void sortByClick(DataGridView dgv, DataTable dt, DataGridViewCellMouseEventArgs e)
+        {
+            string columnName = dgv.Columns[e.ColumnIndex].Name;
+            SortOrder so = dgv.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection;
+            if (so == SortOrder.Ascending)
+            {
+                columnName += " asc";
+            }
+            else if (so == SortOrder.Descending)
+            {
+                columnName += " desc";
+            }
+            DataTable dt1 = dt.Copy();
+            DataRow[] drs = dt1.Select(String.Empty, columnName);
+            dt.Clear();
+            foreach (DataRow dr in drs)
+            {
+                dt.ImportRow(dr);
+            }
+            dgv.DataSource = dt;
+        }
+        private void gradeDataGridView_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                sortByClick(gradeDataGridView, (DataTable)gradeDataGridView.DataSource, e);
+            }
+
+        }
+
+        private void aeDataGridView_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                sortByClick(aeDataGridView, (DataTable)aeDataGridView.DataSource, e);
+            }
+        }
+
+        private void evaluationDataGridView_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                sortByClick(evaluationDataGridView, (DataTable)evaluationDataGridView.DataSource, e);
+            }
+        }
+
+        private void gradeRecountButton_Click(object sender, EventArgs e)
+        {
+            DataTable gradeDt1 = gradeDt.Copy();
+            DataTable dt = comban(gradeDt1, names);
+            DataTable dt1 = dt;
+            string[] neededNames = { "学号", "学年", "学期", "课程名称", "课程性质", "成绩", "期末成绩", "补考成绩", "学分" };
+            for (int i = 0; i < dt1.Columns.Count; i++)
+            {
+                int tag = 0;
+                for (int j = 0; j < 9; j++)
+                {
+                    if (dt1.Columns[i].ColumnName == neededNames[j])
+                    {
+                        tag = 1;
+                    }
+                }
+                if (tag == 0)
+                {
+                    dt1.Columns.Remove(dt1.Columns[i]);
+                    i -= 1;
+                }
+            }
+            SQLiteInput(dt1, "Grade_List");
+            ArrayList sqlList = new ArrayList();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                string sql = "UPDATE Evaluation_Grade SET 智育成绩 = '" + regulerLessonGrade[i] + "' WHERE 学号='" + dt.Rows[i]["学号"]
+                    + "' AND 学年 = '" + dt.Rows[i]["学年"] + "' AND 学期='" + dt.Rows[i]["学期"] + "'";
+                int n = DbHelperSQLite.ExecuteSql(sql);
+                if (n == 0)
+                {
+                    sql = "REPLACE INTO Evaluation_Grade(学号,学年,学期,智育成绩) VALUES ('" + dt.Rows[i]["学号"]
+                    + "','" + dt.Rows[i]["学年"] + "','" + dt.Rows[i]["学期"] + "','" + regulerLessonGrade[i] + "')";
+                    sqlList.Add(sql);
+                }
+
+            }
+            DbHelperSQLite.ExecuteSqlTran(sqlList);
+            gradeRecountButton.Visible = false;
+        }
     }
 }

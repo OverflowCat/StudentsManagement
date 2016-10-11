@@ -21,6 +21,7 @@ namespace StudentsManagement
         private string mStudentSex;
         private string mStudentPoliticalStatus;
         private string mStudentNationality;
+        private string mStudentGradeYear;
         private string[] majors = { "信息与计算科学", "数学与应用数学", "应用物理" };
         private string[] mClassNums;
         private DataSet ds = new DataSet();
@@ -60,10 +61,11 @@ namespace StudentsManagement
             {
                 evaluationPanel.BringToFront();
                 this.AcceptButton = eSearchButton1;
+                eUpdateButton.Visible = false;
                 label17.Text = "学生综合评测信息管理界面";
             }
         }
-        private string getSql(string mStudentId, string mStudentName, string mStudentMajor, string mStudentClass, string mStudentSex, string mStudentNationality, string mStudentPoliticalStatus)
+        private string getSql(string mStudentId, string mStudentName, string mStudentGradeYear, string mStudentMajor, string mStudentClass, string mStudentSex, string mStudentNationality, string mStudentPoliticalStatus)
         {
             string sql = "";
             if (mStudentId == null || mStudentId == "")
@@ -79,7 +81,7 @@ namespace StudentsManagement
                     else
                     {
                         sql = "SELECT * FROM Student_List WHERE 姓名 LIKE '%" + mStudentName + "%' AND 专业 = '" + mStudentMajor + "'"
-                            + "AND 民族 LIKE '%" + mStudentNationality + "%'"
+                            + "AND 民族 LIKE '%" + mStudentNationality + "%' AND 当前所在级 LIKE '%" + mStudentGradeYear + "%'"
                             + "AND 性别 LIKE '%" + mStudentSex + "%' AND 政治面貌 LIKE '%" + mStudentPoliticalStatus + "%'";
                     }
                 }
@@ -88,7 +90,8 @@ namespace StudentsManagement
                     sql = "SELECT * FROM Student_List WHERE 姓名 LIKE '%" + mStudentName + "%'"
                             + "AND 民族 LIKE '%" + mStudentNationality + "%'"
                             + "AND 性别 LIKE '%" + mStudentSex + "%' "
-                            + "AND 政治面貌 LIKE '%" + mStudentPoliticalStatus + "%'";
+                            + "AND 政治面貌 LIKE '%" + mStudentPoliticalStatus + "%'"
+                            + "AND 当前所在级 LIKE '%" + mStudentGradeYear + "%'";
                 }
             }
             else
@@ -100,14 +103,14 @@ namespace StudentsManagement
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            string s = mStudentId + mStudentName + mStudentMajor + mStudentClass + mStudentSex + mStudentNationality + mStudentPoliticalStatus;
+            string s = mStudentId + mStudentName + mStudentGradeYear + mStudentMajor + mStudentClass + mStudentSex + mStudentNationality + mStudentPoliticalStatus;
             if (s == "")
             {
                 MessageBox.Show("请输入搜索条件");
             }
             else
             {
-                string sql = getSql(mStudentId, mStudentName, mStudentMajor, mStudentClass, mStudentSex, mStudentNationality, mStudentPoliticalStatus);
+                string sql = getSql(mStudentId, mStudentName,mStudentGradeYear, mStudentMajor, mStudentClass, mStudentSex, mStudentNationality, mStudentPoliticalStatus);
                 ds = DbHelperSQLite.Query(sql);
                 dt = ds.Tables[0];
                 if (columnsNames.Count == 0)
@@ -133,7 +136,10 @@ namespace StudentsManagement
         {
             mStudentName = studentNameText.Text.ToString().Trim();
         }
-
+        private void gradeYearBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mStudentGradeYear = gradeYearBox.Text;
+        }
         private void majorBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             //mStudentMajor = majors[majorBox.SelectedIndex];
@@ -144,12 +150,14 @@ namespace StudentsManagement
             classBox.Items.Clear();
             if (n != 0)
             {
+                classBox.Items.Add("");
                 mClassNums = new string[n];
                 for (int i = 0; i < n; i++)
                 {
                     mClassNums[i] = ds.Tables[0].Rows[i][0].ToString().Trim();
                 }
                 classBox.Items.AddRange(mClassNums);
+
             }
         }
         private void classBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -410,13 +418,13 @@ namespace StudentsManagement
         private DataTable gradeDt = new DataTable();
         private DataTable eGradeDt = new DataTable();
         private ArrayList gradeColumnNames = new ArrayList();
-        string[] names = { "课程名称", "课程性质", "期末成绩", "成绩", "补考成绩" };
+        string[] names = { "课程名称", "课程性质", "期末成绩", "成绩", "补考成绩" ,"学分"};
         private string getSql(string idText, string majorText, string classText, string yearText, string sessonText)
         {
             string sql = idText + majorText + yearText + sessonText;
-            if(sql == "" && sql == null)
+            if(sql == "" || sql == null)
             {
-                MessageBox.Show("请输入查询条件");
+                //MessageBox.Show("请输入查询条件");
             }
             else
             {
@@ -435,30 +443,41 @@ namespace StudentsManagement
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            string sql = "SELECT * FROM Student_Grade WHERE " + getSql(idText, majorText, classText, yearText, sessonText);           
-            DataSet ds = DbHelperSQLite.Query(sql);
-            DataTable dt = ds.Tables[0];
-            gradeDt = dt.Copy();
-            gradeDt.Rows.Clear();
-            ArrayList lessonNames = split(dt, "课程名称");
-            ArrayList lessonProperties = split(dt, "课程性质");
-            ArrayList finalGrades = split(dt, "期末成绩");
-            ArrayList grades = split(dt, "成绩");
-            ArrayList secondGrades = split(dt, "补考成绩");
-            for (int i = 0; i < dt.Rows.Count; i++)
+            string sql = getSql(idText, majorText, classText, yearText, sessonText);
+            if(sql == "" || sql == null)
             {
-                for (int j = 0; j < ((string[])lessonNames[i]).Count(); j++)
+                MessageBox.Show("请输入查询条件", "提示");
+            }
+            else
+            {
+                sql = "SELECT * FROM Student_Grade WHERE " + sql;
+                DataSet ds = DbHelperSQLite.Query(sql);
+                DataTable dt = ds.Tables[0];
+                gradeDt = dt.Copy();
+                gradeDt.Rows.Clear();
+                ArrayList lessonNames = split(dt, "课程名称");
+                ArrayList lessonProperties = split(dt, "课程性质");
+                ArrayList finalGrades = split(dt, "期末成绩");
+                ArrayList grades = split(dt, "成绩");
+                ArrayList secondGrades = split(dt, "补考成绩");
+                ArrayList lessonScore = split(dt, "学分");
+                for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    dt.Rows[i]["课程名称"] = ((string[])lessonNames[i])[j];
-                    dt.Rows[i]["课程性质"] = ((string[])lessonProperties[i])[j];
-                    dt.Rows[i]["期末成绩"] = ((string[])finalGrades[i])[j];
-                    dt.Rows[i]["成绩"] = ((string[])grades[i])[j];
-                    dt.Rows[i]["补考成绩"] = ((string[])secondGrades[i])[j];
-                    gradeDt.ImportRow(dt.Rows[i]);
-                }                
-            }            
-            gradeDataGridView.DataSource = gradeDt;
-            gradeOutputButton.Enabled = true;
+                    for (int j = 0; j < ((string[])lessonNames[i]).Count(); j++)
+                    {
+                        dt.Rows[i]["课程名称"] = ((string[])lessonNames[i])[j];
+                        dt.Rows[i]["课程性质"] = ((string[])lessonProperties[i])[j];
+                        dt.Rows[i]["期末成绩"] = ((string[])finalGrades[i])[j];
+                        dt.Rows[i]["成绩"] = ((string[])grades[i])[j];
+                        dt.Rows[i]["补考成绩"] = ((string[])secondGrades[i])[j];
+                        dt.Rows[i]["学分"] = ((string[])lessonScore[i])[j];
+                        gradeDt.ImportRow(dt.Rows[i]);
+                    }
+                }
+                gradeDataGridView.DataSource = gradeDt;
+                gradeOutputButton.Enabled = true;
+                gradeRecountButton.Visible = true;
+            }           
         }
         private ArrayList split(DataTable dt, string columnName)
         {
@@ -470,7 +489,7 @@ namespace StudentsManagement
             }            
             return arrayList;
         }
-        private DataTable comban(DataTable dt, string[] columnNames)
+        /*private DataTable comban(DataTable dt, string[] columnNames)
         {
             int index = 0;
             string tag = dt.Rows[0]["学号"].ToString() + dt.Rows[0]["学年"].ToString() + dt.Rows[0]["学期"].ToString();
@@ -652,6 +671,215 @@ namespace StudentsManagement
             //PElessonGrade.Add(grade2);
             //dt.AcceptChanges();
             return dt;
+        }*/
+        private DataTable comban(DataTable dt, string[] columNames)
+        {
+            int index = 0;
+            regulerLessonGrade.Clear();
+            DataTable dt1 = dt.Clone();
+            dt1.Rows.Clear();
+            string tag = dt.Rows[index]["学号"].ToString() + dt.Rows[index]["学年"].ToString() + dt.Rows[index]["学期"].ToString();
+            DataRow dr = dt.Rows[index];
+            dt1.ImportRow(dr);
+            for (int i = 1; i < dt.Rows.Count; i++)
+            {
+                string tag1 = dt.Rows[i]["学号"].ToString() + dt.Rows[i]["学年"].ToString() + dt.Rows[i]["学期"].ToString();
+                if(tag1 == tag)
+                {
+                    for (int j = 0; j < columNames.Count(); j++)
+                    {
+                        dt.Rows[index][columNames[j]] = dt.Rows[index][columNames[j]] + " " + dt.Rows[i][columNames[j]];
+                    }
+                    DataRow dr1 = dt.Rows[i];
+                    dt1.ImportRow(dr1);
+                    dt.Rows[i].Delete();
+                    //i -= 1;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+                }
+                else
+                {
+                    countGrade(dt1);
+                    dt1.Rows.Clear();
+                    DataRow dr2 = dt.Rows[i];
+                    dt1.ImportRow(dr2);
+                    tag = tag1;
+                    index = i;
+                }
+            }
+            countGrade(dt1);
+            dt.AcceptChanges();
+            return dt;
+        }
+
+        private void countGrade(DataTable dt)
+        {
+            int[] percents = Common.percent1;
+            double totalGrade = 0;
+            if (percents[0] == 0)
+            {
+                double gradePoint = 0;
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    switch (dt.Rows[i]["课程性质"].ToString())
+                    {
+                        case "公共基础课":
+                            if(percents[1] != -1)
+                            {
+                                totalGrade = totalGrade + getScore(dt.Rows[i]["期末成绩"].ToString()) * Convert.ToDouble(dt.Rows[i]["学分"]);
+                                gradePoint += Convert.ToDouble(dt.Rows[i]["学分"]);
+                            }                           
+                            break;
+                        case "公共选修课":
+                            if (percents[2] != -1)
+                            {
+                                totalGrade = totalGrade + getScore(dt.Rows[i]["期末成绩"].ToString()) * Convert.ToDouble(dt.Rows[i]["学分"]);
+                                gradePoint += Convert.ToDouble(dt.Rows[i]["学分"]);
+                            }
+                            break;
+                        case "专业必修课":
+                            if (percents[3] != -1)
+                            {
+                                totalGrade = totalGrade + getScore(dt.Rows[i]["期末成绩"].ToString()) * Convert.ToDouble(dt.Rows[i]["学分"]);
+                                gradePoint += Convert.ToDouble(dt.Rows[i]["学分"]);
+                            }
+                            break;
+                        case "专业选修课":
+                            if (percents[4] != -1)
+                            {
+                                totalGrade = totalGrade + getScore(dt.Rows[i]["期末成绩"].ToString()) * Convert.ToDouble(dt.Rows[i]["学分"]);
+                                gradePoint += Convert.ToDouble(dt.Rows[i]["学分"]);
+                            }
+                            break;
+                        case "综合教育必修课":
+                            if (percents[5] != -1)
+                            {
+                                totalGrade = totalGrade + getScore(dt.Rows[i]["期末成绩"].ToString()) * Convert.ToDouble(dt.Rows[i]["学分"]);
+                                gradePoint += Convert.ToDouble(dt.Rows[i]["学分"]);
+                            }
+                            break;
+                        case "实践课":
+                            if (percents[6] != -1)
+                            {
+                                totalGrade = totalGrade + getScore(dt.Rows[i]["期末成绩"].ToString()) * Convert.ToDouble(dt.Rows[i]["学分"]);
+                                gradePoint += Convert.ToDouble(dt.Rows[i]["学分"]);
+                            }
+                            break;
+                        case "体育项目课":
+                            if (percents[7] != -1)
+                            {
+                                totalGrade = totalGrade + getScore(dt.Rows[i]["期末成绩"].ToString()) * Convert.ToDouble(dt.Rows[i]["学分"]);
+                                gradePoint += Convert.ToDouble(dt.Rows[i]["学分"]);
+                            }
+                            break;
+                    }
+                }
+                totalGrade = totalGrade / gradePoint;
+                regulerLessonGrade.Add(totalGrade);
+            }
+            else
+            {
+                double k = 100;
+                double[] grades = { 0, 0, 0, 0, 0, 0, 0 };
+                int[] count = { 0, 0, 0, 0, 0, 0, 0 };
+                for(int i = 0; i< dt.Rows.Count; i++)
+                {
+                    switch (dt.Rows[i]["课程性质"].ToString())
+                    {
+                        case "公共基础课":
+                            if (percents[1] != -1)
+                            {
+                                grades[0] = grades[0] + getScore(dt.Rows[i]["期末成绩"].ToString());
+                                count[0] += 1;
+                            }
+                            break;
+                        case "公共选修课":
+                            if (percents[2] != -1)
+                            {
+                                grades[1] = grades[1] + getScore(dt.Rows[i]["期末成绩"].ToString());
+                                count[1] += 1;
+                            }
+                            break;
+                        case "专业必修课":
+                            if (percents[3] != -1)
+                            {
+                                grades[2] = grades[2] + getScore(dt.Rows[i]["期末成绩"].ToString());
+                                count[2] += 1;
+                            }
+                            break;
+                        case "专业选修课":
+                            if (percents[4] != -1)
+                            {
+                                grades[3] = grades[3] + getScore(dt.Rows[i]["期末成绩"].ToString());
+                                count[3] += 1;
+                            }
+                            break;
+                        case "综合教育必修课":
+                            if (percents[5] != -1)
+                            {
+                                grades[4] = grades[4] + getScore(dt.Rows[i]["期末成绩"].ToString());
+                                count[4] += 1;
+                            }
+                            break;
+                        case "实践课":
+                            if (percents[6] != -1)
+                            {
+                                grades[5] = grades[5] + getScore(dt.Rows[i]["期末成绩"].ToString());
+                                count[5] += 1;
+                            }
+                            break;
+                        case "体育项目课":
+                            if (percents[7] != -1)
+                            {
+                                grades[6] = grades[6] + getScore(dt.Rows[i]["期末成绩"].ToString());
+                                count[6] += 1;
+                            }
+                            break;
+                    }
+                }
+                if(percents[8] == 1)
+                {
+                    for (int i = 0; i < 7; i++)
+                    {
+                        if(count[i] == 0 && percents[i+1] !=-1 )
+                        {
+                            k -= percents[i+1];
+                        }
+                    }
+                }
+                for (int i = 0; i < 7; i++)
+                {
+                    if (count[i] != 0)
+                    {
+                        totalGrade = totalGrade + (grades[i] / count[i]) * (percents[i + 1] / k);
+                    }
+                }
+                regulerLessonGrade.Add(totalGrade);
+            }
+        }
+        private double getScore(string grade)
+        {
+            double score = 0;
+            switch (grade)
+            {
+                case "上": case "优":
+                    score = 90;
+                    break;
+                case "良":
+                    score = 80;
+                    break;
+                case "中":
+                    score = 70;
+                    break;
+                case "及格":
+                    score = 60;
+                    break;
+                case "不及格":
+                    score = 50;
+                    break;
+                default:
+                    score = Convert.ToInt16(grade);
+                    break;
+            }
+            return score;
         }
         private DataTable input(int tag)
         {
@@ -659,7 +887,7 @@ namespace StudentsManagement
             OpenFileDialog openFileDialog = new OpenFileDialog();
             //openFileDialog.InitialDirectory = defaultPath;
             //Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            openFileDialog.Filter = "excel2007|*.xlsx|excel97-2003|*.xls";
+            openFileDialog.Filter = "excel97-2003|*.xls|excel2007|*.xlsx";
             openFileDialog.RestoreDirectory = true;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -730,6 +958,7 @@ namespace StudentsManagement
             classComboBox2.Items.Clear();
             if (n != 0)
             {
+                classComboBox2.Items.Add("");
                 mClassNums = new string[n];
                 for (int i = 0; i < n; i++)
                 {
@@ -812,11 +1041,11 @@ namespace StudentsManagement
             DataTable gradeDt1 = gradeDt.Copy();
             DataTable dt = comban(gradeDt1, names);
             DataTable dt1 = dt;
-            string[] neededNames = { "学号", "学年", "学期", "课程名称", "课程性质", "成绩", "期末成绩", "补考成绩" };
+            string[] neededNames = { "学号", "学年", "学期", "课程名称", "课程性质", "成绩", "期末成绩", "补考成绩" ,"学分"};
             for (int i = 0; i < dt1.Columns.Count; i++)
             {
                 int tag = 0;
-                for (int j = 0; j < 8; j++)
+                for (int j = 0; j < 9; j++)
                 {
                     if (dt1.Columns[i].ColumnName == neededNames[j])
                     {
@@ -852,7 +1081,46 @@ namespace StudentsManagement
             okGroupBox2.Visible = false;
             gradeDt.Clear();
         }
+        private void gradeRecountButton_Click(object sender, EventArgs e)
+        {
+            DataTable gradeDt1 = gradeDt.Copy();
+            DataTable dt = comban(gradeDt1, names);
+            DataTable dt1 = dt;
+            string[] neededNames = { "学号", "学年", "学期", "课程名称", "课程性质", "成绩", "期末成绩", "补考成绩", "学分" };
+            for (int i = 0; i < dt1.Columns.Count; i++)
+            {
+                int tag = 0;
+                for (int j = 0; j < 9; j++)
+                {
+                    if (dt1.Columns[i].ColumnName == neededNames[j])
+                    {
+                        tag = 1;
+                    }
+                }
+                if (tag == 0)
+                {
+                    dt1.Columns.Remove(dt1.Columns[i]);
+                    i -= 1;
+                }
+            }
+            SQLiteInput(dt1, "Grade_List");
+            ArrayList sqlList = new ArrayList();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                string sql = "UPDATE Evaluation_Grade SET 智育成绩 = '" + regulerLessonGrade[i] + "' WHERE 学号='" + dt.Rows[i]["学号"]
+                    + "' AND 学年 = '" + dt.Rows[i]["学年"] + "' AND 学期='" + dt.Rows[i]["学期"] + "'";
+                int n = DbHelperSQLite.ExecuteSql(sql);
+                if (n == 0)
+                {
+                    sql = "REPLACE INTO Evaluation_Grade(学号,学年,学期,智育成绩) VALUES ('" + dt.Rows[i]["学号"]
+                    + "','" + dt.Rows[i]["学年"] + "','" + dt.Rows[i]["学期"] + "','" + regulerLessonGrade[i] + "')";
+                    sqlList.Add(sql);
+                }
 
+            }
+            DbHelperSQLite.ExecuteSqlTran(sqlList);
+            gradeRecountButton.Visible = false;
+        }
         private void gradeDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (okGroupBox2.Visible != true)
@@ -865,11 +1133,11 @@ namespace StudentsManagement
             DataTable gradeDt1 = gradeDt.Copy();
             DataTable dt = comban(gradeDt1, names);
             DataTable dt1 = dt;
-            string[] neededNames = { "学号", "学年", "学期", "课程名称", "课程性质", "成绩", "期末成绩", "补考成绩" };
+            string[] neededNames = { "学号", "学年", "学期", "课程名称", "课程性质", "成绩", "期末成绩", "补考成绩","学分" };
             for (int i = 0; i < dt1.Columns.Count; i++)
             {
                 int tag = 0;
-                for (int j = 0; j < 8; j++)
+                for (int j = 0; j < 9; j++)
                 {
                     if (dt1.Columns[i].ColumnName == neededNames[j])
                     {
@@ -969,9 +1237,9 @@ namespace StudentsManagement
         private DataTable newEvaluationDt(DataTable dt)
         {
             DataTable evaluationDt = new DataTable();
-            evaluationDt.Columns.Add(dt.Columns["学号"]);
+            //evaluationDt.Columns.Add(dt.Columns["学号"]);
             //evaluationDt.Columns.Add(dt.Columns["评测项目"]);
-            //evaluationDt.Columns.Add("学号", typeof(string));
+            evaluationDt.Columns.Add("学号", typeof(string));
             evaluationDt.Columns.Add("学年", typeof(string));
             evaluationDt.Columns.Add("学期", typeof(int));
             evaluationDt.Columns.Add("评测项目", typeof(string));
@@ -991,27 +1259,36 @@ namespace StudentsManagement
             {
                 date = "";
             }
-            string sql = "SELECT * FROM Activities_List WHERE 活动名称 LIKE '%" + activityNameText.Text + "%'" 
-                + date + " AND 学年 LIKE '%" + yearComboBox1.Text + "%' AND 学期 LIKE '%" + sessonComboBox1.Text + "%'";
-            activityDt = DbHelperSQLite.Query(sql).Tables[0];
-            if (activityDt.Rows.Count != 0)
+            string text = activityNameText.Text + date + yearComboBox1.Text + sessonComboBox1.Text;
+            if(text == "")
             {
-                if (activityColumnNames.Count == 0)
-                {
-                    for (int i = 0; i < activityDt.Columns.Count; i++)
-                    {
-                        activityColumnNames.Add(activityDt.Columns[i].ColumnName);
-                    }
-                }
-                activityDataGridView.DataSource = activityDt;
+                MessageBox.Show("请输入条件", "提示");
             }
             else
             {
-                MessageBox.Show("未找到相关信息", "提示");
-            }
-            if(returnActivityButton.Visible == true)
-            {
-                returnActivityButton.Visible = false;
+                string sql = "SELECT * FROM Activities_List WHERE 活动名称 LIKE '%" + activityNameText.Text + "%'"
+                + date + " AND 学年 LIKE '%" + yearComboBox1.Text + "%' AND 学期 LIKE '%" + sessonComboBox1.Text + "%'";
+                activityDt = DbHelperSQLite.Query(sql).Tables[0];
+                if (activityDt.Rows.Count != 0)
+                {
+                    if (activityColumnNames.Count == 0)
+                    {
+                        for (int i = 0; i < activityDt.Columns.Count; i++)
+                        {
+                            activityColumnNames.Add(activityDt.Columns[i].ColumnName);
+                        }
+                    }
+                    activityDataGridView.DataSource = activityDt;
+                    activityOutputButton.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("未找到相关信息", "提示");
+                }
+                if (returnActivityButton.Visible == true)
+                {
+                    returnActivityButton.Visible = false;
+                }
             }
         }
 
@@ -1024,12 +1301,14 @@ namespace StudentsManagement
         private void activityDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = e.RowIndex;
+            selectedIndex = index;
             string sql = "SELECT * FROM Student_Activity WHERE 活动序列 = '" + activityDt.Rows[index]["活动序列"] + "'";
             studentDt = DbHelperSQLite.Query(sql).Tables[0];
             activityDataGridView.DataSource = studentDt;
             activityDataGridView.ContextMenuStrip = contextMenuStrip4;
             activityDataGridView.ReadOnly = true;
             returnActivityButton.Visible = true;
+            listInputButton.Visible = true;
         }
 
         private void returnActivityButton_Click(object sender, EventArgs e)
@@ -1038,8 +1317,82 @@ namespace StudentsManagement
             activityDataGridView.ContextMenuStrip = contextMenuStrip3;
             activityDataGridView.ReadOnly = false;
             returnActivityButton.Visible = false;
+            listInputButton.Visible = false;
         }
-
+        private void listInputButton_Click(object sender, EventArgs e)
+        {
+            DataTable inputActivityDt1 = input(0);
+            if (inputActivityDt1.Rows.Count != 0)
+            {
+                int tag1 = 0;
+                for (int i = 0; i < inputActivityDt1.Columns.Count; i++)
+                {
+                    if (inputActivityDt1.Columns[i].ColumnName == "学号")
+                    {
+                        tag1 = 1;
+                        break;
+                    }
+                    else
+                    {
+                        inputActivityDt1.Columns.Remove(inputActivityDt1.Columns[i]);
+                        i--;
+                    }
+                }
+                if (tag1 != 1)
+                {
+                    MessageBox.Show("请提供学生学号信息", "提示");
+                }
+                else
+                {
+                    DataTable excistCheckDt = DbHelperSQLite.Query("SELECT 学号 FROM Activities_Student WHERE 活动序列 = "
+                        + activityDt.Rows[selectedIndex]["活动序列"]).Tables[0];
+                    inputActivityDt1.Columns.Add("活动序列", typeof(string));
+                    DataTable evaluationDt = newEvaluationDt(inputActivityDt1);
+                    int k = 0;
+                    for (int i = 0; i < inputActivityDt1.Rows.Count; i++)
+                    {
+                        int tag = 0;
+                        for (int j = 0; j < excistCheckDt.Rows.Count; j++)
+                        {
+                            if (excistCheckDt.Rows[j]["学号"].ToString() == inputActivityDt1.Rows[i]["学号"].ToString())
+                            {
+                                tag = 1;
+                                break;
+                            }
+                        }
+                        if (tag == 0)
+                        {
+                            evaluationDt.Rows.Add();
+                            evaluationDt.AcceptChanges();
+                            inputActivityDt1.Rows[i]["活动序列"] = activityDt.Rows[selectedIndex]["活动序列"];
+                            evaluationDt.Rows[k]["学号"] = inputActivityDt1.Rows[i]["学号"];
+                            evaluationDt.Rows[k]["学年"] = activityDt.Rows[selectedIndex]["学年"];
+                            evaluationDt.Rows[k]["学期"] = activityDt.Rows[selectedIndex]["学期"];
+                            evaluationDt.Rows[k]["评测项目"] = activityDt.Rows[selectedIndex]["评测项目"];
+                            evaluationDt.Rows[k]["内容"] = "参加：" + activityDt.Rows[selectedIndex]["活动名称"];
+                            evaluationDt.Rows[k]["分值"] = activityDt.Rows[selectedIndex]["活动加分"];
+                            k++;
+                        }
+                    }
+                    string itemIndex = DbHelperSQLite.Query("SELECT MAX(记录序列) FROM Evaluation_Item").Tables[0].Rows[0][0].ToString();
+                    SQLiteInput(inputActivityDt1, "Activities_Student");
+                    SQLiteInput(evaluationDt, "Evaluation_Item");
+                    int itemIndex1 = Convert.ToInt16(itemIndex);
+                    ArrayList sqlList = new ArrayList();
+                    for (int i = 0; i < evaluationDt.Rows.Count; i++)
+                    {
+                        itemIndex1++;
+                        string sql = "INSERT INTO Activities_Item(学号,活动序列,记录序列) VALUES('" + evaluationDt.Rows[i]["学号"]
+                            + "'," + activityDt.Rows[selectedIndex]["活动序列"] + "," + itemIndex1.ToString() + ") ";
+                        sqlList.Add(sql);
+                    }
+                    DbHelperSQLite.ExecuteSqlTran(sqlList);
+                }
+            }
+            string sql1 = "SELECT * FROM Student_Activity WHERE 活动序列 = '" + activityDt.Rows[selectedIndex]["活动序列"] + "'";
+            studentDt = DbHelperSQLite.Query(sql1).Tables[0];
+            activityDataGridView.DataSource = studentDt;
+        }
         private void activityDataGridView_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -1054,22 +1407,73 @@ namespace StudentsManagement
         private void 导入名单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DataTable inputActivityDt1 = input(0);
-            DataTable inputActivityDt2 = new DataTable();
-            //inputActivityDt2.Columns.Add(inputActivityDt1.Columns["学号"]);
-            //DataColumn activityIndex = new DataColumn("活动序列");
-            DataTable evaluationDt = newEvaluationDt(inputActivityDt2);
-            //inputActivityDt2.Columns.Add(activityIndex);
-            for(int i = 0; i < inputActivityDt2.Rows.Count; i++)
+            if (inputActivityDt1.Rows.Count != 0)
             {
-                inputActivityDt2.Rows[i]["活动序列"] = activityDt.Rows[selectedIndex]["活动序列"];
-                evaluationDt.Rows[i]["学年"] = activityDt.Rows[selectedIndex]["学年"];
-                evaluationDt.Rows[i]["学期"] = activityDt.Rows[selectedIndex]["学期"];
-                evaluationDt.Rows[i]["评测项目"] = activityDt.Rows[selectedIndex]["评测项目"];
-                evaluationDt.Rows[i]["内容"] = "参加：" + activityDt.Rows[selectedIndex]["活动名称"];
-                evaluationDt.Rows[i]["分值"] = activityDt.Rows[selectedIndex]["活动加分"];
+                int tag1 = 0;
+                for (int i = 0; i < inputActivityDt1.Columns.Count; i++)
+                {
+                    if (inputActivityDt1.Columns[i].ColumnName == "学号")
+                    {
+                        tag1 = 1;
+                        break;
+                    }
+                    else
+                    {
+                        inputActivityDt1.Columns.Remove(inputActivityDt1.Columns[i]);
+                        i--;
+                    }
+                }
+                if(tag1 != 1)
+                {
+                    MessageBox.Show("请提供学生学号信息", "提示");
+                }
+                else
+                {
+                    DataTable excistCheckDt = DbHelperSQLite.Query("SELECT 学号 FROM Activities_Student WHERE 活动序列 = " 
+                        + activityDt.Rows[selectedIndex]["活动序列"]).Tables[0];
+                    inputActivityDt1.Columns.Add("活动序列", typeof(string));
+                    DataTable evaluationDt = newEvaluationDt(inputActivityDt1);
+                    int k = 0;
+                    for (int i = 0; i < inputActivityDt1.Rows.Count; i++)
+                    {
+                        int tag = 0;
+                        for(int j = 0; j < excistCheckDt.Rows.Count; j++)
+                        {
+                            if(excistCheckDt.Rows[j]["学号"].ToString() == inputActivityDt1.Rows[i]["学号"].ToString())
+                            {
+                                tag = 1;
+                                break;
+                            }
+                        }
+                        if (tag == 0)
+                        {
+                            evaluationDt.Rows.Add();
+                            evaluationDt.AcceptChanges();
+                            inputActivityDt1.Rows[i]["活动序列"] = activityDt.Rows[selectedIndex]["活动序列"];
+                            evaluationDt.Rows[k]["学号"] = inputActivityDt1.Rows[i]["学号"];
+                            evaluationDt.Rows[k]["学年"] = activityDt.Rows[selectedIndex]["学年"];
+                            evaluationDt.Rows[k]["学期"] = activityDt.Rows[selectedIndex]["学期"];
+                            evaluationDt.Rows[k]["评测项目"] = activityDt.Rows[selectedIndex]["评测项目"];
+                            evaluationDt.Rows[k]["内容"] = "参加：" + activityDt.Rows[selectedIndex]["活动名称"];
+                            evaluationDt.Rows[k]["分值"] = activityDt.Rows[selectedIndex]["活动加分"];
+                            k++;
+                        }
+                    }
+                    string itemIndex = DbHelperSQLite.Query("SELECT MAX(记录序列) FROM Evaluation_Item").Tables[0].Rows[0][0].ToString();
+                    SQLiteInput(inputActivityDt1, "Activities_Student");
+                    SQLiteInput(evaluationDt, "Evaluation_Item");
+                    int itemIndex1 = Convert.ToInt16(itemIndex);
+                    ArrayList sqlList = new ArrayList();
+                    for(int i = 0; i < evaluationDt.Rows.Count; i++)
+                    {
+                        itemIndex1++;
+                        string sql = "INSERT INTO Activities_Item(学号,活动序列,记录序列) VALUES('" + evaluationDt.Rows[i]["学号"]
+                            + "'," + activityDt.Rows[selectedIndex]["活动序列"] + "," + itemIndex1.ToString() + ") ";
+                        sqlList.Add(sql);
+                    }
+                    DbHelperSQLite.ExecuteSqlTran(sqlList);
+                }
             }
-            SQLiteInput(inputActivityDt2, "Activities_Student");
-            SQLiteInput(evaluationDt, "Evaluation_Item");
         }
 
         private void 删除活动ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1082,8 +1486,17 @@ namespace StudentsManagement
 
         private void 清空名单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string sql = "DELETE FROM Activites_Student WHERE 活动序列 = '" + activityDt.Rows[selectedIndex]["活动序列"] + "'";
-            DbHelperSQLite.ExecuteSql(sql);
+            DataTable itemIndexs = DbHelperSQLite.Query("SELECT * FROM Activities_Item WHERE 活动序列 = '"
+                + activityDt.Rows[selectedIndex]["活动序列"] + "'").Tables[0];
+            ArrayList sqlList = new ArrayList();
+            string sql1 = "DELETE FROM Activites_Student WHERE 活动序列 = '" + activityDt.Rows[selectedIndex]["活动序列"] + "'";
+            sqlList.Add(sql1);
+            for(int i = 0; i < itemIndexs.Rows.Count; i++)
+            {
+                string sql2 = "DELETE FROM Evaluation_Item WHERE 记录序列 = " + itemIndexs.Rows[i]["记录序列"];
+                sqlList.Add(sql2);
+            }
+            DbHelperSQLite.ExecuteSqlTran(sqlList);
         }
 
         private void activityDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -1142,9 +1555,22 @@ namespace StudentsManagement
 
         private void 删除ToolStripMenuItem2_Click(object sender, EventArgs e)
         {
+            DataTable itemIndexs = DbHelperSQLite.Query("SELECT 记录序列 FROM Activities_Item WHERE 活动序列 = '"
+                + studentDt.Rows[selectedIndex]["活动序列"] + "' AND 学号 = '" + studentDt.Rows[selectedIndex]["学号"] 
+                + "'").Tables[0];
             string sql = "DELETE FROM Activities_Student WHERE 活动序列 = '"
                 + studentDt.Rows[selectedIndex]["活动序列"]
                 + "' AND 学号 = '" + studentDt.Rows[selectedIndex]["学号"] + "'";
+            string sql1 = "DELETE FROM Activities_Item WHERE 活动序列 = '"
+                + studentDt.Rows[selectedIndex]["活动序列"] + "' AND 学号 = '" + studentDt.Rows[selectedIndex]["学号"]
+                + "'";
+            string sql2 = "DELETE FROM Evaluation_Item WHERE 记录序列 =" + Convert.ToInt16(itemIndexs.Rows[0][0]);
+            ArrayList sqlList = new ArrayList();
+            sqlList.Add(sql);
+            sqlList.Add(sql1);
+            sqlList.Add(sql2);
+            studentDt.Rows.Remove(studentDt.Rows[selectedIndex]);
+            DbHelperSQLite.ExecuteSqlTran(sqlList);
         }
 
         /********************************************************************/
@@ -1160,70 +1586,97 @@ namespace StudentsManagement
         private ArrayList evaluationColumnNames = new ArrayList();
         private void eSearchButton1_Click(object sender, EventArgs e)
         {
-            string sql = "SELECT * FROM Student_EGrade WHERE ";
-            string sql1 = "";
-            if(eIdTextBox1.Text != null && eIdTextBox1.Text != "")
+            string text = eIdTextBox1.Text + eYearComboBox1.Text + eSessionComboBox2.Text + eMajorComboBox3.Text;
+            if (text != null & text != "")
             {
-                sql = sql + "学号 = '" + eIdTextBox1.Text
-                    + "' AND 学年 LIKE '%" + eYearComboBox1.Text + "%' AND 学期 LIKE '%"
+                记录序列.Visible = false;
+                string sql = "SELECT * FROM Student_EGrade WHERE ";
+                string sql1 = "";
+                if (eIdTextBox1.Text != null && eIdTextBox1.Text != "")
+                {
+                    sql = sql + "学号 = '" + eIdTextBox1.Text
+                        + "' AND 学年 LIKE '%" + eYearComboBox1.Text + "%' AND 学期 LIKE '%"
+                        + eSessionComboBox2.Text + "%'";
+                }
+                else
+                {
+                    sql = sql + "学年 LIKE '%" + eYearComboBox1.Text + "%' AND 学期 LIKE '%"
                     + eSessionComboBox2.Text + "%'";
+                    if (eMajorComboBox3.Text != "" && eMajorComboBox3.Text != null)
+                    {
+                        sql1 = "(SELECT 学号 FROM Student_List WHERE 专业 LIKE '%" + eMajorComboBox3.Text
+                        + "%' ANd 行政班 LIKE '%" + eClassComboBox4.Text + "%')";
+                        sql = sql + "AND 学号 IN " + sql1;
+                    }
+                }
+                evaluationGradeDt = DbHelperSQLite.Query(sql).Tables[0];
+                evaluationDataGridView.DataSource = evaluationGradeDt;
+                eOutputButton.Enabled = true;
+                evaluationDataGridView.ReadOnly = true;
+                evaluationOutDt = evaluationGradeDt;
+                evaluationDataGridView.ContextMenuStrip = contextMenuStrip5;
             }
             else
             {
-                sql = sql + "学年 LIKE '%" + eYearComboBox1.Text + "%' AND 学期 LIKE '%"
-                + eSessionComboBox2.Text + "%'";
-                if (eMajorComboBox3.Text != "" && eMajorComboBox3.Text != null)
-                {
-                    sql1 = "(SELECT 学号 FROM Student_List WHERE 专业 LIKE '%" + eMajorComboBox3.Text
-                    + "%' ANd 行政班 LIKE '%" + eClassComboBox4.Text + "%')";
-                    sql = sql + "AND 学号 IN " + sql1;
-                }                
-            }           
-            evaluationGradeDt = DbHelperSQLite.Query(sql).Tables[0];
-            evaluationDataGridView.DataSource = evaluationGradeDt;
-            evaluationDataGridView.ReadOnly = true;
-            evaluationOutDt = evaluationGradeDt;
-            evaluationDataGridView.ContextMenuStrip = contextMenuStrip5;
+                MessageBox.Show("请输入查询条件", "提示");
+            }
         }
 
         private void eSearchButton2_Click(object sender, EventArgs e)
         {
-            string sql = "SELECT * FROM Student_EItem WHERE ";
-            string sql1 = "";
-            if (eIdTextBox1.Text != null && eIdTextBox1.Text != "")
+            string text = eIdTextBox1.Text + eYearComboBox1.Text + eSessionComboBox2.Text + eMajorComboBox3.Text;
+            if (text != null & text != "")
             {
-                sql = sql + "学号 = '" + eIdTextBox1.Text
-                    + "' AND 学年 LIKE '%" + eYearComboBox1.Text + "%' AND 学期 LIKE '%"
+                记录序列.Visible = true;
+                string sql = "SELECT * FROM Student_EItem WHERE ";
+                string sql1 = "";
+                if (eIdTextBox1.Text != null && eIdTextBox1.Text != "")
+                {
+                    sql = sql + "学号 = '" + eIdTextBox1.Text
+                        + "' AND 学年 LIKE '%" + eYearComboBox1.Text + "%' AND 学期 LIKE '%"
+                        + eSessionComboBox2.Text + "%'";
+                }
+                else
+                {
+                    sql = sql + "学年 LIKE '%" + eYearComboBox1.Text + "%' AND 学期 LIKE '%"
                     + eSessionComboBox2.Text + "%'";
+                    if (eMajorComboBox3.Text != "" && eMajorComboBox3.Text != null)
+                    {
+                        sql1 = "(SELECT 学号 FROM Student_List WHERE 专业 LIKE '%" + eMajorComboBox3.Text
+                        + "%' ANd 行政班 LIKE '%" + eClassComboBox4.Text + "%')";
+                        sql = sql + "AND 学号 IN " + sql1;
+                    }
+                }
+                evaluationListDt = DbHelperSQLite.Query(sql).Tables[0];
+                for (int i = 0; i < evaluationListDt.Columns.Count; i++)
+                {
+                    evaluationColumnNames.Add(evaluationListDt.Columns[i].ColumnName);
+                }
+                evaluationDataGridView.DataSource = evaluationListDt;
+                eOutputButton.Enabled = true;
+                evaluationDataGridView.ReadOnly = false;
+                evaluationOutDt = evaluationListDt;
+                evaluationDataGridView.ContextMenuStrip = contextMenuStrip6;
             }
             else
             {
-                sql = sql + "学年 LIKE '%" + eYearComboBox1.Text + "%' AND 学期 LIKE '%"
-                + eSessionComboBox2.Text + "%'";
-                if (eMajorComboBox3.Text != "" && eMajorComboBox3.Text != null)
-                {
-                    sql1 = "(SELECT 学号 FROM Student_List WHERE 专业 LIKE '%" + eMajorComboBox3.Text
-                    + "%' ANd 行政班 LIKE '%" + eClassComboBox4.Text + "%')";
-                    sql = sql + "AND 学号 IN " + sql1;
-                }
+                MessageBox.Show("请输入查询条件", "提示");
             }
-            evaluationListDt = DbHelperSQLite.Query(sql).Tables[0];
-            for(int i = 0; i < evaluationListDt.Columns.Count; i++)
-            {
-                evaluationColumnNames.Add(evaluationListDt.Columns[i].ColumnName);
-            }
-            evaluationDataGridView.DataSource = evaluationListDt;
-            evaluationDataGridView.ReadOnly = false;
-            evaluationOutDt = evaluationListDt;
-            evaluationDataGridView.ContextMenuStrip = contextMenuStrip6;
         }
 
         private void eInputButton_Click(object sender, EventArgs e)
         {
             evaluationListDt = input(0);
-            evaluationDataGridView.DataSource = evaluationListDt;
-            eGroupBox1.Visible = true;
-            evaluationDataGridView.ContextMenuStrip = null;
+            if(evaluationListDt.Rows.Count != 0)
+            {
+                evaluationDataGridView.DataSource = evaluationListDt;
+                eGroupBox1.Visible = true;
+                evaluationDataGridView.ContextMenuStrip = null;
+            }
+            else
+            {
+                MessageBox.Show("未导入文件或文件没有数据", "提示");
+            }
         }
 
         private void eInputOkbutton_Click(object sender, EventArgs e)
@@ -1303,9 +1756,10 @@ namespace StudentsManagement
             string sql = "SELECT DISTINCT 行政班 FROM Student_List WHERE 专业 = '" + eStudentMajor + "'";
             DataSet ds = DbHelperSQLite.Query(sql);
             int n = ds.Tables[0].Rows.Count;
-            classBox.Items.Clear();
+            eClassComboBox4.Items.Clear();
             if (n != 0)
             {
+                eClassComboBox4.Items.Add("");
                 mClassNums = new string[n];
                 for (int i = 0; i < n; i++)
                 {
@@ -1389,10 +1843,12 @@ namespace StudentsManagement
         private void 删除ToolStripMenuItem3_Click(object sender, EventArgs e)
         {
             string sql = "DELETE FROM Evaluation_Item WHERE 记录序列 = '" + evaluationListDt.Rows[selectedIndex]["记录序列"] + "'";
-            string eStudentId = evaluationGradeDt.Rows[selectedIndex]["学号"].ToString();
-            string year = evaluationGradeDt.Rows[selectedIndex]["学年"].ToString();
-            string sesson = evaluationGradeDt.Rows[selectedIndex]["学期"].ToString();
+            DbHelperSQLite.ExecuteSql(sql);
+            string eStudentId = evaluationListDt.Rows[selectedIndex]["学号"].ToString();
+            string year = evaluationListDt.Rows[selectedIndex]["学年"].ToString();
+            string sesson = evaluationListDt.Rows[selectedIndex]["学期"].ToString();
             Common.evaluationCalculate(eStudentId, year, sesson);
+            evaluationListDt.Rows.Remove(evaluationListDt.Rows[selectedIndex]);
         }
 
         private void calculateButton_Click(object sender, EventArgs e)
@@ -1412,5 +1868,70 @@ namespace StudentsManagement
             SignUpForm signUpForm = new SignUpForm();
             signUpForm.Show();
         }
+
+        private void StudentManagement_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void activityOutputButton_Click(object sender, EventArgs e)
+        {
+            output((DataTable)activityDataGridView.DataSource, "活动信息");
+        }
+
+        private void sortByClick(DataGridView dgv, DataTable dt, DataGridViewCellMouseEventArgs e)
+        {
+            string columnName = dgv.Columns[e.ColumnIndex].Name;
+            SortOrder so = dgv.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection;
+            if (so == SortOrder.Ascending)
+            {
+                columnName += " asc";
+            }
+            else if (so == SortOrder.Descending)
+            {
+                columnName += " desc";
+            }
+            DataTable dt1 = dt.Copy();
+            DataRow[] drs = dt1.Select(String.Empty, columnName);
+            dt.Clear();
+            foreach (DataRow dr in drs)
+            {
+                dt.ImportRow(dr);
+            }
+            dgv.DataSource = dt;
+        }
+        private void StudentListGridView_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                sortByClick(StudentListGridView, dt, e);
+            }
+        }
+
+        private void evaluationDataGridView_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                sortByClick(evaluationDataGridView, (DataTable)evaluationDataGridView.DataSource, e);
+            }
+        }
+
+        private void activityDataGridView_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                sortByClick(activityDataGridView, (DataTable)activityDataGridView.DataSource, e);
+            }
+        }
+
+        private void gradeDataGridView_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                sortByClick(gradeDataGridView, (DataTable)gradeDataGridView.DataSource, e);
+            }
+        }
+
+
     }
 }

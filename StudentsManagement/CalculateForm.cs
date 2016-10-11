@@ -185,6 +185,7 @@ namespace StudentsManagement
             classComboBox.Items.Clear();
             if (n != 0)
             {
+                classComboBox.Items.Add("");
                 mClassNums = new string[n];
                 for (int i = 0; i < n; i++)
                 {

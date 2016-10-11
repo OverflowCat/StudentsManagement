@@ -33,6 +33,7 @@
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("成绩");
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("活动");
             System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("综合评定");
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentManagement));
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.studentPanel = new System.Windows.Forms.Panel();
             this.updateButton = new System.Windows.Forms.Button();
@@ -40,13 +41,13 @@
             this.cancelButton1 = new System.Windows.Forms.Button();
             this.okButton1 = new System.Windows.Forms.Button();
             this.StudentListGridView = new System.Windows.Forms.DataGridView();
-            this.student_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.student_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.student_sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.student_nationality = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.student_political = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.student_major = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.student_class = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.学号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.姓名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.性别 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.民族 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.政治面貌 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.专业名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.行政班 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.outputButton = new System.Windows.Forms.Button();
@@ -55,6 +56,8 @@
             this.sstudentIdText = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.studentNameText = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.gradeYearBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.majorBox = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -68,6 +71,7 @@
             this.inputButton = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
             this.gradePanel = new System.Windows.Forms.Panel();
+            this.gradeRecountButton = new System.Windows.Forms.Button();
             this.gradeUpdateButton = new System.Windows.Forms.Button();
             this.okGroupBox2 = new System.Windows.Forms.GroupBox();
             this.insertCancelButton1 = new System.Windows.Forms.Button();
@@ -89,6 +93,7 @@
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.activityPanel = new System.Windows.Forms.Panel();
+            this.listInputButton = new System.Windows.Forms.Button();
             this.activityUpdateButton1 = new System.Windows.Forms.Button();
             this.returnActivityButton = new System.Windows.Forms.Button();
             this.sessonComboBox1 = new System.Windows.Forms.ComboBox();
@@ -131,6 +136,7 @@
             this.eIdTextBox1 = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.evaluationDataGridView = new System.Windows.Forms.DataGridView();
+            this.记录序列 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label17 = new System.Windows.Forms.Label();
             this.contextMenuStrip5 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.计算成绩ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -138,6 +144,7 @@
             this.删除ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.setupLabel = new System.Windows.Forms.LinkLabel();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.studentPanel.SuspendLayout();
             this.okGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StudentListGridView)).BeginInit();
@@ -160,9 +167,8 @@
             // 
             // treeView1
             // 
-            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.treeView1.Location = new System.Drawing.Point(12, 88);
             this.treeView1.Name = "treeView1";
             treeNode1.Name = "student";
@@ -247,68 +253,73 @@
             // 
             this.StudentListGridView.AllowUserToAddRows = false;
             this.StudentListGridView.AllowUserToOrderColumns = true;
+            this.StudentListGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.StudentListGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.StudentListGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.student_id,
-            this.student_name,
-            this.student_sex,
-            this.student_nationality,
-            this.student_political,
-            this.student_major,
-            this.student_class});
+            this.学号,
+            this.姓名,
+            this.性别,
+            this.民族,
+            this.政治面貌,
+            this.专业名称,
+            this.行政班});
             this.StudentListGridView.Location = new System.Drawing.Point(0, 96);
             this.StudentListGridView.Name = "StudentListGridView";
             this.StudentListGridView.RowTemplate.ContextMenuStrip = this.contextMenuStrip1;
             this.StudentListGridView.RowTemplate.Height = 23;
             this.StudentListGridView.Size = new System.Drawing.Size(1131, 484);
             this.StudentListGridView.TabIndex = 15;
+            this.toolTip1.SetToolTip(this.StudentListGridView, "双击打开学生详细信息");
             this.StudentListGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.StudentListGridView_CellDoubleClick);
             this.StudentListGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.StudentListGridView_CellMouseDown);
             this.StudentListGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.StudentListGridView_CellValidating);
             this.StudentListGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.StudentListGridView_CellValueChanged);
+            this.StudentListGridView.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.StudentListGridView_ColumnHeaderMouseClick);
             // 
-            // student_id
+            // 学号
             // 
-            this.student_id.DataPropertyName = "学号";
-            this.student_id.HeaderText = "学号";
-            this.student_id.Name = "student_id";
-            this.student_id.ReadOnly = true;
+            this.学号.DataPropertyName = "学号";
+            this.学号.HeaderText = "学号";
+            this.学号.Name = "学号";
+            this.学号.ReadOnly = true;
             // 
-            // student_name
+            // 姓名
             // 
-            this.student_name.DataPropertyName = "姓名";
-            this.student_name.HeaderText = "姓名";
-            this.student_name.Name = "student_name";
+            this.姓名.DataPropertyName = "姓名";
+            this.姓名.HeaderText = "姓名";
+            this.姓名.Name = "姓名";
             // 
-            // student_sex
+            // 性别
             // 
-            this.student_sex.DataPropertyName = "性别";
-            this.student_sex.HeaderText = "性别";
-            this.student_sex.Name = "student_sex";
+            this.性别.DataPropertyName = "性别";
+            this.性别.HeaderText = "性别";
+            this.性别.Name = "性别";
             // 
-            // student_nationality
+            // 民族
             // 
-            this.student_nationality.DataPropertyName = "民族";
-            this.student_nationality.HeaderText = "民族";
-            this.student_nationality.Name = "student_nationality";
+            this.民族.DataPropertyName = "民族";
+            this.民族.HeaderText = "民族";
+            this.民族.Name = "民族";
             // 
-            // student_political
+            // 政治面貌
             // 
-            this.student_political.DataPropertyName = "政治面貌";
-            this.student_political.HeaderText = "政治面貌";
-            this.student_political.Name = "student_political";
+            this.政治面貌.DataPropertyName = "政治面貌";
+            this.政治面貌.HeaderText = "政治面貌";
+            this.政治面貌.Name = "政治面貌";
             // 
-            // student_major
+            // 专业名称
             // 
-            this.student_major.DataPropertyName = "专业";
-            this.student_major.HeaderText = "专业名称";
-            this.student_major.Name = "student_major";
+            this.专业名称.DataPropertyName = "专业";
+            this.专业名称.HeaderText = "专业名称";
+            this.专业名称.Name = "专业名称";
             // 
-            // student_class
+            // 行政班
             // 
-            this.student_class.DataPropertyName = "行政班";
-            this.student_class.HeaderText = "行政班";
-            this.student_class.Name = "student_class";
+            this.行政班.DataPropertyName = "行政班";
+            this.行政班.HeaderText = "行政班";
+            this.行政班.Name = "行政班";
             // 
             // contextMenuStrip1
             // 
@@ -345,6 +356,8 @@
             this.flowLayoutPanel1.Controls.Add(this.sstudentIdText);
             this.flowLayoutPanel1.Controls.Add(this.label2);
             this.flowLayoutPanel1.Controls.Add(this.studentNameText);
+            this.flowLayoutPanel1.Controls.Add(this.label23);
+            this.flowLayoutPanel1.Controls.Add(this.gradeYearBox);
             this.flowLayoutPanel1.Controls.Add(this.label3);
             this.flowLayoutPanel1.Controls.Add(this.majorBox);
             this.flowLayoutPanel1.Controls.Add(this.label4);
@@ -394,10 +407,44 @@
             this.studentNameText.TabIndex = 6;
             this.studentNameText.TextChanged += new System.EventHandler(this.studentNameText_TextChanged);
             // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(285, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(29, 12);
+            this.label23.TabIndex = 17;
+            this.label23.Text = "年级";
+            // 
+            // gradeYearBox
+            // 
+            this.gradeYearBox.FormattingEnabled = true;
+            this.gradeYearBox.Items.AddRange(new object[] {
+            "",
+            "2013",
+            "2014",
+            "2015",
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025",
+            "2026"});
+            this.gradeYearBox.Location = new System.Drawing.Point(320, 3);
+            this.gradeYearBox.Name = "gradeYearBox";
+            this.gradeYearBox.Size = new System.Drawing.Size(121, 20);
+            this.gradeYearBox.TabIndex = 18;
+            this.gradeYearBox.SelectedIndexChanged += new System.EventHandler(this.gradeYearBox_SelectedIndexChanged);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(285, 0);
+            this.label3.Location = new System.Drawing.Point(447, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 5;
@@ -407,10 +454,11 @@
             // 
             this.majorBox.FormattingEnabled = true;
             this.majorBox.Items.AddRange(new object[] {
+            "",
             "信息与计算科学",
             "数学与应用数学",
             "应用物理"});
-            this.majorBox.Location = new System.Drawing.Point(320, 3);
+            this.majorBox.Location = new System.Drawing.Point(482, 3);
             this.majorBox.Name = "majorBox";
             this.majorBox.Size = new System.Drawing.Size(121, 20);
             this.majorBox.TabIndex = 7;
@@ -419,7 +467,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(447, 0);
+            this.label4.Location = new System.Drawing.Point(609, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 9;
@@ -428,16 +476,16 @@
             // classBox
             // 
             this.classBox.FormattingEnabled = true;
-            this.classBox.Location = new System.Drawing.Point(482, 3);
+            this.classBox.Location = new System.Drawing.Point(644, 3);
             this.classBox.Name = "classBox";
-            this.classBox.Size = new System.Drawing.Size(121, 20);
+            this.classBox.Size = new System.Drawing.Size(113, 20);
             this.classBox.TabIndex = 10;
             this.classBox.SelectedIndexChanged += new System.EventHandler(this.classBox_SelectedIndexChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(609, 0);
+            this.label5.Location = new System.Drawing.Point(3, 27);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 11;
@@ -447,9 +495,10 @@
             // 
             this.sexBox.FormattingEnabled = true;
             this.sexBox.Items.AddRange(new object[] {
+            "",
             "男",
             "女"});
-            this.sexBox.Location = new System.Drawing.Point(644, 3);
+            this.sexBox.Location = new System.Drawing.Point(38, 30);
             this.sexBox.Name = "sexBox";
             this.sexBox.Size = new System.Drawing.Size(100, 20);
             this.sexBox.TabIndex = 12;
@@ -458,7 +507,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 27);
+            this.label6.Location = new System.Drawing.Point(144, 27);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 12);
             this.label6.TabIndex = 13;
@@ -466,7 +515,7 @@
             // 
             // nationalityText
             // 
-            this.nationalityText.Location = new System.Drawing.Point(38, 30);
+            this.nationalityText.Location = new System.Drawing.Point(179, 30);
             this.nationalityText.Name = "nationalityText";
             this.nationalityText.Size = new System.Drawing.Size(100, 21);
             this.nationalityText.TabIndex = 14;
@@ -475,7 +524,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(144, 27);
+            this.label7.Location = new System.Drawing.Point(285, 27);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 15;
@@ -483,7 +532,7 @@
             // 
             // politicalStatusText
             // 
-            this.politicalStatusText.Location = new System.Drawing.Point(203, 30);
+            this.politicalStatusText.Location = new System.Drawing.Point(344, 30);
             this.politicalStatusText.Name = "politicalStatusText";
             this.politicalStatusText.Size = new System.Drawing.Size(76, 21);
             this.politicalStatusText.TabIndex = 16;
@@ -514,6 +563,7 @@
             this.gradePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gradePanel.Controls.Add(this.gradeRecountButton);
             this.gradePanel.Controls.Add(this.gradeUpdateButton);
             this.gradePanel.Controls.Add(this.okGroupBox2);
             this.gradePanel.Controls.Add(this.gradeOutputButton);
@@ -535,8 +585,22 @@
             this.gradePanel.Size = new System.Drawing.Size(1131, 635);
             this.gradePanel.TabIndex = 2;
             // 
+            // gradeRecountButton
+            // 
+            this.gradeRecountButton.Location = new System.Drawing.Point(458, 592);
+            this.gradeRecountButton.Name = "gradeRecountButton";
+            this.gradeRecountButton.Size = new System.Drawing.Size(86, 30);
+            this.gradeRecountButton.TabIndex = 16;
+            this.gradeRecountButton.Text = "重新计算成绩";
+            this.gradeRecountButton.UseVisualStyleBackColor = true;
+            this.gradeRecountButton.Visible = false;
+            this.gradeRecountButton.Click += new System.EventHandler(this.gradeRecountButton_Click);
+            // 
             // gradeUpdateButton
             // 
+            this.gradeUpdateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gradeUpdateButton.Location = new System.Drawing.Point(68, 599);
             this.gradeUpdateButton.Name = "gradeUpdateButton";
             this.gradeUpdateButton.Size = new System.Drawing.Size(75, 23);
@@ -548,6 +612,9 @@
             // 
             // okGroupBox2
             // 
+            this.okGroupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.okGroupBox2.Controls.Add(this.insertCancelButton1);
             this.okGroupBox2.Controls.Add(this.insertOKButton1);
             this.okGroupBox2.Location = new System.Drawing.Point(106, 586);
@@ -580,6 +647,9 @@
             // 
             // gradeOutputButton
             // 
+            this.gradeOutputButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gradeOutputButton.Enabled = false;
             this.gradeOutputButton.Location = new System.Drawing.Point(879, 599);
             this.gradeOutputButton.Name = "gradeOutputButton";
@@ -591,6 +661,9 @@
             // 
             // gradeInputButton
             // 
+            this.gradeInputButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gradeInputButton.Location = new System.Drawing.Point(771, 599);
             this.gradeInputButton.Name = "gradeInputButton";
             this.gradeInputButton.Size = new System.Drawing.Size(75, 23);
@@ -601,8 +674,12 @@
             // 
             // sessonComboBox4
             // 
+            this.sessonComboBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.sessonComboBox4.FormattingEnabled = true;
             this.sessonComboBox4.Items.AddRange(new object[] {
+            "",
             "1",
             "2",
             "3"});
@@ -614,11 +691,25 @@
             // 
             // yearComboBox3
             // 
+            this.yearComboBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.yearComboBox3.FormattingEnabled = true;
             this.yearComboBox3.Items.AddRange(new object[] {
+            "",
             "2013-2014",
             "2014-2015",
-            "2015-2016"});
+            "2015-2016",
+            "2016-2017",
+            "2017-2018",
+            "2018-2019",
+            "2019-2020",
+            "2020-2021",
+            "2021-2022",
+            "2022-2023",
+            "2023-2024",
+            "2024-2025",
+            "2025-2026"});
             this.yearComboBox3.Location = new System.Drawing.Point(313, 52);
             this.yearComboBox3.Name = "yearComboBox3";
             this.yearComboBox3.Size = new System.Drawing.Size(121, 20);
@@ -627,6 +718,9 @@
             // 
             // label12
             // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(480, 55);
             this.label12.Name = "label12";
@@ -636,6 +730,9 @@
             // 
             // label11
             // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(278, 55);
             this.label11.Name = "label11";
@@ -645,6 +742,9 @@
             // 
             // classComboBox2
             // 
+            this.classComboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.classComboBox2.FormattingEnabled = true;
             this.classComboBox2.Location = new System.Drawing.Point(590, 10);
             this.classComboBox2.Name = "classComboBox2";
@@ -654,6 +754,9 @@
             // 
             // label10
             // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(555, 13);
             this.label10.Name = "label10";
@@ -663,8 +766,12 @@
             // 
             // majorComboBox1
             // 
+            this.majorComboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.majorComboBox1.FormattingEnabled = true;
             this.majorComboBox1.Items.AddRange(new object[] {
+            "",
             "信息与计算科学",
             "数学与应用数学",
             "应用物理"});
@@ -676,6 +783,9 @@
             // 
             // label9
             // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(377, 13);
             this.label9.Name = "label9";
@@ -685,6 +795,9 @@
             // 
             // idTextBox1
             // 
+            this.idTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.idTextBox1.Location = new System.Drawing.Point(255, 10);
             this.idTextBox1.Name = "idTextBox1";
             this.idTextBox1.Size = new System.Drawing.Size(100, 21);
@@ -693,6 +806,9 @@
             // 
             // label8
             // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(220, 13);
             this.label8.Name = "label8";
@@ -702,6 +818,9 @@
             // 
             // searchButton1
             // 
+            this.searchButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.searchButton1.Location = new System.Drawing.Point(852, 19);
             this.searchButton1.Name = "searchButton1";
             this.searchButton1.Size = new System.Drawing.Size(102, 33);
@@ -712,6 +831,9 @@
             // 
             // gradeDataGridView
             // 
+            this.gradeDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gradeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gradeDataGridView.ContextMenuStrip = this.contextMenuStrip2;
             this.gradeDataGridView.Location = new System.Drawing.Point(21, 80);
@@ -721,6 +843,7 @@
             this.gradeDataGridView.TabIndex = 0;
             this.gradeDataGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gradeDataGridView_CellMouseDown);
             this.gradeDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gradeDataGridView_CellValueChanged);
+            this.gradeDataGridView.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gradeDataGridView_ColumnHeaderMouseClick);
             // 
             // contextMenuStrip2
             // 
@@ -738,6 +861,7 @@
             // 
             // activityPanel
             // 
+            this.activityPanel.Controls.Add(this.listInputButton);
             this.activityPanel.Controls.Add(this.activityUpdateButton1);
             this.activityPanel.Controls.Add(this.returnActivityButton);
             this.activityPanel.Controls.Add(this.sessonComboBox1);
@@ -756,6 +880,17 @@
             this.activityPanel.Name = "activityPanel";
             this.activityPanel.Size = new System.Drawing.Size(1131, 635);
             this.activityPanel.TabIndex = 15;
+            // 
+            // listInputButton
+            // 
+            this.listInputButton.Location = new System.Drawing.Point(532, 575);
+            this.listInputButton.Name = "listInputButton";
+            this.listInputButton.Size = new System.Drawing.Size(75, 23);
+            this.listInputButton.TabIndex = 14;
+            this.listInputButton.Text = "导入名单";
+            this.listInputButton.UseVisualStyleBackColor = true;
+            this.listInputButton.Visible = false;
+            this.listInputButton.Click += new System.EventHandler(this.listInputButton_Click);
             // 
             // activityUpdateButton1
             // 
@@ -783,6 +918,7 @@
             // 
             this.sessonComboBox1.FormattingEnabled = true;
             this.sessonComboBox1.Items.AddRange(new object[] {
+            "",
             "1",
             "2",
             "3"});
@@ -804,10 +940,20 @@
             // 
             this.yearComboBox1.FormattingEnabled = true;
             this.yearComboBox1.Items.AddRange(new object[] {
+            "",
             "2013-2014",
             "2014-2015",
             "2015-2016",
-            "2016-2017"});
+            "2016-2017",
+            "2017-2018",
+            "2018-2019",
+            "2019-2020",
+            "2020-2021",
+            "2021-2022",
+            "2022-2023",
+            "2023-2024",
+            "2024-2025",
+            "2025-2026"});
             this.yearComboBox1.Location = new System.Drawing.Point(370, 55);
             this.yearComboBox1.Name = "yearComboBox1";
             this.yearComboBox1.Size = new System.Drawing.Size(121, 20);
@@ -824,12 +970,14 @@
             // 
             // activityOutputButton
             // 
+            this.activityOutputButton.Enabled = false;
             this.activityOutputButton.Location = new System.Drawing.Point(900, 575);
             this.activityOutputButton.Name = "activityOutputButton";
             this.activityOutputButton.Size = new System.Drawing.Size(75, 23);
             this.activityOutputButton.TabIndex = 7;
             this.activityOutputButton.Text = "导出";
             this.activityOutputButton.UseVisualStyleBackColor = true;
+            this.activityOutputButton.Click += new System.EventHandler(this.activityOutputButton_Click);
             // 
             // activityInputButton
             // 
@@ -843,6 +991,9 @@
             // 
             // activityDataGridView
             // 
+            this.activityDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.activityDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.activityDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.activityDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -855,6 +1006,7 @@
             this.activityDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.activityDataGridView_CellDoubleClick);
             this.activityDataGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.activityDataGridView_CellMouseDown);
             this.activityDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.activityDataGridView_CellValueChanged);
+            this.activityDataGridView.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.activityDataGridView_ColumnHeaderMouseClick);
             // 
             // contextMenuStrip3
             // 
@@ -1031,6 +1183,7 @@
             // 
             // eOutputButton
             // 
+            this.eOutputButton.Enabled = false;
             this.eOutputButton.Location = new System.Drawing.Point(865, 592);
             this.eOutputButton.Name = "eOutputButton";
             this.eOutputButton.Size = new System.Drawing.Size(75, 23);
@@ -1061,6 +1214,7 @@
             // 
             this.eMajorComboBox3.FormattingEnabled = true;
             this.eMajorComboBox3.Items.AddRange(new object[] {
+            "",
             "信息与计算科学",
             "数学与应用数学",
             "应用物理"});
@@ -1112,6 +1266,7 @@
             // 
             this.eSessionComboBox2.FormattingEnabled = true;
             this.eSessionComboBox2.Items.AddRange(new object[] {
+            "",
             "1",
             "2",
             "3"});
@@ -1133,13 +1288,20 @@
             // 
             this.eYearComboBox1.FormattingEnabled = true;
             this.eYearComboBox1.Items.AddRange(new object[] {
+            "",
             "2013-2014",
             "2014-2015",
             "2015-2016",
             "2016-2017",
             "2017-2018",
             "2018-2019",
-            "2019-2020"});
+            "2019-2020",
+            "2020-2021",
+            "2021-2022",
+            "2022-2023",
+            "2023-2024",
+            "2024-2025",
+            "2025-2026"});
             this.eYearComboBox1.Location = new System.Drawing.Point(358, 19);
             this.eYearComboBox1.Name = "eYearComboBox1";
             this.eYearComboBox1.Size = new System.Drawing.Size(121, 20);
@@ -1172,7 +1334,12 @@
             // 
             // evaluationDataGridView
             // 
+            this.evaluationDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.evaluationDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.evaluationDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.记录序列});
             this.evaluationDataGridView.Location = new System.Drawing.Point(47, 106);
             this.evaluationDataGridView.Name = "evaluationDataGridView";
             this.evaluationDataGridView.RowTemplate.Height = 23;
@@ -1180,11 +1347,20 @@
             this.evaluationDataGridView.TabIndex = 0;
             this.evaluationDataGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.evaluationDataGridView_CellMouseDown);
             this.evaluationDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.evaluationDataGridView_CellValueChanged);
+            this.evaluationDataGridView.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.evaluationDataGridView_ColumnHeaderMouseClick);
+            // 
+            // 记录序列
+            // 
+            this.记录序列.DataPropertyName = "记录序列";
+            this.记录序列.HeaderText = "记录序列";
+            this.记录序列.Name = "记录序列";
+            this.记录序列.ReadOnly = true;
+            this.记录序列.Visible = false;
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("SimSun", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label17.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label17.Location = new System.Drawing.Point(105, 95);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(87, 21);
@@ -1241,6 +1417,10 @@
             this.linkLabel1.Text = "注册";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
+            // toolTip1
+            // 
+            this.toolTip1.IsBalloon = true;
+            // 
             // StudentManagement
             // 
             this.AcceptButton = this.searchButton;
@@ -1251,13 +1431,18 @@
             this.Controls.Add(this.setupLabel);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.studentPanel);
             this.Controls.Add(this.evaluationPanel);
             this.Controls.Add(this.activityPanel);
             this.Controls.Add(this.gradePanel);
-            this.Controls.Add(this.studentPanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.Name = "StudentManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "学生信息管理系统";
+            this.Load += new System.EventHandler(this.StudentManagement_Load);
             this.studentPanel.ResumeLayout(false);
             this.okGroupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.StudentListGridView)).EndInit();
@@ -1309,13 +1494,6 @@
         private System.Windows.Forms.TextBox politicalStatusText;
         private System.Windows.Forms.Panel gradePanel;
         private System.Windows.Forms.Panel studentPanel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn student_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn student_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn student_sex;
-        private System.Windows.Forms.DataGridViewTextBoxColumn student_nationality;
-        private System.Windows.Forms.DataGridViewTextBoxColumn student_political;
-        private System.Windows.Forms.DataGridViewTextBoxColumn student_major;
-        private System.Windows.Forms.DataGridViewTextBoxColumn student_class;
         private System.Windows.Forms.GroupBox okGroupBox1;
         private System.Windows.Forms.Button cancelButton1;
         private System.Windows.Forms.Button okButton1;
@@ -1392,6 +1570,19 @@
         private System.Windows.Forms.Button calculateButton;
         private System.Windows.Forms.LinkLabel setupLabel;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.ComboBox gradeYearBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 记录序列;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 学号;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 姓名;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 性别;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 民族;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 政治面貌;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 专业名称;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 行政班;
+        private System.Windows.Forms.Button listInputButton;
+        private System.Windows.Forms.Button gradeRecountButton;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

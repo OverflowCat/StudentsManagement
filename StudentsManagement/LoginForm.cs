@@ -55,5 +55,11 @@ namespace StudentsManagement
         {
 
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            PasswordChange passwordChange = new PasswordChange();
+            passwordChange.Show();
+        }
     }
 }

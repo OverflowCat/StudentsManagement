@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CalculateForm));
             this.label1 = new System.Windows.Forms.Label();
             this.yearComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -66,13 +67,20 @@
             // 
             this.yearComboBox.FormattingEnabled = true;
             this.yearComboBox.Items.AddRange(new object[] {
+            "",
             "2013-2014",
             "2014-2015",
             "2015-2016",
             "2016-2017",
             "2017-2018",
             "2018-2019",
-            "2019-2020"});
+            "2019-2020",
+            "2020-2021",
+            "2021-2022",
+            "2022-2023",
+            "2023-2024",
+            "2024-2025",
+            "2025-2026"});
             this.yearComboBox.Location = new System.Drawing.Point(72, 19);
             this.yearComboBox.Name = "yearComboBox";
             this.yearComboBox.Size = new System.Drawing.Size(121, 20);
@@ -112,6 +120,7 @@
             // 
             this.gradeComboBox.FormattingEnabled = true;
             this.gradeComboBox.Items.AddRange(new object[] {
+            "",
             "2013",
             "2014",
             "2015",
@@ -119,7 +128,13 @@
             "2017",
             "2018",
             "2019",
-            "2020"});
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025",
+            "2026"});
             this.gradeComboBox.Location = new System.Drawing.Point(72, 56);
             this.gradeComboBox.Name = "gradeComboBox";
             this.gradeComboBox.Size = new System.Drawing.Size(121, 20);
@@ -138,6 +153,7 @@
             // 
             this.majorComboBox.FormattingEnabled = true;
             this.majorComboBox.Items.AddRange(new object[] {
+            "",
             "信息与计算科学",
             "数学与应用数学",
             "应用物理"});
@@ -301,9 +317,12 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.yearComboBox);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "CalculateForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CalculateForm";
+            this.Text = "综评成绩计算";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

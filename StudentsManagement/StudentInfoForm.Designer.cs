@@ -29,24 +29,18 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentInfoForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.updateButton1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.psTextBox = new System.Windows.Forms.TextBox();
-            this.mWorkTextBox = new System.Windows.Forms.TextBox();
-            this.mPhoneTextBox = new System.Windows.Forms.TextBox();
-            this.mNameTextBox = new System.Windows.Forms.TextBox();
-            this.codeTextBox = new System.Windows.Forms.TextBox();
-            this.addressTextBox = new System.Windows.Forms.TextBox();
-            this.emailTextBox = new System.Windows.Forms.TextBox();
-            this.qqTextBox = new System.Windows.Forms.TextBox();
-            this.phoneTextBox = new System.Windows.Forms.TextBox();
+            this.pcgradeText = new System.Windows.Forms.TextBox();
             this.eGradeTextBox = new System.Windows.Forms.TextBox();
             this.eLevelTextBox = new System.Windows.Forms.TextBox();
             this.levelTextBox = new System.Windows.Forms.TextBox();
@@ -83,23 +77,35 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
+            this.psTextBox = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.mWorkTextBox = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.mPhoneTextBox = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.mNameTextBox = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
-            this.fNameTextBox = new System.Windows.Forms.TextBox();
-            this.textBox24 = new System.Windows.Forms.TextBox();
             this.fWorktextBox = new System.Windows.Forms.TextBox();
             this.fPhoneTextBox = new System.Windows.Forms.TextBox();
+            this.fNameTextBox = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.codeTextBox = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.emailTextBox = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.addressTextBox = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.phoneTextBox = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.qqTextBox = new System.Windows.Forms.TextBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.pclevelText = new System.Windows.Forms.TextBox();
+            this.label39 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.gradeRecountButton = new System.Windows.Forms.Button();
             this.gradeUpdateButton = new System.Windows.Forms.Button();
             this.gradeInputGroupBox = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
@@ -141,7 +147,6 @@
             this.evaluatingSearchButton = new System.Windows.Forms.Button();
             this.sessonComboBox3 = new System.Windows.Forms.ComboBox();
             this.yearComboBox3 = new System.Windows.Forms.ComboBox();
-            this.updateButton1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -163,7 +168,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tabControl1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabControl1.Location = new System.Drawing.Point(18, 41);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -174,7 +179,7 @@
             // 
             this.tabPage1.Controls.Add(this.updateButton1);
             this.tabPage1.Controls.Add(this.tableLayoutPanel1);
-            this.tabPage1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tabPage1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -182,6 +187,17 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "详细信息";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // updateButton1
+            // 
+            this.updateButton1.Location = new System.Drawing.Point(568, 610);
+            this.updateButton1.Name = "updateButton1";
+            this.updateButton1.Size = new System.Drawing.Size(88, 46);
+            this.updateButton1.TabIndex = 1;
+            this.updateButton1.Text = "更新";
+            this.updateButton1.UseVisualStyleBackColor = true;
+            this.updateButton1.Visible = false;
+            this.updateButton1.Click += new System.EventHandler(this.updateButton1_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -192,15 +208,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.75F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.25F));
-            this.tableLayoutPanel1.Controls.Add(this.psTextBox, 1, 15);
-            this.tableLayoutPanel1.Controls.Add(this.mWorkTextBox, 1, 14);
-            this.tableLayoutPanel1.Controls.Add(this.mPhoneTextBox, 1, 13);
-            this.tableLayoutPanel1.Controls.Add(this.mNameTextBox, 1, 12);
-            this.tableLayoutPanel1.Controls.Add(this.codeTextBox, 1, 11);
-            this.tableLayoutPanel1.Controls.Add(this.addressTextBox, 3, 10);
-            this.tableLayoutPanel1.Controls.Add(this.emailTextBox, 1, 10);
-            this.tableLayoutPanel1.Controls.Add(this.qqTextBox, 3, 9);
-            this.tableLayoutPanel1.Controls.Add(this.phoneTextBox, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.pcgradeText, 3, 9);
             this.tableLayoutPanel1.Controls.Add(this.eGradeTextBox, 3, 8);
             this.tableLayoutPanel1.Controls.Add(this.eLevelTextBox, 1, 8);
             this.tableLayoutPanel1.Controls.Add(this.levelTextBox, 3, 7);
@@ -237,126 +245,64 @@
             this.tableLayoutPanel1.Controls.Add(this.label16, 2, 7);
             this.tableLayoutPanel1.Controls.Add(this.label17, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.label18, 2, 8);
-            this.tableLayoutPanel1.Controls.Add(this.label19, 0, 9);
-            this.tableLayoutPanel1.Controls.Add(this.label20, 2, 9);
-            this.tableLayoutPanel1.Controls.Add(this.label21, 0, 10);
-            this.tableLayoutPanel1.Controls.Add(this.label22, 2, 10);
-            this.tableLayoutPanel1.Controls.Add(this.label23, 0, 11);
-            this.tableLayoutPanel1.Controls.Add(this.label27, 0, 12);
-            this.tableLayoutPanel1.Controls.Add(this.label28, 0, 13);
-            this.tableLayoutPanel1.Controls.Add(this.label29, 0, 14);
-            this.tableLayoutPanel1.Controls.Add(this.label30, 0, 15);
-            this.tableLayoutPanel1.Controls.Add(this.label26, 2, 14);
-            this.tableLayoutPanel1.Controls.Add(this.label25, 2, 13);
-            this.tableLayoutPanel1.Controls.Add(this.label24, 2, 12);
-            this.tableLayoutPanel1.Controls.Add(this.fNameTextBox, 3, 12);
-            this.tableLayoutPanel1.Controls.Add(this.textBox24, 2, 15);
-            this.tableLayoutPanel1.Controls.Add(this.fWorktextBox, 3, 14);
-            this.tableLayoutPanel1.Controls.Add(this.fPhoneTextBox, 3, 13);
+            this.tableLayoutPanel1.Controls.Add(this.label30, 0, 16);
+            this.tableLayoutPanel1.Controls.Add(this.psTextBox, 1, 16);
+            this.tableLayoutPanel1.Controls.Add(this.label29, 0, 15);
+            this.tableLayoutPanel1.Controls.Add(this.mWorkTextBox, 1, 15);
+            this.tableLayoutPanel1.Controls.Add(this.label28, 0, 14);
+            this.tableLayoutPanel1.Controls.Add(this.mPhoneTextBox, 1, 14);
+            this.tableLayoutPanel1.Controls.Add(this.label27, 0, 13);
+            this.tableLayoutPanel1.Controls.Add(this.mNameTextBox, 1, 13);
+            this.tableLayoutPanel1.Controls.Add(this.label26, 2, 15);
+            this.tableLayoutPanel1.Controls.Add(this.label25, 2, 14);
+            this.tableLayoutPanel1.Controls.Add(this.label24, 2, 13);
+            this.tableLayoutPanel1.Controls.Add(this.fWorktextBox, 3, 15);
+            this.tableLayoutPanel1.Controls.Add(this.fPhoneTextBox, 3, 14);
+            this.tableLayoutPanel1.Controls.Add(this.fNameTextBox, 3, 13);
+            this.tableLayoutPanel1.Controls.Add(this.label23, 0, 12);
+            this.tableLayoutPanel1.Controls.Add(this.codeTextBox, 1, 12);
+            this.tableLayoutPanel1.Controls.Add(this.label21, 0, 11);
+            this.tableLayoutPanel1.Controls.Add(this.emailTextBox, 1, 11);
+            this.tableLayoutPanel1.Controls.Add(this.label22, 2, 11);
+            this.tableLayoutPanel1.Controls.Add(this.addressTextBox, 3, 11);
+            this.tableLayoutPanel1.Controls.Add(this.label19, 0, 10);
+            this.tableLayoutPanel1.Controls.Add(this.phoneTextBox, 1, 10);
+            this.tableLayoutPanel1.Controls.Add(this.label20, 2, 10);
+            this.tableLayoutPanel1.Controls.Add(this.qqTextBox, 3, 10);
+            this.tableLayoutPanel1.Controls.Add(this.label38, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.pclevelText, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.label39, 2, 9);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(283, 17);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 16;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.985537F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.985537F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.985537F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.985537F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.985537F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.985537F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.985537F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.985537F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.985537F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.985537F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.971074F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.2748F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.985537F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.985537F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.985537F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.94215F));
+            this.tableLayoutPanel1.RowCount = 17;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(660, 587);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // psTextBox
+            // pcgradeText
             // 
-            this.psTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.psTextBox.Location = new System.Drawing.Point(127, 469);
-            this.psTextBox.Multiline = true;
-            this.psTextBox.Name = "psTextBox";
-            this.psTextBox.Size = new System.Drawing.Size(198, 114);
-            this.psTextBox.TabIndex = 63;
-            this.psTextBox.TextChanged += new System.EventHandler(this.psTextBox_TextChanged);
-            // 
-            // mWorkTextBox
-            // 
-            this.mWorkTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mWorkTextBox.Location = new System.Drawing.Point(127, 440);
-            this.mWorkTextBox.Name = "mWorkTextBox";
-            this.mWorkTextBox.Size = new System.Drawing.Size(198, 14);
-            this.mWorkTextBox.TabIndex = 61;
-            this.mWorkTextBox.TextChanged += new System.EventHandler(this.mWorkTextBox_TextChanged);
-            // 
-            // mPhoneTextBox
-            // 
-            this.mPhoneTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mPhoneTextBox.Location = new System.Drawing.Point(127, 411);
-            this.mPhoneTextBox.Name = "mPhoneTextBox";
-            this.mPhoneTextBox.Size = new System.Drawing.Size(100, 14);
-            this.mPhoneTextBox.TabIndex = 59;
-            this.mPhoneTextBox.TextChanged += new System.EventHandler(this.mPhoneTextBox_TextChanged);
-            // 
-            // mNameTextBox
-            // 
-            this.mNameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.mNameTextBox.Location = new System.Drawing.Point(127, 382);
-            this.mNameTextBox.Name = "mNameTextBox";
-            this.mNameTextBox.Size = new System.Drawing.Size(100, 14);
-            this.mNameTextBox.TabIndex = 55;
-            this.mNameTextBox.TextChanged += new System.EventHandler(this.mNameTextBox_TextChanged);
-            // 
-            // codeTextBox
-            // 
-            this.codeTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.codeTextBox.Location = new System.Drawing.Point(127, 351);
-            this.codeTextBox.Name = "codeTextBox";
-            this.codeTextBox.Size = new System.Drawing.Size(100, 14);
-            this.codeTextBox.TabIndex = 52;
-            this.codeTextBox.TextChanged += new System.EventHandler(this.codeTextBox_TextChanged);
-            // 
-            // addressTextBox
-            // 
-            this.addressTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.addressTextBox.Location = new System.Drawing.Point(455, 294);
-            this.addressTextBox.Multiline = true;
-            this.addressTextBox.Name = "addressTextBox";
-            this.addressTextBox.Size = new System.Drawing.Size(201, 49);
-            this.addressTextBox.TabIndex = 51;
-            this.addressTextBox.TextChanged += new System.EventHandler(this.addressTextBox_TextChanged);
-            // 
-            // emailTextBox
-            // 
-            this.emailTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.emailTextBox.Location = new System.Drawing.Point(127, 294);
-            this.emailTextBox.Name = "emailTextBox";
-            this.emailTextBox.Size = new System.Drawing.Size(182, 14);
-            this.emailTextBox.TabIndex = 50;
-            this.emailTextBox.TextChanged += new System.EventHandler(this.emailTextBox_TextChanged);
-            // 
-            // qqTextBox
-            // 
-            this.qqTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.qqTextBox.Location = new System.Drawing.Point(455, 265);
-            this.qqTextBox.Name = "qqTextBox";
-            this.qqTextBox.Size = new System.Drawing.Size(100, 14);
-            this.qqTextBox.TabIndex = 49;
-            this.qqTextBox.TextChanged += new System.EventHandler(this.qqTextBox_TextChanged);
-            // 
-            // phoneTextBox
-            // 
-            this.phoneTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.phoneTextBox.Location = new System.Drawing.Point(127, 265);
-            this.phoneTextBox.Name = "phoneTextBox";
-            this.phoneTextBox.Size = new System.Drawing.Size(100, 14);
-            this.phoneTextBox.TabIndex = 48;
-            this.phoneTextBox.TextChanged += new System.EventHandler(this.phoneTextBox_TextChanged);
+            this.pcgradeText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.pcgradeText.Location = new System.Drawing.Point(455, 265);
+            this.pcgradeText.Name = "pcgradeText";
+            this.pcgradeText.Size = new System.Drawing.Size(116, 14);
+            this.pcgradeText.TabIndex = 70;
+            this.pcgradeText.TextChanged += new System.EventHandler(this.pcgradeText_TextChanged);
             // 
             // eGradeTextBox
             // 
@@ -688,91 +634,83 @@
             this.label18.TabIndex = 23;
             this.label18.Text = "英语成绩：";
             // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(4, 262);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(53, 12);
-            this.label19.TabIndex = 24;
-            this.label19.Text = "手机号：";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(332, 262);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(41, 12);
-            this.label20.TabIndex = 25;
-            this.label20.Text = "QQ号：";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(4, 291);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(65, 12);
-            this.label21.TabIndex = 26;
-            this.label21.Text = "电子邮箱：";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(332, 291);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(65, 12);
-            this.label22.TabIndex = 27;
-            this.label22.Text = "家庭地址：";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(4, 348);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(65, 12);
-            this.label23.TabIndex = 28;
-            this.label23.Text = "邮政编码：";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(4, 379);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(65, 12);
-            this.label27.TabIndex = 32;
-            this.label27.Text = "母亲姓名：";
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(4, 408);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(65, 12);
-            this.label28.TabIndex = 33;
-            this.label28.Text = "母亲电话：";
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(4, 437);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(65, 12);
-            this.label29.TabIndex = 34;
-            this.label29.Text = "母亲单位：";
-            // 
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(4, 466);
+            this.label30.Location = new System.Drawing.Point(4, 493);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(41, 12);
             this.label30.TabIndex = 35;
             this.label30.Text = "备注：";
             // 
+            // psTextBox
+            // 
+            this.psTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.psTextBox.Location = new System.Drawing.Point(127, 496);
+            this.psTextBox.Multiline = true;
+            this.psTextBox.Name = "psTextBox";
+            this.psTextBox.Size = new System.Drawing.Size(198, 87);
+            this.psTextBox.TabIndex = 63;
+            this.psTextBox.TextChanged += new System.EventHandler(this.psTextBox_TextChanged);
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(4, 464);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(65, 12);
+            this.label29.TabIndex = 34;
+            this.label29.Text = "母亲单位：";
+            // 
+            // mWorkTextBox
+            // 
+            this.mWorkTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mWorkTextBox.Location = new System.Drawing.Point(127, 467);
+            this.mWorkTextBox.Name = "mWorkTextBox";
+            this.mWorkTextBox.Size = new System.Drawing.Size(198, 14);
+            this.mWorkTextBox.TabIndex = 61;
+            this.mWorkTextBox.TextChanged += new System.EventHandler(this.mWorkTextBox_TextChanged);
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(4, 435);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(65, 12);
+            this.label28.TabIndex = 33;
+            this.label28.Text = "母亲电话：";
+            // 
+            // mPhoneTextBox
+            // 
+            this.mPhoneTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mPhoneTextBox.Location = new System.Drawing.Point(127, 438);
+            this.mPhoneTextBox.Name = "mPhoneTextBox";
+            this.mPhoneTextBox.Size = new System.Drawing.Size(100, 14);
+            this.mPhoneTextBox.TabIndex = 59;
+            this.mPhoneTextBox.TextChanged += new System.EventHandler(this.mPhoneTextBox_TextChanged);
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(4, 406);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(65, 12);
+            this.label27.TabIndex = 32;
+            this.label27.Text = "母亲姓名：";
+            // 
+            // mNameTextBox
+            // 
+            this.mNameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mNameTextBox.Location = new System.Drawing.Point(127, 409);
+            this.mNameTextBox.Name = "mNameTextBox";
+            this.mNameTextBox.Size = new System.Drawing.Size(100, 14);
+            this.mNameTextBox.TabIndex = 55;
+            this.mNameTextBox.TextChanged += new System.EventHandler(this.mNameTextBox_TextChanged);
+            // 
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(332, 437);
+            this.label26.Location = new System.Drawing.Point(332, 464);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(65, 12);
             this.label26.TabIndex = 31;
@@ -781,7 +719,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(332, 408);
+            this.label25.Location = new System.Drawing.Point(332, 435);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(65, 12);
             this.label25.TabIndex = 30;
@@ -790,33 +728,16 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(332, 379);
+            this.label24.Location = new System.Drawing.Point(332, 406);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(65, 12);
             this.label24.TabIndex = 29;
             this.label24.Text = "父亲姓名：";
             // 
-            // fNameTextBox
-            // 
-            this.fNameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.fNameTextBox.Location = new System.Drawing.Point(455, 382);
-            this.fNameTextBox.Name = "fNameTextBox";
-            this.fNameTextBox.Size = new System.Drawing.Size(100, 14);
-            this.fNameTextBox.TabIndex = 65;
-            this.fNameTextBox.TextChanged += new System.EventHandler(this.fNameTextBox_TextChanged);
-            // 
-            // textBox24
-            // 
-            this.textBox24.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox24.Location = new System.Drawing.Point(332, 469);
-            this.textBox24.Name = "textBox24";
-            this.textBox24.Size = new System.Drawing.Size(116, 14);
-            this.textBox24.TabIndex = 64;
-            // 
             // fWorktextBox
             // 
             this.fWorktextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.fWorktextBox.Location = new System.Drawing.Point(455, 440);
+            this.fWorktextBox.Location = new System.Drawing.Point(455, 467);
             this.fWorktextBox.Name = "fWorktextBox";
             this.fWorktextBox.Size = new System.Drawing.Size(201, 14);
             this.fWorktextBox.TabIndex = 67;
@@ -825,14 +746,142 @@
             // fPhoneTextBox
             // 
             this.fPhoneTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.fPhoneTextBox.Location = new System.Drawing.Point(455, 411);
+            this.fPhoneTextBox.Location = new System.Drawing.Point(455, 438);
             this.fPhoneTextBox.Name = "fPhoneTextBox";
             this.fPhoneTextBox.Size = new System.Drawing.Size(100, 14);
             this.fPhoneTextBox.TabIndex = 66;
             this.fPhoneTextBox.TextChanged += new System.EventHandler(this.fPhoneTextBox_TextChanged);
             // 
+            // fNameTextBox
+            // 
+            this.fNameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.fNameTextBox.Location = new System.Drawing.Point(455, 409);
+            this.fNameTextBox.Name = "fNameTextBox";
+            this.fNameTextBox.Size = new System.Drawing.Size(100, 14);
+            this.fNameTextBox.TabIndex = 65;
+            this.fNameTextBox.TextChanged += new System.EventHandler(this.fNameTextBox_TextChanged);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(4, 377);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(65, 12);
+            this.label23.TabIndex = 28;
+            this.label23.Text = "邮政编码：";
+            // 
+            // codeTextBox
+            // 
+            this.codeTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.codeTextBox.Location = new System.Drawing.Point(127, 380);
+            this.codeTextBox.Name = "codeTextBox";
+            this.codeTextBox.Size = new System.Drawing.Size(100, 14);
+            this.codeTextBox.TabIndex = 52;
+            this.codeTextBox.TextChanged += new System.EventHandler(this.codeTextBox_TextChanged);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(4, 320);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(65, 12);
+            this.label21.TabIndex = 26;
+            this.label21.Text = "电子邮箱：";
+            // 
+            // emailTextBox
+            // 
+            this.emailTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.emailTextBox.Location = new System.Drawing.Point(127, 323);
+            this.emailTextBox.Name = "emailTextBox";
+            this.emailTextBox.Size = new System.Drawing.Size(182, 14);
+            this.emailTextBox.TabIndex = 50;
+            this.emailTextBox.TextChanged += new System.EventHandler(this.emailTextBox_TextChanged);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(332, 320);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(65, 12);
+            this.label22.TabIndex = 27;
+            this.label22.Text = "家庭地址：";
+            // 
+            // addressTextBox
+            // 
+            this.addressTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.addressTextBox.Location = new System.Drawing.Point(455, 323);
+            this.addressTextBox.Multiline = true;
+            this.addressTextBox.Name = "addressTextBox";
+            this.addressTextBox.Size = new System.Drawing.Size(201, 49);
+            this.addressTextBox.TabIndex = 51;
+            this.addressTextBox.TextChanged += new System.EventHandler(this.addressTextBox_TextChanged);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(4, 291);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(53, 12);
+            this.label19.TabIndex = 24;
+            this.label19.Text = "手机号：";
+            // 
+            // phoneTextBox
+            // 
+            this.phoneTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.phoneTextBox.Location = new System.Drawing.Point(127, 294);
+            this.phoneTextBox.Name = "phoneTextBox";
+            this.phoneTextBox.Size = new System.Drawing.Size(100, 14);
+            this.phoneTextBox.TabIndex = 48;
+            this.phoneTextBox.TextChanged += new System.EventHandler(this.phoneTextBox_TextChanged);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(332, 291);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(41, 12);
+            this.label20.TabIndex = 25;
+            this.label20.Text = "QQ号：";
+            // 
+            // qqTextBox
+            // 
+            this.qqTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.qqTextBox.Location = new System.Drawing.Point(455, 294);
+            this.qqTextBox.Name = "qqTextBox";
+            this.qqTextBox.Size = new System.Drawing.Size(100, 14);
+            this.qqTextBox.TabIndex = 49;
+            this.qqTextBox.TextChanged += new System.EventHandler(this.qqTextBox_TextChanged);
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(4, 262);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(65, 12);
+            this.label38.TabIndex = 68;
+            this.label38.Text = "计算机等级";
+            // 
+            // pclevelText
+            // 
+            this.pclevelText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.pclevelText.Location = new System.Drawing.Point(127, 265);
+            this.pclevelText.Name = "pclevelText";
+            this.pclevelText.Size = new System.Drawing.Size(116, 14);
+            this.pclevelText.TabIndex = 64;
+            this.pclevelText.TextChanged += new System.EventHandler(this.pclevelText_TextChanged);
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(332, 262);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(65, 12);
+            this.label39.TabIndex = 69;
+            this.label39.Text = "计算机成绩";
+            // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.gradeRecountButton);
             this.tabPage2.Controls.Add(this.gradeUpdateButton);
             this.tabPage2.Controls.Add(this.gradeInputGroupBox);
             this.tabPage2.Controls.Add(this.gradeOutputButton);
@@ -843,7 +892,7 @@
             this.tabPage2.Controls.Add(this.gradeSearchButton);
             this.tabPage2.Controls.Add(this.sessonComboBox1);
             this.tabPage2.Controls.Add(this.yearComboBox1);
-            this.tabPage2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tabPage2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -851,6 +900,17 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "成绩";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // gradeRecountButton
+            // 
+            this.gradeRecountButton.Location = new System.Drawing.Point(537, 594);
+            this.gradeRecountButton.Name = "gradeRecountButton";
+            this.gradeRecountButton.Size = new System.Drawing.Size(90, 45);
+            this.gradeRecountButton.TabIndex = 10;
+            this.gradeRecountButton.Text = "重新计算成绩";
+            this.gradeRecountButton.UseVisualStyleBackColor = true;
+            this.gradeRecountButton.Visible = false;
+            this.gradeRecountButton.Click += new System.EventHandler(this.gradeRecountButton_Click);
             // 
             // gradeUpdateButton
             // 
@@ -936,39 +996,40 @@
             // 
             // gradeDataGridView
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gradeDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gradeDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gradeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gradeDataGridView.ContextMenuStrip = this.contextMenuStrip1;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gradeDataGridView.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gradeDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.gradeDataGridView.Location = new System.Drawing.Point(94, 111);
             this.gradeDataGridView.Name = "gradeDataGridView";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gradeDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gradeDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gradeDataGridView.RowTemplate.Height = 23;
             this.gradeDataGridView.Size = new System.Drawing.Size(1037, 477);
             this.gradeDataGridView.TabIndex = 3;
             this.gradeDataGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gradeDataGridView_CellMouseDown);
             this.gradeDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gradeDataGridView_CellValueChanged);
+            this.gradeDataGridView.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gradeDataGridView_ColumnHeaderMouseClick);
             // 
             // contextMenuStrip1
             // 
@@ -1016,7 +1077,13 @@
             "2016-2017",
             "2017-2018",
             "2018-2019",
-            "2019-2020"});
+            "2019-2020",
+            "2020-2021",
+            "2021-2022",
+            "2022-2023",
+            "2023-2024",
+            "2024-2025",
+            "2025-2026"});
             this.yearComboBox1.Location = new System.Drawing.Point(305, 62);
             this.yearComboBox1.Name = "yearComboBox1";
             this.yearComboBox1.Size = new System.Drawing.Size(121, 20);
@@ -1037,7 +1104,7 @@
             this.tabPage3.Controls.Add(this.activitySearchButton);
             this.tabPage3.Controls.Add(this.sessonComboBox2);
             this.tabPage3.Controls.Add(this.yearComboBox2);
-            this.tabPage3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tabPage3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabPage3.Location = new System.Drawing.Point(4, 29);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(1213, 662);
@@ -1169,6 +1236,7 @@
             this.aeDataGridView.TabIndex = 13;
             this.aeDataGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.aeDataGridView_CellMouseDown);
             this.aeDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.aeDataGridView_CellValueChanged);
+            this.aeDataGridView.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.aeDataGridView_ColumnHeaderMouseClick);
             // 
             // contextMenuStrip2
             // 
@@ -1180,7 +1248,7 @@
             // 删除ToolStripMenuItem1
             // 
             this.删除ToolStripMenuItem1.Name = "删除ToolStripMenuItem1";
-            this.删除ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.删除ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
             this.删除ToolStripMenuItem1.Text = "删除";
             this.删除ToolStripMenuItem1.Click += new System.EventHandler(this.删除ToolStripMenuItem1_Click);
             // 
@@ -1216,7 +1284,13 @@
             "2016-2017",
             "2017-2018",
             "2018-2019",
-            "2019-2020"});
+            "2019-2020",
+            "2020-2021",
+            "2021-2022",
+            "2022-2023",
+            "2023-2024",
+            "2024-2025",
+            "2025-2026"});
             this.yearComboBox2.Location = new System.Drawing.Point(225, 47);
             this.yearComboBox2.Name = "yearComboBox2";
             this.yearComboBox2.Size = new System.Drawing.Size(121, 20);
@@ -1232,7 +1306,7 @@
             this.tabPage4.Controls.Add(this.evaluatingSearchButton);
             this.tabPage4.Controls.Add(this.sessonComboBox3);
             this.tabPage4.Controls.Add(this.yearComboBox3);
-            this.tabPage4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tabPage4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabPage4.Location = new System.Drawing.Point(4, 29);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(1213, 662);
@@ -1252,6 +1326,7 @@
             // 
             // evaluationOutputButton
             // 
+            this.evaluationOutputButton.Enabled = false;
             this.evaluationOutputButton.Location = new System.Drawing.Point(939, 614);
             this.evaluationOutputButton.Name = "evaluationOutputButton";
             this.evaluationOutputButton.Size = new System.Drawing.Size(75, 23);
@@ -1280,38 +1355,39 @@
             // 
             // evaluationDataGridView
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.evaluationDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.evaluationDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.evaluationDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.evaluationDataGridView.ContextMenuStrip = this.contextMenuStrip1;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.evaluationDataGridView.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.evaluationDataGridView.DefaultCellStyle = dataGridViewCellStyle5;
             this.evaluationDataGridView.Location = new System.Drawing.Point(92, 100);
             this.evaluationDataGridView.Name = "evaluationDataGridView";
             this.evaluationDataGridView.ReadOnly = true;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.evaluationDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.evaluationDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.evaluationDataGridView.RowTemplate.Height = 23;
             this.evaluationDataGridView.Size = new System.Drawing.Size(1037, 477);
             this.evaluationDataGridView.TabIndex = 9;
+            this.evaluationDataGridView.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.evaluationDataGridView_ColumnHeaderMouseClick);
             // 
             // evaluatingSearchButton
             // 
@@ -1345,22 +1421,17 @@
             "2016-2017",
             "2017-2018",
             "2018-2019",
-            "2019-2020"});
+            "2019-2020",
+            "2020-2021",
+            "2021-2022",
+            "2022-2023",
+            "2023-2024",
+            "2024-2025",
+            "2025-2026"});
             this.yearComboBox3.Location = new System.Drawing.Point(303, 51);
             this.yearComboBox3.Name = "yearComboBox3";
             this.yearComboBox3.Size = new System.Drawing.Size(121, 20);
             this.yearComboBox3.TabIndex = 6;
-            // 
-            // updateButton1
-            // 
-            this.updateButton1.Location = new System.Drawing.Point(568, 610);
-            this.updateButton1.Name = "updateButton1";
-            this.updateButton1.Size = new System.Drawing.Size(88, 46);
-            this.updateButton1.TabIndex = 1;
-            this.updateButton1.Text = "更新";
-            this.updateButton1.UseVisualStyleBackColor = true;
-            this.updateButton1.Visible = false;
-            this.updateButton1.Click += new System.EventHandler(this.updateButton1_Click);
             // 
             // StudentInfoForm
             // 
@@ -1368,8 +1439,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 766);
             this.Controls.Add(this.tabControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "StudentInfoForm";
-            this.Text = "StudentInfoForm";
+            this.Text = "学生详细信息";
             this.Load += new System.EventHandler(this.StudentInfoForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -1457,7 +1531,7 @@
         private System.Windows.Forms.TextBox policTextBox;
         private System.Windows.Forms.TextBox sexTextBox;
         private System.Windows.Forms.TextBox NameTextBox;
-        private System.Windows.Forms.TextBox textBox24;
+        private System.Windows.Forms.TextBox pclevelText;
         private System.Windows.Forms.TextBox fNameTextBox;
         private System.Windows.Forms.TextBox fWorktextBox;
         private System.Windows.Forms.TextBox fPhoneTextBox;
@@ -1501,5 +1575,9 @@
         private System.Windows.Forms.ComboBox yearComboBox3;
         private System.Windows.Forms.Button calculateButton;
         private System.Windows.Forms.Button updateButton1;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.TextBox pcgradeText;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Button gradeRecountButton;
     }
 }

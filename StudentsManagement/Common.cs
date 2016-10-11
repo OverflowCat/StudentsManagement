@@ -17,6 +17,7 @@ namespace StudentsManagement
         public static int index;
         public static string fileName;
         public static Double[] percent = GetPercent();
+        public static int[] percent1 = GetPercent1();
         private static  Double[] GetPercent()
         {
             string sql = "SELECT * FROM Evaluation_Percent";
@@ -27,6 +28,17 @@ namespace StudentsManagement
                 Convert.ToDouble(percent.Rows[0]["个性发展比例"]),
                 Convert.ToDouble(percent.Rows[0]["个性发展标志"]),
             Convert.ToDouble(percent.Rows[0]["个性发展分值"])};
+            return percents;
+        }
+        private static int[] GetPercent1()
+        {
+            string sql = "SELECT * FROM Grade_Percent";
+            DataTable percent = DbHelperSQLite.Query(sql).Tables[0];
+            int[] percents = { 0,0,0,0,0,0,0,0,0};
+            for(int i = 0; i < percent.Columns.Count; i++)
+            {
+                percents[i] = Convert.ToInt16(percent.Rows[0][i]);
+            }    
             return percents;
         }
         public static ArrayList columnNames = new ArrayList();

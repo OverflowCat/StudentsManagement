@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ActivityInputForm));
             this.label1 = new System.Windows.Forms.Label();
             this.activityInputTextBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -149,7 +150,14 @@
             "2015-2016",
             "2016-2017",
             "2017-2018",
-            "2018-2019"});
+            "2018-2019",
+            "2019-2020",
+            "2020-2021",
+            "2021-2022",
+            "2022-2023",
+            "2023-2024",
+            "2024-2025",
+            "2025-2026"});
             this.activityYearComboBox1.Location = new System.Drawing.Point(152, 102);
             this.activityYearComboBox1.Name = "activityYearComboBox1";
             this.activityYearComboBox1.Size = new System.Drawing.Size(121, 20);
@@ -278,9 +286,12 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.activityInputTextBox1);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "ActivityInputForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ActivityInputForm";
+            this.Text = "活动添加";
             this.ResumeLayout(false);
             this.PerformLayout();
 
